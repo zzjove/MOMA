@@ -1,6 +1,6 @@
 <%-- 
     Document   : index
-    Created on : 2013-5-10, 21:27:31
+    Created on : 2013-5-12, 3:05:03
     Author     : ZZ
 --%>
 
@@ -9,9 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>MOMA</title>
+        <title>Welcome to MOMA</title>
+	<link rel="stylesheet" type="text/css" href="WEB-INF/css/generalStyle.css" media="all" />
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>汉字</h1>
     </body>
 </html>

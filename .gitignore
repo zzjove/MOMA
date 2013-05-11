@@ -5,3 +5,5 @@
 *.war
 *.ear
 /MOMA/nbproject/private/
+/MOMA/build/
+/MOMA/dist/
