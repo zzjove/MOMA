@@ -34,17 +34,18 @@ public class UserHelper {
         return UserList;
     }
     
-    public User getUserByUserName(String userName){
-        User user = null;
-        try {
-            org.hibernate.Transaction tx = session.beginTransaction();
-            Query q = session.createQuery("from User as user where user.user_name=" + "'"+userName+"'");
-            user = (User) q.uniqueResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
+    //hql 语句待改进
+//    public User getUserByUserName(String userName){
+//        User user = null;
+//        try {
+//            org.hibernate.Transaction tx = session.beginTransaction();
+//            Query q = session.createQuery("from User as user where user.user_name=" + "'"+userName+"'");
+//            user = (User) q.uniqueResult();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return user;
+//    }
     
     public int getMaxUserId(){
         User user = new User();

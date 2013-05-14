@@ -133,7 +133,25 @@ public class User  implements java.io.Serializable {
         this.blessings = blessings;
     }
 
+    public void addFriend(User secondUser){
+        this.getUsersForSecondUserId().add(secondUser);
+        this.getUsersForFirstUserId().add(this);
+    }
+    
+    public void removeFriend(User userToDelete){
+        this.getUsersForSecondUserId().remove(userToDelete);
+        this.getUsersForFirstUserId().remove(this);
+    }
 
+    public void addBrochure(Brochure userBrochure) {
+        this.getBrochures().add(userBrochure);
+        userBrochure.getUsers().add(this);
+    }
+    
+    public void removeBrochure(Brochure userBrochure) {
+        this.getBrochures().remove(userBrochure);
+        userBrochure.getUsers().remove(this);
+    }
 
 
 }

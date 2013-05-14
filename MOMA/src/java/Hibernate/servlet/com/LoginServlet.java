@@ -7,6 +7,7 @@ package Hibernate.servlet.com;
 import Hibernate.dvdrental.com.UserHelper;
 import Hibernate.moma.com.User;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginServlet extends HttpServlet {
 
     private UserHelper userhelper = new UserHelper();
+    private User currentLoginUser = null;
+    private PersonalPageServlet currentPersonalPage= null;
+    private ArrayList<PersonalPageServlet> personalPageList = new ArrayList<PersonalPageServlet>();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,11 +42,26 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (isRightPassword(request)) {
-            request.getRequestDispatcher("PersonalSpace.html").forward(request, response);
-        }
-        else {
+            if (!hasSamePersonPage()){
+                currentPersonalPage = new PersonalPageServlet(currentLoginUser);
+                personalPageList.add(currentPersonalPage);
+            }
+            request.setAttribute("currentPersonalPage", currentPersonalPage);
+            response.getWriter().println(currentPersonalPage.getuserofPage().getUserName());
+            //request.getRequestDispatcher("PersonalSpace.jsp").forward(request, response);
+        } else {
             request.getRequestDispatcher("index.html").forward(request, response);
         }
+    }
+
+    private boolean hasSamePersonPage() {
+        for (PersonalPageServlet tempEntity : personalPageList) {
+            if (tempEntity.getPersonalPageUserId() == currentLoginUser.getUserId()) {
+                currentPersonalPage = tempEntity;
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isRightPassword(HttpServletRequest request) {
@@ -50,11 +69,11 @@ public class LoginServlet extends HttpServlet {
         for (User userEntity : userList) {
             if (userEntity.getUserName().equals(request.getParameter("userName"))) {
                 if (userEntity.getUserPassword().equals(request.getParameter("userPassword"))) {
+                    currentLoginUser = userEntity;
                     return true;
                 }
             }
         }
         return false;
     }
-
 }
