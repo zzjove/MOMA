@@ -26,7 +26,7 @@ public class UserHelper {
         List<User> UserList = null;
         try {
             org.hibernate.Transaction tx = session.beginTransaction();
-            Query q = session.createQuery("from user");
+            Query q = session.createQuery("from User");
             UserList = (List<User>) q.list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -38,7 +38,7 @@ public class UserHelper {
         User user = null;
         try {
             org.hibernate.Transaction tx = session.beginTransaction();
-            Query q = session.createQuery("from user as user where user.user_name=" + "'"+userName+"'");
+            Query q = session.createQuery("from User as user where user.user_name=" + "'"+userName+"'");
             user = (User) q.uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class UserHelper {
         User user = new User();
         try {
             org.hibernate.Transaction tx = session.beginTransaction();
-            Query q = session.createQuery("select max(user_id )from user as user_id");
+            Query q = session.createQuery("select max(user_id )from User as user_id");
             user = (User)q.uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();

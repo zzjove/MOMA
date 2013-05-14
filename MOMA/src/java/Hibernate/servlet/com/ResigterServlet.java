@@ -7,7 +7,6 @@ package Hibernate.servlet.com;
 import Hibernate.dvdrental.com.UserHelper;
 import Hibernate.moma.com.User;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,11 +45,11 @@ public class ResigterServlet extends HttpServlet {
             if (isTwicePasswordSame(request.getParameter("newUserPassword"), request.getParameter("newUserPasswordConfirm"))) {
                 setNewUserInformation(request);
                 /*检查UserId
-                List<User> userIdList = userhelper.getUser();
+                userIdList = userhelper.getUser();
                 for (User tempEntity : userIdList) {
                     response.getWriter().println(tempEntity.getUserId());
-                }
-                */
+                }*/
+                
                 response.getWriter().println("Database Updated Successfully");
             } else {
                 //修改第二行密码输入栏为两次密码不一致
