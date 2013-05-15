@@ -47,8 +47,8 @@ public class LoginServlet extends HttpServlet {
                 personalPageList.add(currentPersonalPage);
             }
             request.setAttribute("currentPersonalPage", currentPersonalPage);
-            response.getWriter().println(currentPersonalPage.getuserofPage().getUserName());
-            //request.getRequestDispatcher("PersonalSpace.jsp").forward(request, response);
+            //response.getWriter().println(currentPersonalPage.getuserofPage().getUserName());
+            request.getRequestDispatcher("PersonalSpace.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("index.html").forward(request, response);
         }

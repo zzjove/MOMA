@@ -29,7 +29,7 @@
 		</div>
 		<div class="span5 offset4 ">
 		<div class="hero-unit">
-			<form>
+                    <form method="POST" action="LoginServlet">
 				<input class="span3" type="text" placeholder="用户名" name="userName"/><br />
 				<div class="controls controls-row">
 				<input class="span2" type="password" placeholder="密码" name="userPassword"/>
@@ -40,7 +40,7 @@
 		</div>
 		<div class="hero-unit">
 			<div class="text-left">刚刚来到MOMA？</div>
-			<form>
+                        <form method="POST" action="ResigterServlet">
 				<input type="text" placeholder="用户名" name="newUserName"/><br/>
 				<input type="email" placeholder="邮箱" name="newUserEmail" /><br/>
 				<input type="password" placeholder="密码" name="newUserPassword"/><br/>

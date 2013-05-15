@@ -6,6 +6,12 @@ package Hibernate.servlet.com;
 
 import Hibernate.moma.com.Brochure;
 import Hibernate.moma.com.User;
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,7 +21,8 @@ import org.hibernate.cfg.Configuration;
  *
  * @author bianshujun
  */
-public class PersonalPageServlet {
+@WebServlet(name = "PersonalPageServlet", urlPatterns = {"/PersonalPageServlet"})
+public class PersonalPageServlet extends HttpServlet{
 
     private User userofPage = null;
 
@@ -29,8 +36,25 @@ public class PersonalPageServlet {
         return this.userofPage.getUserId();
     }
     
-    public User getuserofPage(){
+    public User getUserofPage(){
         return this.userofPage;
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
     }
 
     public void addFriend(User friendUser) {
@@ -54,6 +78,14 @@ public class PersonalPageServlet {
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
         userofPage.addBrochure(userBrochure);
+        transaction.commit();
+    }
+    
+    public void removeBrochure(Brochure userBrochure) {
+        SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
+        Session session = sessionfactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        userofPage.removeBrochure(userBrochure);
         transaction.commit();
     }
 }
