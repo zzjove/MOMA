@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Hibernate.dao.com;
+package com.dao.hibernate;
 
 import Hibernate.moma.com.HibernateUtil;
 import Hibernate.moma.com.User;

@@ -1,5 +1,5 @@
-package Hibernate.moma.com;
-// Generated 2013-5-12 3:09:07 by Hibernate Tools 3.2.1.GA
+package com.moma.hibernate;
+// Generated 2013-5-20 23:59:45 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -17,6 +17,7 @@ public class Brochure  implements java.io.Serializable {
      private Date brochureStartTime;
      private int brochureType;
      private int brochureRoot;
+     private String brochureDescription;
      private Set<Diary> diaries = new HashSet<Diary>(0);
      private Set<Blessing> blessings = new HashSet<Blessing>(0);
      private Set<Video> videos = new HashSet<Video>(0);
@@ -33,11 +34,12 @@ public class Brochure  implements java.io.Serializable {
         this.brochureType = brochureType;
         this.brochureRoot = brochureRoot;
     }
-    public Brochure(String brochureName, Date brochureStartTime, int brochureType, int brochureRoot, Set<Diary> diaries, Set<Blessing> blessings, Set<Video> videos, Set<User> users, Set<Photo> photos) {
+    public Brochure(String brochureName, Date brochureStartTime, int brochureType, int brochureRoot, String brochureDescription, Set<Diary> diaries, Set<Blessing> blessings, Set<Video> videos, Set<User> users, Set<Photo> photos) {
        this.brochureName = brochureName;
        this.brochureStartTime = brochureStartTime;
        this.brochureType = brochureType;
        this.brochureRoot = brochureRoot;
+       this.brochureDescription = brochureDescription;
        this.diaries = diaries;
        this.blessings = blessings;
        this.videos = videos;
@@ -79,6 +81,13 @@ public class Brochure  implements java.io.Serializable {
     
     public void setBrochureRoot(int brochureRoot) {
         this.brochureRoot = brochureRoot;
+    }
+    public String getBrochureDescription() {
+        return this.brochureDescription;
+    }
+    
+    public void setBrochureDescription(String brochureDescription) {
+        this.brochureDescription = brochureDescription;
     }
     public Set<Diary> getDiaries() {
         return this.diaries;

@@ -6,7 +6,7 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/moma_db?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">bianshujun</property>
+    <property name="hibernate.connection.password">tongji</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
@@ -17,5 +17,12 @@
     <mapping resource="Hibernate/moma/com/User.hbm.xml"/>
     <mapping resource="Hibernate/moma/com/Photo.hbm.xml"/>
     <mapping resource="Hibernate/moma/com/Comment.hbm.xml"/>
+    <mapping resource="com/moma/hibernate/Blessing.hbm.xml"/>
+    <mapping resource="com/moma/hibernate/Video.hbm.xml"/>
+    <mapping resource="com/moma/hibernate/User.hbm.xml"/>
+    <mapping resource="com/moma/hibernate/Diary.hbm.xml"/>
+    <mapping resource="com/moma/hibernate/Photo.hbm.xml"/>
+    <mapping resource="com/moma/hibernate/Brochure.hbm.xml"/>
+    <mapping resource="com/moma/hibernate/Comment.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

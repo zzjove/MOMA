@@ -4,7 +4,7 @@
  */
 package Hibernate.servlet.com;
 
-import Hibernate.dao.com.UserHelper;
+import com.dao.hibernate.UserHelper;
 import Hibernate.moma.com.User;
 import java.io.IOException;
 import java.util.List;

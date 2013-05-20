@@ -1,5 +1,5 @@
-package Hibernate.moma.com;
-// Generated 2013-5-12 3:09:07 by Hibernate Tools 3.2.1.GA
+package com.moma.hibernate;
+// Generated 2013-5-20 23:59:45 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;

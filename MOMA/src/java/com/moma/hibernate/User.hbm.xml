@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2013-5-12 3:09:08 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 2013-5-20 23:59:46 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="Hibernate.moma.com.User" table="user" catalog="moma_db">
+    <class name="com.moma.hibernate.User" table="user" catalog="moma_db">
         <id name="userId" type="java.lang.Integer">
             <column name="user_id" />
             <generator class="identity" />
@@ -20,11 +20,35 @@
         <property name="userEmail" type="string">
             <column name="user_email" length="64" not-null="true" unique="true" />
         </property>
+        <property name="phoneNumber" type="string">
+            <column name="phone_number" length="32" />
+        </property>
+        <property name="qqNumber" type="java.lang.Integer">
+            <column name="qq_number" />
+        </property>
+        <property name="adressFirstLine" type="string">
+            <column name="adress_first_line" length="45" />
+        </property>
+        <property name="adressSecondLine" type="string">
+            <column name="adress_second_line" length="45" />
+        </property>
+        <property name="adressCountry" type="java.lang.Integer">
+            <column name="adress_country" />
+        </property>
+        <property name="adressProvince" type="java.lang.Integer">
+            <column name="adress_province" />
+        </property>
+        <property name="usercol" type="string">
+            <column name="usercol" length="45" />
+        </property>
+        <property name="userPortraitUrl" type="string">
+            <column name="user_portrait_url" />
+        </property>
         <set name="usersForFirstUserId" inverse="false" table="friends">
             <key>
                 <column name="second_user_id" not-null="true" />
             </key>
-            <many-to-many entity-name="Hibernate.moma.com.User">
+            <many-to-many entity-name="com.moma.hibernate.User">
                 <column name="first_user_id" not-null="true" />
             </many-to-many>
         </set>
@@ -32,7 +56,7 @@
             <key>
                 <column name="first_user_id" not-null="true" />
             </key>
-            <many-to-many entity-name="Hibernate.moma.com.User">
+            <many-to-many entity-name="com.moma.hibernate.User">
                 <column name="second_user_id" not-null="true" />
             </many-to-many>
         </set>
@@ -40,13 +64,13 @@
             <key>
                 <column name="diary_user_fk" />
             </key>
-            <one-to-many class="Hibernate.moma.com.Diary" />
+            <one-to-many class="com.moma.hibernate.Diary" />
         </set>
         <set name="brochures" inverse="false" table="user_brochure_relationship">
             <key>
                 <column name="relationship_user_id" not-null="true" />
             </key>
-            <many-to-many entity-name="Hibernate.moma.com.Brochure">
+            <many-to-many entity-name="com.moma.hibernate.Brochure">
                 <column name="relationship_brochure_id" not-null="true" />
             </many-to-many>
         </set>
@@ -54,19 +78,19 @@
             <key>
                 <column name="video_user_fk" not-null="true" />
             </key>
-            <one-to-many class="Hibernate.moma.com.Video" />
+            <one-to-many class="com.moma.hibernate.Video" />
         </set>
         <set name="photos" inverse="true">
             <key>
                 <column name="photo_user_fk" not-null="true" />
             </key>
-            <one-to-many class="Hibernate.moma.com.Photo" />
+            <one-to-many class="com.moma.hibernate.Photo" />
         </set>
         <set name="blessings" inverse="true">
             <key>
                 <column name="blessing_user_fk" not-null="true" />
             </key>
-            <one-to-many class="Hibernate.moma.com.Blessing" />
+            <one-to-many class="com.moma.hibernate.Blessing" />
         </set>
     </class>
 </hibernate-mapping>
