@@ -17,12 +17,12 @@
     <mapping resource="Hibernate/moma/com/User.hbm.xml"/>
     <mapping resource="Hibernate/moma/com/Photo.hbm.xml"/>
     <mapping resource="Hibernate/moma/com/Comment.hbm.xml"/>
-    <mapping resource="com/moma/hibernate/Blessing.hbm.xml"/>
-    <mapping resource="com/moma/hibernate/Video.hbm.xml"/>
-    <mapping resource="com/moma/hibernate/User.hbm.xml"/>
-    <mapping resource="com/moma/hibernate/Diary.hbm.xml"/>
-    <mapping resource="com/moma/hibernate/Photo.hbm.xml"/>
-    <mapping resource="com/moma/hibernate/Brochure.hbm.xml"/>
-    <mapping resource="com/moma/hibernate/Comment.hbm.xml"/>
+    <mapping resource="com/entity/moma/Blessing.hbm.xml"/>
+    <mapping resource="com/entity/moma/Video.hbm.xml"/>
+    <mapping resource="com/entity/moma/User.hbm.xml"/>
+    <mapping resource="com/entity/moma/Diary.hbm.xml"/>
+    <mapping resource="com/entity/moma/Photo.hbm.xml"/>
+    <mapping resource="com/entity/moma/Brochure.hbm.xml"/>
+    <mapping resource="com/entity/moma/Comment.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

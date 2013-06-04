@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-5-20 23:59:46 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="moma_db" name="com.entity.moma.Photo" table="photo">
+    <id name="photoId" type="java.lang.Integer">
+      <column name="photo_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="com.entity.moma.User" fetch="select" name="user">
+      <column name="photo_user_fk" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.entity.moma.Brochure" fetch="select" name="brochure">
+      <column name="photo_brochure_fk" not-null="true"/>
+    </many-to-one>
+    <property name="photoStartTime" type="date">
+      <column length="10" name="photo_start_time" not-null="true"/>
+    </property>
+    <property name="photoUrl" type="string">
+      <column name="photo_url" not-null="true" unique="true"/>
+    </property>
+    <property name="photoTitle" type="string">
+      <column length="32" name="photo_title" not-null="true"/>
+    </property>
+    <property name="photoLocation" type="string">
+      <column length="32" name="photo_location"/>
+    </property>
+  </class>
+</hibernate-mapping>

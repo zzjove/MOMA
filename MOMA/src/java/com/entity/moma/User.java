@@ -1,4 +1,4 @@
-package com.moma.hibernate;
+package com.entity.moma;
 // Generated 2013-5-20 23:59:45 by Hibernate Tools 3.2.1.GA
 
 

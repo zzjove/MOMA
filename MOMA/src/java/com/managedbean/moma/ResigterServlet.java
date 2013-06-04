@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Hibernate.servlet.com;
+package com.managedbean.moma;
 
 import com.dao.hibernate.UserHelper;
 import Hibernate.moma.com.User;

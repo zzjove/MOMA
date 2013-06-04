@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-5-20 23:59:46 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="moma_db" name="com.entity.moma.Video" table="video">
+    <id name="videoId" type="java.lang.Integer">
+      <column name="video_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="com.entity.moma.Brochure" fetch="select" name="brochure">
+      <column name="video_brochure_fk" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.entity.moma.User" fetch="select" name="user">
+      <column name="video_user_fk" not-null="true"/>
+    </many-to-one>
+    <property name="videoStartTime" type="date">
+      <column length="10" name="video_start_time" not-null="true"/>
+    </property>
+    <property name="videoUrl" type="string">
+      <column name="video_url" not-null="true" unique="true"/>
+    </property>
+    <property name="videoTitle" type="string">
+      <column length="32" name="video_title" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

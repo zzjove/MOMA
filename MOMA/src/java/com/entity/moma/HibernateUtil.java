@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.moma.hibernate;
+package com.entity.moma;
 
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
