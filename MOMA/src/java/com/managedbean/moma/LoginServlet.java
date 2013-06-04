@@ -5,7 +5,7 @@
 package com.managedbean.moma;
 
 import com.dao.hibernate.UserHelper;
-import Hibernate.moma.com.User;
+import com.entity.moma.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

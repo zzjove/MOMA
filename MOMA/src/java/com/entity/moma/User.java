@@ -1,5 +1,5 @@
 package com.entity.moma;
-// Generated 2013-5-20 23:59:45 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-4 20:42:26 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -22,7 +22,6 @@ public class User  implements java.io.Serializable {
      private String adressSecondLine;
      private Integer adressCountry;
      private Integer adressProvince;
-     private String usercol;
      private String userPortraitUrl;
      private Set<User> usersForFirstUserId = new HashSet<User>(0);
      private Set<User> usersForSecondUserId = new HashSet<User>(0);
@@ -42,7 +41,7 @@ public class User  implements java.io.Serializable {
         this.userPassword = userPassword;
         this.userEmail = userEmail;
     }
-    public User(String userName, String userRealName, String userPassword, String userEmail, String phoneNumber, Integer qqNumber, String adressFirstLine, String adressSecondLine, Integer adressCountry, Integer adressProvince, String usercol, String userPortraitUrl, Set<User> usersForFirstUserId, Set<User> usersForSecondUserId, Set<Diary> diaries, Set<Brochure> brochures, Set<Video> videos, Set<Photo> photos, Set<Blessing> blessings) {
+    public User(String userName, String userRealName, String userPassword, String userEmail, String phoneNumber, Integer qqNumber, String adressFirstLine, String adressSecondLine, Integer adressCountry, Integer adressProvince, String userPortraitUrl, Set<User> usersForFirstUserId, Set<User> usersForSecondUserId, Set<Diary> diaries, Set<Brochure> brochures, Set<Video> videos, Set<Photo> photos, Set<Blessing> blessings) {
        this.userName = userName;
        this.userRealName = userRealName;
        this.userPassword = userPassword;
@@ -53,7 +52,6 @@ public class User  implements java.io.Serializable {
        this.adressSecondLine = adressSecondLine;
        this.adressCountry = adressCountry;
        this.adressProvince = adressProvince;
-       this.usercol = usercol;
        this.userPortraitUrl = userPortraitUrl;
        this.usersForFirstUserId = usersForFirstUserId;
        this.usersForSecondUserId = usersForSecondUserId;
@@ -141,13 +139,6 @@ public class User  implements java.io.Serializable {
     public void setAdressProvince(Integer adressProvince) {
         this.adressProvince = adressProvince;
     }
-    public String getUsercol() {
-        return this.usercol;
-    }
-    
-    public void setUsercol(String usercol) {
-        this.usercol = usercol;
-    }
     public String getUserPortraitUrl() {
         return this.userPortraitUrl;
     }
@@ -204,9 +195,27 @@ public class User  implements java.io.Serializable {
     public void setBlessings(Set<Blessing> blessings) {
         this.blessings = blessings;
     }
+    
+    
+        public void addFriend(User secondUser){
+        this.getUsersForSecondUserId().add(secondUser);
+        secondUser.getUsersForFirstUserId().add(this);
+    }
+    
+    public void removeFriend(User userToDelete){
+        this.getUsersForSecondUserId().remove(userToDelete);
+        userToDelete.getUsersForFirstUserId().remove(this);
+    }
 
-
-
+    public void addBrochure(Brochure userBrochure) {
+        this.getBrochures().add(userBrochure);
+        userBrochure.getUsers().add(this);
+    }
+    
+    public void removeBrochure(Brochure userBrochuretoDelete) {
+        this.getBrochures().remove(userBrochuretoDelete);
+        userBrochuretoDelete.getUsers().remove(this);
+    }
 
 }
 

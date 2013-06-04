@@ -4,8 +4,8 @@
  */
 package com.managedbean.moma;
 
-import Hibernate.moma.com.Brochure;
-import Hibernate.moma.com.User;
+import com.entity.moma.Brochure;
+import com.entity.moma.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +22,7 @@ import org.hibernate.cfg.Configuration;
  * @author bianshujun
  */
 @WebServlet(name = "PersonalPageServlet", urlPatterns = {"/PersonalPageServlet"})
-public class PersonalPageServlet extends HttpServlet{
+public class PersonalPageServlet extends HttpServlet {
 
     private User userofPage = null;
 
@@ -35,11 +35,11 @@ public class PersonalPageServlet extends HttpServlet{
     public int getPersonalPageUserId() {
         return this.userofPage.getUserId();
     }
-    
-    public User getUserofPage(){
+
+    public User getUserofPage() {
         return this.userofPage;
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -54,7 +54,6 @@ public class PersonalPageServlet extends HttpServlet{
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
 
     public void addFriend(User friendUser) {
@@ -62,6 +61,7 @@ public class PersonalPageServlet extends HttpServlet{
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
         userofPage.addFriend(friendUser);
+        session.merge(userofPage);
         transaction.commit();
     }
 
@@ -70,22 +70,31 @@ public class PersonalPageServlet extends HttpServlet{
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
         userofPage.removeFriend(friendUser);
+        session.merge(userofPage);
         transaction.commit();
-    }
+}
 
     public void addBrochure(Brochure userBrochure) {
         SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
         userofPage.addBrochure(userBrochure);
+        session.merge(userofPage);
         transaction.commit();
     }
-    
+
     public void removeBrochure(Brochure userBrochure) {
         SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
         userofPage.removeBrochure(userBrochure);
+        session.merge(userofPage);
         transaction.commit();
+    }
+    
+    public void clearAllFriends(){
+        for(User friendtoDelete :userofPage.getUsersForSecondUserId()){
+            this.removeFriend(friendtoDelete);
+        }
     }
 }

@@ -4,8 +4,8 @@
  */
 package com.dao.hibernate;
 
-import Hibernate.moma.com.HibernateUtil;
-import Hibernate.moma.com.User;
+import com.dao.hibernate.HibernateUtil;
+import com.entity.moma.User;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -55,6 +55,9 @@ public class UserHelper {
             user = (User)q.uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        if (user == null){
+            return 1;
         }
         return user.getUserId();
     }

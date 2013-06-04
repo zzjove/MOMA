@@ -1,95 +1,93 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2013-5-20 23:59:46 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-6-4 20:42:26 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class catalog="moma_db" name="com.entity.moma.User" table="user">
-    <id name="userId" type="java.lang.Integer">
-      <column name="user_id"/>
-      <generator class="identity"/>
-    </id>
-    <property name="userName" type="string">
-      <column length="32" name="user_name" not-null="true" unique="true"/>
-    </property>
-    <property name="userRealName" type="string">
-      <column length="32" name="user_real_name" not-null="true"/>
-    </property>
-    <property name="userPassword" type="string">
-      <column length="32" name="user_password" not-null="true"/>
-    </property>
-    <property name="userEmail" type="string">
-      <column length="64" name="user_email" not-null="true" unique="true"/>
-    </property>
-    <property name="phoneNumber" type="string">
-      <column length="32" name="phone_number"/>
-    </property>
-    <property name="qqNumber" type="java.lang.Integer">
-      <column name="qq_number"/>
-    </property>
-    <property name="adressFirstLine" type="string">
-      <column length="45" name="adress_first_line"/>
-    </property>
-    <property name="adressSecondLine" type="string">
-      <column length="45" name="adress_second_line"/>
-    </property>
-    <property name="adressCountry" type="java.lang.Integer">
-      <column name="adress_country"/>
-    </property>
-    <property name="adressProvince" type="java.lang.Integer">
-      <column name="adress_province"/>
-    </property>
-    <property name="usercol" type="string">
-      <column length="45" name="usercol"/>
-    </property>
-    <property name="userPortraitUrl" type="string">
-      <column name="user_portrait_url"/>
-    </property>
-    <set inverse="false" name="usersForFirstUserId" table="friends">
-      <key>
-        <column name="second_user_id" not-null="true"/>
-      </key>
-      <many-to-many entity-name="com.moma.hibernate.User">
-        <column name="first_user_id" not-null="true"/>
-      </many-to-many>
-    </set>
-    <set inverse="false" name="usersForSecondUserId" table="friends">
-      <key>
-        <column name="first_user_id" not-null="true"/>
-      </key>
-      <many-to-many entity-name="com.moma.hibernate.User">
-        <column name="second_user_id" not-null="true"/>
-      </many-to-many>
-    </set>
-    <set inverse="true" name="diaries">
-      <key>
-        <column name="diary_user_fk"/>
-      </key>
-      <one-to-many class="com.entity.moma.Diary"/>
-    </set>
-    <set inverse="false" name="brochures" table="user_brochure_relationship">
-      <key>
-        <column name="relationship_user_id" not-null="true"/>
-      </key>
-      <many-to-many entity-name="com.moma.hibernate.Brochure">
-        <column name="relationship_brochure_id" not-null="true"/>
-      </many-to-many>
-    </set>
-    <set inverse="true" name="videos">
-      <key>
-        <column name="video_user_fk" not-null="true"/>
-      </key>
-      <one-to-many class="com.entity.moma.Video"/>
-    </set>
-    <set inverse="true" name="photos">
-      <key>
-        <column name="photo_user_fk" not-null="true"/>
-      </key>
-      <one-to-many class="com.entity.moma.Photo"/>
-    </set>
-    <set inverse="true" name="blessings">
-      <key>
-        <column name="blessing_user_fk" not-null="true"/>
-      </key>
-      <one-to-many class="com.entity.moma.Blessing"/>
-    </set>
-  </class>
+    <class name="com.entity.moma.User" table="user" catalog="moma_db">
+        <id name="userId" type="java.lang.Integer">
+            <column name="user_id" />
+            <generator class="identity" />
+        </id>
+        <property name="userName" type="string">
+            <column name="user_name" length="32" not-null="true" unique="true" />
+        </property>
+        <property name="userRealName" type="string">
+            <column name="user_real_name" length="32" not-null="true" />
+        </property>
+        <property name="userPassword" type="string">
+            <column name="user_password" length="32" not-null="true" />
+        </property>
+        <property name="userEmail" type="string">
+            <column name="user_email" length="64" not-null="true" unique="true" />
+        </property>
+        <property name="phoneNumber" type="string">
+            <column name="phone_number" length="32" />
+        </property>
+        <property name="qqNumber" type="java.lang.Integer">
+            <column name="qq_number" />
+        </property>
+        <property name="adressFirstLine" type="string">
+            <column name="adress_first_line" length="45" />
+        </property>
+        <property name="adressSecondLine" type="string">
+            <column name="adress_second_line" length="45" />
+        </property>
+        <property name="adressCountry" type="java.lang.Integer">
+            <column name="adress_country" />
+        </property>
+        <property name="adressProvince" type="java.lang.Integer">
+            <column name="adress_province" />
+        </property>
+        <property name="userPortraitUrl" type="string">
+            <column name="user_portrait_url" />
+        </property>
+        <set name="usersForFirstUserId" inverse="false" table="friends">
+            <key>
+                <column name="second_user_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.entity.moma.User">
+                <column name="first_user_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="usersForSecondUserId" inverse="false" table="friends">
+            <key>
+                <column name="first_user_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.entity.moma.User">
+                <column name="second_user_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="diaries" inverse="true">
+            <key>
+                <column name="diary_user_fk" />
+            </key>
+            <one-to-many class="com.entity.moma.Diary" />
+        </set>
+        <set name="brochures" inverse="false" table="user_brochure_relationship">
+            <key>
+                <column name="relationship_user_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.entity.moma.Brochure">
+                <column name="relationship_brochure_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="videos" inverse="true">
+            <key>
+                <column name="video_user_fk" not-null="true" />
+            </key>
+            <one-to-many class="com.entity.moma.Video" />
+        </set>
+        <set name="photos" inverse="true">
+            <key>
+                <column name="photo_user_fk" not-null="true" />
+            </key>
+            <one-to-many class="com.entity.moma.Photo" />
+        </set>
+        <set name="blessings" inverse="true">
+            <key>
+                <column name="blessing_user_fk" not-null="true" />
+            </key>
+            <one-to-many class="com.entity.moma.Blessing" />
+        </set>
+    </class>
 </hibernate-mapping>

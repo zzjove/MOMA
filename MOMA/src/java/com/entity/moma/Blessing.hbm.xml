@@ -1,23 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2013-5-20 23:59:46 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-6-4 20:42:26 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class catalog="moma_db" name="com.entity.moma.Blessing" table="blessing">
-    <id name="blessingId" type="java.lang.Integer">
-      <column name="blessing_id"/>
-      <generator class="identity"/>
-    </id>
-    <many-to-one class="com.entity.moma.User" fetch="select" name="user">
-      <column name="blessing_user_fk" not-null="true"/>
-    </many-to-one>
-    <many-to-one class="com.entity.moma.Brochure" fetch="select" name="brochure">
-      <column name="blessing_brochure_fk" not-null="true"/>
-    </many-to-one>
-    <property name="blessingStartTime" type="date">
-      <column length="10" name="blessing_start_time" not-null="true"/>
-    </property>
-    <property name="blessingUrl" type="string">
-      <column name="blessing_url" not-null="true" unique="true"/>
-    </property>
-  </class>
+    <class name="com.entity.moma.Blessing" table="blessing" catalog="moma_db">
+        <id name="blessingId" type="java.lang.Integer">
+            <column name="blessing_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="com.entity.moma.User" fetch="select">
+            <column name="blessing_user_fk" not-null="true" />
+        </many-to-one>
+        <many-to-one name="brochure" class="com.entity.moma.Brochure" fetch="select">
+            <column name="blessing_brochure_fk" not-null="true" />
+        </many-to-one>
+        <property name="blessingStartTime" type="date">
+            <column name="blessing_start_time" length="10" not-null="true" />
+        </property>
+        <property name="blessingUrl" type="string">
+            <column name="blessing_url" not-null="true" unique="true" />
+        </property>
+    </class>
 </hibernate-mapping>
