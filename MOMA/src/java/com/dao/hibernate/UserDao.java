@@ -91,7 +91,10 @@ public class UserDao {
         
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-
+        
+        if (user.getUserRealName() == null) {
+            user.setUserRealName("realName");
+        }
         session.save(user);
         session.flush();
 
