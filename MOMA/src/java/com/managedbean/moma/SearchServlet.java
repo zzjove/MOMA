@@ -4,7 +4,7 @@
  */
 package com.managedbean.moma;
 
-import com.dao.hibernate.UserHelper;
+import com.dao.hibernate.UserDao;
 import com.entity.moma.User;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class SearchServlet extends HttpServlet {
 
     private PersonalPageServlet personalPage;
     private String userNametoSearch = null;
-    private UserHelper userhelper = new UserHelper();
+    private UserDao userhelper = new UserDao();
     private String relatedFriend = null;
 
     @Override
@@ -47,14 +47,8 @@ public class SearchServlet extends HttpServlet {
 
         if (isSameUserName(userNametoSearch)) {
             if (!isSameFriend(userNametoSearch)) {
-                List<User> allUsers = userhelper.getUser();
-                for (User tempEntity : allUsers) {
-                    if (tempEntity.getUserName().equals(userNametoSearch)) {
-                        personalPage.addFriend(tempEntity);
-                    }
-                }
+                personalPage.addFriend(UserDao.findby_userName(userNametoSearch));
                 response.getWriter().println(personalPage.getUserofPage().getUserName() + " add " + userNametoSearch + " as a friend successfully");
-                findRelatedFriend(userNametoSearch);
                 response.getWriter().println(relatedFriend);
             } else {
                 response.getWriter().println("He/She is already your friend");
@@ -91,23 +85,9 @@ public class SearchServlet extends HttpServlet {
     }
 
     private boolean isSameUserName(String registerUserName) {
-        List<User> userList = userhelper.getUser();
-        for (User tempEntity : userList) {
-            if (tempEntity.getUserName().equals(registerUserName)) {
-                return true;
-            }
+        if (UserDao.findby_userName(registerUserName) == null) {
+            return false;
         }
-        return false;
-    }
-
-    private void findRelatedFriend(String registerUserName) {
-        List<User> userList = userhelper.getUser();
-        for (User tempEntity : userList) {
-            if (tempEntity.getUserName().equals(registerUserName)) {
-                for (User tempUser : tempEntity.getUsersForFirstUserId()) {
-                    relatedFriend = tempUser.getUserName();
-                }
-            }
-        }
+        return true;
     }
 }

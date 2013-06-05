@@ -4,7 +4,7 @@
  */
 package com.managedbean.moma;
 
-import com.dao.hibernate.UserHelper;
+import com.dao.hibernate.UserDao;
 import com.entity.moma.User;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class MyFriendServlet extends HttpServlet {
 
     private PersonalPageServlet personalPage ;
     private String userNametoSearch = null;
-    private UserHelper userhelper = new UserHelper();
+    private UserDao userhelper = new UserDao();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,14 +43,14 @@ public class MyFriendServlet extends HttpServlet {
             throws ServletException, IOException {
         personalPage = (PersonalPageServlet) request.getSession().getAttribute("currentPersonalPageforSearch");
         userNametoSearch = request.getParameter("SearchName");
-        List<User> allUsers =  userhelper.getUser();
-        for(User tempEntity: allUsers){
-            if (tempEntity.getUserName().equals(userNametoSearch)){
-                personalPage.addFriend(tempEntity);
-            }
-        }
-        response.getWriter().println(personalPage.getUserofPage().getUserName() + " add " + userNametoSearch + " as a friend successfully");
-        
+//        List<User> allUsers =  userhelper.getUser();
+//        for(User tempEntity: allUsers){
+//            if (tempEntity.getUserName().equals(userNametoSearch)){
+//                personalPage.addFriend(tempEntity);
+//            }
+//        }
+//        response.getWriter().println(personalPage.getUserofPage().getUserName() + " add " + userNametoSearch + " as a friend successfully");
+//        
         //request.setAttribute("searchUserList", personalPage);
         //request.getRequestDispatcher("SearchFriend.jsp").forward(request, response);
     }

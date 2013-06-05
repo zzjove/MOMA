@@ -1,5 +1,5 @@
 package com.entity.moma;
-// Generated 2013-6-4 20:42:26 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-5 8:53:04 by Hibernate Tools 3.2.1.GA
 
 
 

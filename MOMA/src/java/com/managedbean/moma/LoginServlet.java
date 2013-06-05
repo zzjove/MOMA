@@ -4,11 +4,10 @@
  */
 package com.managedbean.moma;
 
-import com.dao.hibernate.UserHelper;
+import com.dao.hibernate.UserDao;
 import com.entity.moma.User;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-    private UserHelper userhelper = new UserHelper();
     private User currentLoginUser = null;
     private PersonalPageServlet currentPersonalPage= null;
     private ArrayList<PersonalPageServlet> personalPageList = new ArrayList<PersonalPageServlet>();
@@ -42,13 +40,15 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (isRightPassword(request)) {
-            if (!hasSamePersonPage()){
-                currentPersonalPage = new PersonalPageServlet(currentLoginUser);
-                personalPageList.add(currentPersonalPage);
-            }
-            request.setAttribute("currentPersonalPage", currentPersonalPage);
-            //response.getWriter().println(currentPersonalPage.getuserofPage().getUserName());
-            request.getRequestDispatcher("PersonalSpace.jsp").forward(request, response);
+            response.getWriter().println("It is Successful");
+//            if (!hasSamePersonPage()){
+//                currentPersonalPage = new PersonalPageServlet(currentLoginUser);
+//                personalPageList.add(currentPersonalPage);
+//            }
+//            request.setAttribute("currentPersonalPage", currentPersonalPage);
+////            response.getWriter().println(currentPersonalPage.getuserofPage().getUserName());
+//            
+//            request.getRequestDispatcher("PersonalSpace.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("index.html").forward(request, response);
         }
@@ -65,15 +65,9 @@ public class LoginServlet extends HttpServlet {
     }
 
     private boolean isRightPassword(HttpServletRequest request) {
-        List<User> userList = userhelper.getUser();
-        for (User userEntity : userList) {
-            if (userEntity.getUserName().equals(request.getParameter("userName"))) {
-                if (userEntity.getUserPassword().equals(request.getParameter("userPassword"))) {
-                    currentLoginUser = userEntity;
-                    return true;
-                }
-            }
+        if (UserDao.loginby_userName_pw(request.getParameter("userName"), request.getParameter("userPassword")) == null){
+            return false;
         }
-        return false;
+        return true;
     }
 }

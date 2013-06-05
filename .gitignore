@@ -1,4 +1,8 @@
 *.class
+hibernate.cfg.xml
+hibernate.reveng.xml
+*.properties
+MOMA/nbproject/genfiles.properties
 
 # Package Files #
 *.jar
@@ -20,3 +24,6 @@
 /Exercise2Dup/nbproject/private/
 /Exercise2Dup/build/
 /Exercise2Dup/dist/
+
+
+*.properties

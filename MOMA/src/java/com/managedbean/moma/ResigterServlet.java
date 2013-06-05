@@ -4,7 +4,7 @@
  */
 package com.managedbean.moma;
 
-import com.dao.hibernate.UserHelper;
+import com.dao.hibernate.UserDao;
 import com.entity.moma.User;
 import java.io.IOException;
 import java.util.List;
@@ -24,40 +24,39 @@ import org.hibernate.cfg.Configuration;
  */
 @WebServlet(name = "ResigterServlet", urlPatterns = {"/ResigterServlet"})
 public class ResigterServlet extends HttpServlet {
-
-    private UserHelper userhelper = new UserHelper();
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (!isSameEmail(request.getParameter("newUserEmail")) && !isSameUserName(request.getParameter("newUserName")) && !isEmptyInput(request)) {
-            if (isTwicePasswordSame(request.getParameter("newUserPassword"), request.getParameter("newUserPasswordConfirm"))) {
-                setNewUserInformation(request);
-                /*检查UserId
-                userIdList = userhelper.getUser();
-                for (User tempEntity : userIdList) {
-                    response.getWriter().println(tempEntity.getUserId());
-                }*/
-                
+//        if (!isSameEmail(request.getParameter("newUserEmail")) && !isSameUserName(request.getParameter("newUserName")) && !isEmptyInput(request)) {
+//            if (isTwicePasswordSame(request.getParameter("newUserPassword"), request.getParameter("newUserPasswordConfirm"))) {
+//        setNewUserInformation(request);
+                User user = new User();
+                user.setUserRealName("RealName");
+                user.setUserId(getNewUserId());
+                user.setUserEmail(request.getParameter("newUserEmail"));
+                user.setUserName(request.getParameter("newUserName"));
+                user.setUserPassword(request.getParameter("newUserPassword"));
+                UserDao.add_user(user);
                 response.getWriter().println("Database Updated Successfully");
-            } else {
-                //修改第二行密码输入栏为两次密码不一致
-            }
-        }
-
+//            } else {
+//                //修改第二行密码输入栏为两次密码不一致
+//            }
+//        }
+        
     }
-
+    
     private void setNewUserInformation(HttpServletRequest request) {
         SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionfactory.openSession();
@@ -71,40 +70,35 @@ public class ResigterServlet extends HttpServlet {
         session.save(user);
         transaction.commit();
     }
-
-    private boolean isEmptyInput(HttpServletRequest request){
-        if(request.getParameter("newUserEmail") == null &&
-           request.getParameter("newUserName") == null &&
-           request.getParameter("newUserPassword") == null)
+    
+    private boolean isEmptyInput(HttpServletRequest request) {
+        if (request.getParameter("newUserEmail") == null
+                && request.getParameter("newUserName") == null
+                && request.getParameter("newUserPassword") == null) {
             return true;
+        }
         return false;
     }
     
     private boolean isSameEmail(String registerEmail) {
-        List<User> userList = userhelper.getUser();
-        for (User tempEntity : userList) {
-            if (tempEntity.getUserEmail().equals(registerEmail)) {
-                return true;
-            }
+        if (UserDao.findby_userEmail(registerEmail) == null) {
+            return false;
         }
-        return false;
+        return true;
     }
     
     private boolean isSameUserName(String registerUserName) {
-        List<User> userList = userhelper.getUser();
-        for (User tempEntity : userList) {
-            if (tempEntity.getUserName().equals(registerUserName)) {
-                return true;
-            }
+        if (UserDao.findby_userName(registerUserName) == null) {
+            return false;
         }
-        return false;
+        return true;
     }
-
+    
     private int getNewUserId() {
-        int maxUserId = userhelper.getMaxUserId();
+        int maxUserId = UserDao.getMaxUserId();
         return maxUserId + 1;
     }
-
+    
     private boolean isTwicePasswordSame(String firstPassword, String secondPassword) {
         if (firstPassword.equals(secondPassword)) {
             return true;
