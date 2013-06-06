@@ -2,7 +2,6 @@
 hibernate.cfg.xml
 hibernate.reveng.xml
 *.properties
-MOMA/nbproject/genfiles.properties
 
 # Package Files #
 *.jar
@@ -24,6 +23,3 @@ MOMA/nbproject/genfiles.properties
 /Exercise2Dup/nbproject/private/
 /Exercise2Dup/build/
 /Exercise2Dup/dist/
-
-
-*.properties
