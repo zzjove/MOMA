@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <h:head>
+        <title>User Info Completion Page</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+            <ui:define name="body">
+                <h2>User Infomation Data Entry</h2>
+                <h:form>
+                    <p:messages/>
+                    <p:panel header="Please Complete the Following Infomation">
+                        <h:panelGrid columns="2">
+
+                            <h:outputText value="Real Name"/>
+                            <p:inputText id="realName" value="#{user.userRealName}"/>
+                            
+                            <h:outputText value="E-mail"/>
+                            <p:autoComplete id ="email" value="#{user.userEmail}"
+                                            completeMethod="#{autoCompleteBean.complete}"/>
+                            
+                            <h:outputText value="Phone Number"/>
+                            <p:inputMask id ="phoneNumber" value="#{user.phoneNumber}" mask="(999) 999-9999-9999"/>
+                            
+                            <h:outputText value="QQ Number"/>
+                            <p:inputText id="qqNumber" value="#{user.qqNumber}" />
+                            
+                            <h:outputText value="Address Line1"/>
+                            <p:inputText id="addressLine1" value="#{user.adressFirstLine}"/>
+                            
+                            <h:outputText value="Address Line2"/>
+                            <p:inputText id="addressLine2" value="#{user.adressSecondLine}"/>
+                            
+                            <h:outputText value="Country"/>
+                            <p:selectOneMenu value="#{user.adressCountry}">
+                                <!--仅作显示参考：找现成的数据库-->
+                                <f:selectItem itemLabel="China" itemValue="China" />  
+                                <f:selectItem itemLabel="Japan" itemValue="Japan" />  
+                                <f:selectItem itemLabel="Britain" itemValue="Britain" />  
+                                <f:selectItem itemLabel="the United States" itemValue="the United States" />  
+                            </p:selectOneMenu>
+                            
+                            <h:outputText value="Province"/>
+                            <p:selectOneMenu value="#{user.adressProvince}">
+                                <!--仅作显示参考：找现成的数据库-->
+                                <f:selectItem itemLabel="Shanghai" itemValue="Shanghai" />  
+                                <f:selectItem itemLabel="Beijing" itemValue="Beijing" />  
+                                <f:selectItem itemLabel="Shanxi" itemValue="Shanxi" />  
+                                <f:selectItem itemLabel="Liaoning" itemValue="Liaoning" />  
+                            </p:selectOneMenu>
+
+                            <h:outputText value="Avatar"/>
+                            <p:selectOneMenu value="#{user.userPortraitUrl}">
+                                <f:selectItem itemLabel="Select One" itemValue="" />  
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                    <p:commandButton value="Submit" id="submit" update="display" oncomplete="dialog.show()" />  
+                    <p:dialog header="User Information" widgetVar="dialog" showEffect="fold" hideEffect="fold" width="200">
+                        <h:panelGrid id="display" columns="2" cellpadding="5">
+                            <h:outputText value="Real Name:"/>
+                            <h:outputText value="#{user.userRealName}"/>
+                            <h:outputText value="E-mail:"/>
+                            <h:outputText value="#{user.userEmail}"/>
+                            <h:outputText value="Phone Number:"/>
+                            <h:outputText value="#{user.phoneNumber}"/>
+                            <h:outputText value="QQ Number:"/>
+                            <h:outputText value="#{user.qqNumber}"/>
+                            <h:outputText value="Address:"/>
+                            <h:outputText value="#{user.adressCountry} #{user.adressProvince} 
+                                          #{user.adressSecondLine} #{user.adressFirstLine}"/>    
+                        </h:panelGrid>
+                    </p:dialog>  
+
+                </h:form>  
+            </ui:define>
+        </ui:composition>
+
+
+    </h:body>
+</html>
+
