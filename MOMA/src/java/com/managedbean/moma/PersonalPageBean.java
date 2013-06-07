@@ -7,18 +7,16 @@ package com.managedbean.moma;
 import com.dao.hibernate.UserDao;
 import com.entity.moma.User;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author bianshujun
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class PersonalPageBean {
 
     private String loginUserName;
@@ -53,16 +51,9 @@ public class PersonalPageBean {
      * Creates a new instance of PersonalPageBean
      */
     public PersonalPageBean() {
-//        FacesContext facesContext = FacesContext.getCurrentInstance();
-//        ExternalContext extContext = facesContext.getExternalContext();
-//        HttpSession session = (HttpSession) extContext.getSession(true);
-//        String user = (String) session.getAttribute("userName");
-        
-//        String name = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("name").toString();
-//        System.out.println(name);
     }
-    
-        public String doLogin() {
+
+    public String doLogin() {
         System.out.println(loginUserName + " and " + loginUserPassword);
         if (UserDao.loginby_userName_pw(loginUserName, loginUserPassword) == null) {
             System.out.println("LoginFail");
@@ -70,7 +61,18 @@ public class PersonalPageBean {
         } else {
             System.out.println("LoginSuccessfully");
             user = UserDao.findby_userName(loginUserName);
-            return "test";
+            if ("RealName".equals(user.getUserRealName())) {
+                
+                FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userName", loginUserName);
+
+//                String testSession = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
+//                System.out.println(testSession);
+
+                return "userInfoCompletion";
+            } else {
+                return "test";
+            }
         }
     }
 }

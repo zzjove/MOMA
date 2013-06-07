@@ -19,21 +19,22 @@ public class SearchBean {
     
     private String searchName;
 
-    public String getSearch() {
+    public String getSearchName() {
         return searchName;
     }
 
-    public void setSearch(String search) {
-        this.searchName = search;
+    public void setSearchName(String searchName) {
+        this.searchName = searchName;
     }
+
     /**
      * Creates a new instance of SearchBean
      */
     public SearchBean() {
     }
     
-    public String searchConfirm() {
-        User searchUser = UserDao.findby_userName(searchName);
-        return "searchAnswer";
+    public String doSearch() {
+        
+        return "test";
     }
 }

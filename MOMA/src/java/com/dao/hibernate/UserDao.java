@@ -107,8 +107,8 @@ public class UserDao {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
-//        session.merge(user);
-        session.update(user);
+        session.merge(user);
+//        session.update(user);
         session.flush();
 
         transaction.commit();
