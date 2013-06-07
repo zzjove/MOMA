@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.managedbean.moma;
+package com.formerServlet.moma;
 
 import com.dao.hibernate.UserDao;
 import com.entity.moma.User;

@@ -1,168 +1,101 @@
-<<<<<<< HEAD
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
- 
-    <h:head>
-        <title>Welcome to MOMA</title>
-        <link rel="stylesheet" type="text/css" href="./css/generalStyle.css"  />
-        <script type="text/javascript" src="./js/formStyle.js"></script>
-    </h:head>
-    <h:body>
-       
-        
-        <div class="navbar">
-            <div class="navbar-inner">
-  		<div class="container-fluid">
-  		   <h:outputLink styleClass="brand" value="#">
-                         <h:outputText value="MOMA" />
-                   </h:outputLink>
-                   
-                    
-                   <h:form styleClass="navbar-search pull-right" >
-                        <h:inputText styleClass="search-query" value="Search for friends" onfocus="accFocus()" onblur="accBlur()" />
-                    </h:form>
-             
-               </div>
-           </div>
-        </div>
-            <div class="container-fluid">
-			
-		<div class="row">
-		<div class="span3 offset2 text-center" id="welcomeMessage">
-		<h2>
-			Keep your memories,<br /> keep them alive.
-		</h2>
-                    </div>
-                    <div class="span2 pull-right"></div>
-		<div class="span5 pull-right ">
-		<div class="hero-unit">
-                    <h:form>
-			<h:inputText styleClass="span3" id="userName" onfocus="accFocus()" onblur="accBlur()"/><br />
-			<div class="controls controls-row">
-                        	<h:inputSecret styleClass="span2" id="userPassword" onfocus="accFocus()" onblur="accBlur()"/>
-                                <h:commandButton styleClass="span1 btn btn-primary" value="登陆" action="success" /><br />	
-                        </div> 
-			<h:selectBooleanCheckbox styleClass="checkbox" value=""/> 
-                        <h:outputText value=" Remember me" ></h:outputText>
-	            </h:form>
-		</div>
-		<div class="hero-unit">
-			<div class="text-left">刚刚来到MOMA？</div>
-                        <h:form>
-                            <h:inputText id="newUserName" value="#{registerBean.user.userName}" onfocus="accFocus()" onblur="accBlur()"/><br/>
-                            <h:inputText  id="newUserEmail" value="#{registerBean.user.userEmail}" onfocus="accFocus()" onblur="accBlur()" /><br/>
-                            <h:inputSecret id="newUserPassword" value="#{registerBean.user.userPassword}" onfocus="accFocus()" onblur="accBlur()"/><br/>
-                            <h:inputSecret id="newUserPasswordConfirm" onfocus="accFocus()" onblur="accBlur()" /><br/>
-                            <h:commandButton styleClass="btn btn-primary" value="注册" action="#{registerBean.doRegistration}" />
-			</h:form>
-			</div>
-		</div>
-		</div>
-		</div>
-		<script src="bootstrap.js"></script>
-                <h:outputText value="haha"></h:outputText>             
-        
-    </h:body>
-</html>
 
-=======
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <f:view contentType="text/html">
-    <h:head>
-        <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
-        <title>Welcome to MOMA</title>
-    </h:head>
-    <h:body>
-         
-        <div class="navbar">
-            <div class="navbar-inner">
-  		<div class="container-fluid">
-  		   <h:outputLink styleClass="brand" value="#">
-                         <h:outputText value="MOMA" />
-                   </h:outputLink>
-                   
-                    
-                   <h:form styleClass="navbar-search pull-right" >
-                       <h:outputText value="Find friends "></h:outputText>
-                        <p:inputText styleClass="search-query" value="#{searchBean.search}" />
-                    </h:form>
-             
-               </div>
-           </div>
-        </div>
-        
-           <div class="container-fluid">
-			
-		<div class="row">
-		<div class="span3 offset2 text-center" id="welcomeMessage">
-		<h2>
-			Keep your memories,<br /> keep them alive.
-		</h2>
+        <h:head>
+            <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
+            <title>Welcome to MOMA</title>
+        </h:head>
+        <h:body>
+
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <h:outputLink styleClass="brand" value="#">
+                            <h:outputText value="MOMA" />
+                        </h:outputLink>
+
+
+                        <h:form styleClass="navbar-search pull-right" >
+                            <h:outputText value="Find friends "></h:outputText>
+                            <p:inputText styleClass="search-query" value="#{searchBean.searchName}" />
+                        </h:form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="span3 offset2 text-center" id="welcomeMessage">
+                        <h2>
+                            Keep your memories,<br /> keep them alive.
+                        </h2>
                     </div>
                     <div class="span2 pull-right"></div>
-		<div class="span5 pull-right ">
-		<div class="hero-unit">
-                    <h:form>
-                        <h:outputLabel for="userName">
-                            <h:outputText value="User Name: " />
-                        </h:outputLabel>
-			<p:inputText styleClass="span3" id="userName" /><br />
-			<div class="controls controls-row">
-                           <h:outputLabel for="userPassword">
-                            <h:outputText value="User Password: " />
-                           </h:outputLabel>
-                             <p:password id="userPassword" styleClass="span2" /> 
-                             <p:commandButton styleClass="span1 btn btn-primary" value="登陆" action="success"/><br />	
-                        </div> 
-                      <p:selectBooleanCheckbox styleClass="checkbox" value="" />  
-                        <h:outputText value=" Remember me" ></h:outputText>
-                        <br />
-                        <h:outputLink value="#">
-                              <h:outputText value="Forget your password?" />
-                       </h:outputLink>
-	            </h:form>
-		</div>
-		<div class="hero-unit">
-			<div class="text-left">刚刚来到MOMA？</div>
-                        <h:form>
-                            <h:outputLabel for="newUserName" >
-                                <h:outputText value="User Name: "/>
-                            </h:outputLabel>
-                            <p:inputText id="newUserName" value="#{registerBean.user.userName}" required="true" /><br/>
-                             
-                            <h:outputLabel for="newUserEmail" >
-                                <h:outputText value="Email Address: "/>
-                            </h:outputLabel>
-                            <p:inputText  id="newUserEmail" value="#{registerBean.user.userEmail}" required="true"/><br/>
-                            
-                            <h:outputLabel for="newUserPassword" >
-                                <h:outputText value="Password: "/>
-                            </h:outputLabel>
-                            <p:password id="newUserPassword" value="#{registerBean.user.userPassword}" match="newUserPasswordConfirm" feedback="true" inline="true" required="true"/><br/>
-                            
-                            <h:outputLabel for="newUserPasswordConfirm" >
-                                <h:outputText value="Confirm Password: "/>
-                            </h:outputLabel>   
-                            <p:password id="newUserPasswordConfirm" feedback="true" inline="true" required="true"/><br />                           
-                            
-                            <p:commandButton styleClass="btn btn-primary" value="注册" action="#{registerBean.doRegistration}" />
-			</h:form>
-			</div>
-		</div>
-		</div>
-		</div>
-       
-		<script src="bootstrap.js"></script>
-    </h:body>
-   </f:view>
+                    <div class="span5 pull-right ">
+                        <div class="hero-unit">
+                            <h:form>
+                                <h:outputLabel for="userName">
+                                    <h:outputText value="User Name: " />
+                                </h:outputLabel>
+                                <p:inputText styleClass="span3" value="#{personalPageBean.loginUserName}" id="userName" /><br />
+                               <div class="controls controls-row"> 
+                                    <h:outputLabel for="userPassword">
+                                        <h:outputText value="User Password: " />
+                                    </h:outputLabel>
+                                    <p:password id="userPassword" value="#{personalPageBean.loginUserPassword}" styleClass="span2" /> 
+                                    <p:commandButton styleClass="span1 btn btn-primary" value="登陆" action="#{personalPageBean.doLogin}"/><br />	
+                              </div> 
+                              <!--<p:selectBooleanCheckbox styleClass="checkbox" value="" />  
+                                <h:outputText value=" Remember me" ></h:outputText> -->
+                                <br />
+                                <h:outputLink value="#">
+                                    <h:outputText value="Forget your password?" />
+                                </h:outputLink> 
+                            </h:form>
+                           
+                        </div>
+                        
+                           
+                        <div class="hero-unit">
+                            <div class="text-left">刚刚来到MOMA？</div>
+                            <h:form>
+                                <h:outputLabel for="newUserName" >
+                                    <h:outputText value="User Name: "/>
+                                </h:outputLabel>
+                                <p:inputText id="newUserName" value="#{welcomeBean.user.userName}" required="true" /><br/>
+
+                                <h:outputLabel for="newUserEmail" >
+                                    <h:outputText value="Email Address: "/>
+                                </h:outputLabel>
+                                <p:inputText  id="newUserEmail" value="#{welcomeBean.user.userEmail}" required="true"/><br/>
+
+                                <h:outputLabel for="newUserPassword" >
+                                    <h:outputText value="Password: "/>
+                                </h:outputLabel>
+                                <p:password id="newUserPassword" value="#{welcomeBean.user.userPassword}" match="newUserPasswordConfirm" feedback="true" inline="true" required="true"/><br/>
+
+                                <h:outputLabel for="newUserPasswordConfirm" >
+                                    <h:outputText value="Confirm Password: "/>
+                                </h:outputLabel>   
+                                <p:password id="newUserPasswordConfirm" feedback="true" inline="true" required="true"/><br />                           
+
+                                <p:commandButton styleClass="btn btn-primary" value="注册" actionListener="#{welcomeBean.doRegistration}" />
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="bootstrap.js"></script>
+        </h:body>
+    </f:view>
 </html>
 
->>>>>>> caac30f7bd40fe6b0d2e22cf48855571757b5cb6

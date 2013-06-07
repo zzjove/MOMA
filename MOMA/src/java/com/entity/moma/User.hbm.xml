@@ -41,7 +41,7 @@
         <property name="userPortraitUrl" type="string">
             <column name="user_portrait_url" />
         </property>
-        <set name="usersForFirstUserId" inverse="false" table="friends">
+        <set name="usersForFirstUserId" inverse="false" table="friends" lazy="false">
             <key>
                 <column name="second_user_id" not-null="true" />
             </key>
@@ -49,7 +49,7 @@
                 <column name="first_user_id" not-null="true" />
             </many-to-many>
         </set>
-        <set name="usersForSecondUserId" inverse="false" table="friends">
+        <set name="usersForSecondUserId" inverse="false" table="friends" lazy="false">
             <key>
                 <column name="first_user_id" not-null="true" />
             </key>
