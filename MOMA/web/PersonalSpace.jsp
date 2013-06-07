@@ -3,7 +3,7 @@
     Created on : 2013-5-14, 22:34:31
     Author     : bianshujun
 --%>
-<%@page import="com.managedbean.moma.PersonalPageServlet"%>
+<%@page import="com.formerServlet.moma.PersonalPageServlet"%>
 <%@taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
     <head>
         <title>Welcome to MOMA</title>
         <meta http-equiv="Content-Type" CONTENT="text/html; charset=UTF-8"/>
-        <link rel="stylesheet" type="text/css" href="generalStyle.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
     </head>
     <body>
         <%
