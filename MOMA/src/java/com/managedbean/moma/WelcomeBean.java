@@ -61,12 +61,16 @@ public class WelcomeBean {
         if ((UserDao.findby_userName(user.getUserName()) == null)
                 && UserDao.findby_userEmail(user.getUserEmail()) == null) {
             UserDao.add_user(user);
+
+            FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("registerUserName", user.getUserName());
+            return "userInfoCompletion";
         }
 //        UserDao.add_user_friend("shitVincent","shit");
 //        for (User user : UserDao.findby_userName("shit").getUsersForFirstUserId()) {
 //            System.out.println(user.getUserName());
 //        }
-        return "test";
+        return "welcome";
     }
 
     public String doLogin() {
@@ -76,18 +80,21 @@ public class WelcomeBean {
             return "welcome";
         } else {
             System.out.println("LoginSuccessfully");
-
+            FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userName", loginUserName);
+            
+            return "PersonalSpace";
+//            return "PersonalSpace";
 //            FacesContext facesContext = FacesContext.getCurrentInstance();
 //            ExternalContext extContext = facesContext.getExternalContext();
 //            HttpSession session = (HttpSession) extContext.getSession(true);
 //            session.setAttribute("name", loginUserName);
-            
+
 //            Map <String,Object>   sessionParameterMap   =   FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 //            sessionParameterMap.put("name", loginUserName);
-            
+
 //            System.out.println(session.getAttribute("name").toString());
 
-            return "test";
         }
     }
 }

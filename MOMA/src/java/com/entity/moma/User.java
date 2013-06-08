@@ -105,6 +105,9 @@ public class User implements java.io.Serializable {
     }
 
     public String getPhoneNumber() {
+        if (this.phoneNumber == null) {
+            return "";
+        }
         return this.phoneNumber;
     }
 
@@ -113,6 +116,9 @@ public class User implements java.io.Serializable {
     }
 
     public Integer getQqNumber() {
+        if (this.qqNumber == null) {
+            return 0;
+        }
         return this.qqNumber;
     }
 
@@ -121,6 +127,9 @@ public class User implements java.io.Serializable {
     }
 
     public String getAdressFirstLine() {
+        if (this.adressFirstLine == null) {
+            return "";
+        }
         return this.adressFirstLine;
     }
 
@@ -129,6 +138,9 @@ public class User implements java.io.Serializable {
     }
 
     public String getAdressSecondLine() {
+        if (this.adressSecondLine == null) {
+            return "";
+        }
         return this.adressSecondLine;
     }
 
@@ -137,6 +149,9 @@ public class User implements java.io.Serializable {
     }
 
     public Integer getAdressCountry() {
+        if (this.adressCountry == null) {
+            return 0;
+        }
         return this.adressCountry;
     }
 
@@ -145,6 +160,9 @@ public class User implements java.io.Serializable {
     }
 
     public Integer getAdressProvince() {
+        if (this.adressProvince == null) {
+            return 0;
+        }
         return this.adressProvince;
     }
 
@@ -153,6 +171,9 @@ public class User implements java.io.Serializable {
     }
 
     public String getUserPortraitUrl() {
+        if (this.userPortraitUrl == null) {
+            return "";
+        }
         return this.userPortraitUrl;
     }
 

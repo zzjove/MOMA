@@ -1,0 +1,308 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+    <h:head>
+        <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
+        <title>Welcome to MOMA</title>
+    </h:head>
+    <h:body>
+        <div class="navbar">
+                <div class="navbar-inner">
+  			<div class="container-fluid">
+                            <h:outputLink styleClass="brand" value="#">
+                                <h:outputText value="MOMA" />
+                            </h:outputLink>
+    				<ul class="nav">
+                                    <li><h:outputLink value="#">
+                                            <h:outputText value="首页" />
+                                        </h:outputLink>
+                                    </li>
+      					<li class="active">
+                                            <h:outputLink value="#">
+                                                <h:outputText value="我的纪念册" />
+                                            </h:outputLink>
+                                        </li>
+      					<li>
+                                            <h:outputLink value="Friends.xhtml">
+                                                <h:outputText value="我的好友" />
+                                            </h:outputLink>
+                                        </li>
+      					
+   					</ul>
+   					
+                                       <h:form styleClass="navbar-search pull-right">
+                                               <p:inputText id="search_friends" styleClass="search-query" />
+					</h:form>
+   					<ul class="nav pull-right ">
+   						<li>
+                                                    <h:outputLink value="#">
+                                                        <h:outputText value="新建纪念册" />
+                                                    </h:outputLink>
+                                                </li>
+   					</ul>
+   				
+				</div>
+  			</div>
+		</div>
+        
+                    <div class="row" >
+			<div class="row">		
+				<div class=" pull-right">
+				<div class="span2">
+                                    <h:outputLink value="#">
+                                         <h:graphicImage url="./img/portrait.png" />
+                                    </h:outputLink><br/>
+					
+                                    <a href="#editMyInfo" role="button" class="btn" data-toggle="modal">编辑个人资料</a>
+                                  
+					<div id="editMyInfo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  						<div class="modal-header">
+   							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    						<h3 id="myModalLabel">个人资料</h3>
+  						</div>
+  						<div class="modal-body">
+                                          
+     <h:form>  
+  
+    <p:growl id="growl" sticky="true" showDetail="true"/>  
+  
+    <p:wizard widgetVar="wiz" flowListener="#{personalPageBean.onFlowProcess}">  
+      
+        <p:tab id="personal" title="个人">  
+  
+            <p:panel header="个人基本信息">  
+              
+                <h:messages errorClass="error"/>  
+                  
+                <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">  
+                
+                    <h:outputText value="真实姓名: *" />  
+                    <p:inputText required="true" label="userRealName"  
+                            value="#{personalPageBean.user.userRealName}" />  
+                    
+                    <h:outputText value="邮箱: *" />  
+                   <p:autoComplete label="userEmail" value="#{personalPageBean.user.userEmail}"
+                                            completeMethod="#{autoCompleteBean.complete}"/>
+              
+                    <h:outputText value="Skip to last: " />  
+                    <h:selectBooleanCheckbox value="#{personalPageBean.skip}" />  
+                </h:panelGrid>  
+            </p:panel>  
+        </p:tab>  
+              
+        <p:tab id="address" title="地址">  
+            <p:panel header="地址信息">  
+              
+                <h:messages errorClass="error"/>  
+                  
+                <h:panelGrid columns="2" columnClasses="label, value">  
+                    <h:outputText value="街道: " />  
+                    <p:inputText value="#{personalPageBean.user.adressFirstLine}" />  
+                      
+                    <h:outputText value="城市: " />  
+                    <p:inputText value="#{personalPageBean.user.adressSecondLine}" />  
+                      
+                      <h:outputText value="国家"/>
+                           <p:selectOneMenu value="#{personalPageBean.user.adressCountry}">
+                                <!--仅作显示参考：找现成的数据库-->
+                               <f:selectItem itemLabel="China" itemValue="China" />  
+                                <f:selectItem itemLabel="Japan" itemValue="Japan" />  
+                               <f:selectItem itemLabel="Britain" itemValue="Britain" />  
+                                <f:selectItem itemLabel="the United States" itemValue="the United States" />  
+                           </p:selectOneMenu>
+                            
+                          <h:outputText value="省份"/>
+                            <p:selectOneMenu value="#{modifyInfoBean.user.adressProvince}">
+                               <!--仅作显示参考：找现成的数据库-->
+                                <f:selectItem itemLabel="Shanghai" itemValue="Shanghai" />  
+                                <f:selectItem itemLabel="Beijing" itemValue="Beijing" />  
+                               <f:selectItem itemLabel="Shanxi" itemValue="Shanxi" />  
+                                <f:selectItem itemLabel="Liaoning" itemValue="Liaoning" />  
+                           </p:selectOneMenu>
+                 
+                     <h:outputText value="Skip to last: " />  
+                     <h:selectBooleanCheckbox value="#{personalPageBean.skip}" />  
+                </h:panelGrid>  
+            </p:panel>  
+        </p:tab>  
+              
+        <p:tab id="contact" title="联系">  
+            <p:panel header="联系方式">  
+                  
+                <h:messages errorClass="error"/>  
+              
+                <h:panelGrid columns="2" columnClasses="label, value">  
+                 
+                      
+                    <h:outputText value="电话: " />  
+                    <p:inputText value="#{personalPageBean.user.phoneNumber}"/>  
+                      
+                    <h:outputText value="qq号: " />  
+                    <p:inputText value="#{personalPageBean.user.qqNumber}"/>  
+                    
+                </h:panelGrid>  
+            </p:panel>  
+        </p:tab>  
+              
+        <p:tab id="confirm" title="确认">  
+            <p:panel header="确认信息">  
+              
+                <h:panelGrid id="confirmation" columns="6">  
+                    <h:outputText value="真实姓名: " />  
+                    <h:outputText styleClass="outputLabel"  
+                                value="#{personalPageBean.user.userRealName}" />  
+                      
+                    
+                     <h:outputText value="邮箱: " />  
+                     <h:outputText styleClass="outputLabel"  
+                                value="#{personalPageBean.user.userEmail}" />  
+                   
+                   <h:outputText value="地址1: " />  
+                    <h:outputText styleClass="outputLabel"  
+                                value="#{personalPageBean.user.adressFirstLine}" />  
+                      
+                    <h:outputText value="地址2: " />  
+                    <h:outputText styleClass="outputLabel"  
+                                value="#{personalPageBean.user.adressSecondLine}" />  
+                      
+                    <h:outputText value="国家: " />  
+                    <h:outputText styleClass="outputLabel"  
+                                value="#{personalPageBean.user.adressCountry}" />  
+                      
+                    <h:outputText value="省份: " />  
+                    <h:outputText styleClass="outputLabel"  
+                                value="#{personalPageBean.user.adressProvince}" /> 
+                    
+                    
+                    <h:outputText value="电话:" />  
+                    <h:outputText styleClass="outputLabel"  
+                                value="#{personalPageBean.user.phoneNumber}"/>  
+                      
+                    <h:outputText value="qq号: " />  
+                    <h:outputText styleClass="outputLabel"  
+                                value="#{personalPageBean.user.qqNumber}" />  
+                      
+                    <h:outputText />  
+                    <h:outputText />  
+                </h:panelGrid>  
+                  
+                <p:commandButton value="保存修改" update="growl"   
+                                 actionListener="#{personalPageBean.modifyPersonalInfo}"/>  
+              
+            </p:panel>  
+        </p:tab>  
+    </p:wizard>        
+</h:form>  
+  						</div>
+  						<div class="modal-footer">
+    						<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    						<!--<button class="btn btn-primary">Save changes</button> -->
+  						</div>
+					</div>
+				</div>
+				<div class="span3 text-left badge badge-warning">
+					<h4>
+					姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名<br/>
+					性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别<br/>
+					年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄<br/>
+					邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱<br />
+					地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址<br />
+					联系方式<br/>
+					
+					</h4>
+				</div>
+				<div class="span3">
+			
+				</div>
+				</div>
+			</div>
+		
+			<br/>
+			<br/>
+			
+			<div class="row">
+				<div class="span1"> </div>
+				<ul class="thumbnails">
+  					<li class="span3">
+    					<div class="thumbnail">
+      					<img src="img/brochure.jpg" alt="brochure"/>
+      					<h4>The first brochure</h4>
+      					<p>Description is...</p>
+                                        
+                                          <h:outputLink styleClass="btn btn-primary" value="#">
+                                                <h:outputText value="浏览" />
+                                          </h:outputLink>
+      					
+                                          <h:outputLink styleClass="btn btn-success" value="#">
+                                                <h:outputText value="编辑" />
+                                          </h:outputLink>
+                                       
+    					</div>
+  					</li>
+  					<li class="span3">
+    					<div class="thumbnail">
+      					<img src="img/brochure.jpg" alt="brochure" />
+      					<h4>The second brochure</h4>
+      					<p>Description is...</p>
+      					 <h:outputLink styleClass="btn btn-primary" value="#">
+                                                <h:outputText value="浏览" />
+                                          </h:outputLink>
+      					
+                                          <h:outputLink styleClass="btn btn-success" value="#">
+                                                <h:outputText value="编辑" />
+                                          </h:outputLink>
+    					</div>
+  					</li>
+  					<li class="span3">
+    					<div class="thumbnail">
+      					<img src="img/brochure.jpg" alt="brochure" />
+      					<h4>The third brochure</h4>
+      					<p>Description is...</p>
+      					 <h:outputLink styleClass="btn btn-primary" value="#">
+                                                <h:outputText value="浏览" />
+                                          </h:outputLink>
+      					
+                                          <h:outputLink styleClass="btn btn-success" value="#">
+                                                <h:outputText value="编辑" />
+                                          </h:outputLink>
+    					</div>
+  					</li>
+  					<li class="span3">
+    					<div class="thumbnail">
+      					<img src="img/brochure.jpg" alt="brochure" />
+      					<h4>The forth brochure</h4>
+      					<p>Description is...</p>
+      					 <h:outputLink styleClass="btn btn-primary" value="#">
+                                                <h:outputText value="浏览" />
+                                          </h:outputLink>
+      					
+                                          <h:outputLink styleClass="btn btn-success" value="#">
+                                                <h:outputText value="编辑" />
+                                          </h:outputLink>
+    					</div>
+  					</li>
+				</ul>
+			</div>
+			
+			<div class="row pull-right">
+				<p:button outcome="newBrochure" value="新建一个" styleClass="btn btn-primary">  
+                                    <!--  <f:param name="" value="" />  -->
+                                </p:button>  
+					
+			</div>
+				
+		</div>
+		
+		
+		
+		<script src="http://code.jquery.com/jquery.js"></script>
+		<script src="generalJS.js"></script>
+    </h:body>
+</f:view>
+</html>
+
