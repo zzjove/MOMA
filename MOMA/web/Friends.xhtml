@@ -1,33 +1,47 @@
-<%-- 
-    Document   : Friends
-    Created on : 2013-5-15, 10:16:10
-    Author     : bianshujun
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Welcome to MOMA</title>
-        <meta http-equiv="Content-Type" CONTENT="text/html; charset=UTF-8"/>
-        <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
-    </head>
-    <body>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Friends</title>
+         <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
+    </h:head>
+    <h:body>
         <div class="navbar">
             <div class="navbar-inner">
                 <div class="container-fluid">
-                    <a class="brand" href="#">MOMA</a>
+                    <h:outputLink styleClass="brand" value="#">
+                                <h:outputText value="MOMA" />
+                    </h:outputLink>
                     <ul class="nav">
-                        <li><a href="#">首页</a></li>
-                        <li><a href="PersonalSpace.jsp">我的纪念册</a></li>
-                        <li class="active"><a href="#">我的好友</a></li>
+                        <li>
+                            <h:outputLink value="#">
+                                <h:outputText value="首页" />
+                            </h:outputLink>
+                        </li>
+                        <li>
+                            <h:outputLink value="PersonalSpace.xhtml">
+                                <h:outputText value="我的纪念册" />
+                            </h:outputLink>
+                        </li>
+                        <li class="active">
+                            <h:outputLink value="#">
+                                <h:outputText value="我的好友" />
+                            </h:outputLink>
+                        </li>
 
                     </ul>
-                    <form class="navbar-search pull-right">
-                        <input type="text" class="search-query" placeholder="Search for friends">
-                    </form>
+                    <h:form styleClass="navbar-search pull-right">
+                        <p:inputText id="search_friends" styleClass="search-query" value="" />
+                        <p:watermark for="search_friends" value="找朋友、找家人、找同事" />
+                    </h:form>
                     <ul class="nav pull-right ">
-                        <li><a href="#">新建纪念册</a></li>
+                        <li> 
+                            <h:outputLink value="#">
+                                    <h:outputText value="新建纪念册" />
+                            </h:outputLink>
+                        </li>
                     </ul>
 
                 </div>
@@ -40,15 +54,26 @@
                     <h5>好友分组</h5>
                 </div>
                 <div class="text-success">
-                    <a href="#">同学</a><br/>
-                    <a href="#">朋友</a><br/>
-                    <a href="#">同事</a><br/>
-                    <a href="#">家人</a><br/>
-                    <a href="#">爱人</a><br/>
+                    <h:outputLink value="#">
+                         <h:outputText value="同学" />
+                    </h:outputLink><br/>
+                    <h:outputLink value="#">
+                         <h:outputText value="朋友" />
+                    </h:outputLink><br/>
+                    
+                    <h:outputLink value="#">
+                         <h:outputText value="同事" />
+                    </h:outputLink><br/>
+                    <h:outputLink value="#">
+                         <h:outputText value="家人" />
+                    </h:outputLink><br/>
+                    
+                    <h:outputLink value="#">
+                         <h:outputText value="爱人" />
+                    </h:outputLink><br/>
                 </div>
             </div>
-
-            <div class="container hero-unit span2">
+        <div class="container hero-unit span2">
                 <div class="label label-warning">
                     <h5>好友纪念册</h5>
                 </div>
@@ -61,7 +86,7 @@
                 </div>
             </div>
         </div>
-        <div class="span11">
+         <div class="span11">
             <div class="row lead text-left"> 
                 <a href="#">a</a>&nbsp;
                 <a href="#">b</a>&nbsp;
@@ -96,7 +121,7 @@
                 <ul class="thumbnails">
                     <li class="span2">
                         <div class="thumbnail">
-                            <img src="img/portrait.png" alt="">
+                            <img src="img/portrait.png" alt=""/>
                             <h4>shitVincent</h4>
                             <a class="btn btn-success btn-mini" href="#">进入主页</a>
                             <a class="btn btn-danger btn-mini" href="#">解除关系</a>
@@ -105,7 +130,7 @@
 
                     <li class="span2">
                         <div class="thumbnail">
-                            <img src="img/portrait.png" alt="">
+                            <img src="img/portrait.png" alt="" />
                             <h4>巴蒂</h4>
                             <a class="btn btn-success btn-mini" href="#">进入主页</a>
                             <a class="btn btn-danger btn-mini" href="#">解除关系</a>
@@ -113,7 +138,7 @@
                     </li>
                     <li class="span2">
                         <div class="thumbnail">
-                            <img src="img/portrait.png" alt="">
+                            <img src="img/portrait.png" alt="" />
                             <h4>科比</h4>
                             <a class="btn btn-success btn-mini" href="#">进入主页</a>
                             <a class="btn btn-danger btn-mini" href="#">解除关系</a>
@@ -121,7 +146,7 @@
                     </li>
                     <li class="span2">
                         <div class="thumbnail">
-                            <img src="img/portrait.png" alt="">
+                            <img src="img/portrait.png" alt="" />
                             <h4>潘石屹</h4>
                             <a class="btn btn-success btn-mini" href="#">进入主页</a>
                             <a class="btn btn-danger btn-mini" href="#">解除关系</a>
@@ -129,16 +154,18 @@
                     </li>
                     <li class="span2">
                         <div class="thumbnail">
-                            <img src="img/portrait.png" alt="">
+                            <img src="img/portrait.png" alt="" />
                             <h4>严俊杰</h4>
                             <a class="btn btn-success btn-mini" href="#">进入主页</a>
                             <a class="btn btn-danger btn-mini" href="#">解除关系</a>
                         </div>
+                    </li>
 
                 </ul>
             </div>
         </div>
         <script src="http://code.jquery.com/jquery.js"></script>
         <script src="bootstrap.js"></script>
-    </body>
+    </h:body>
 </html>
+
