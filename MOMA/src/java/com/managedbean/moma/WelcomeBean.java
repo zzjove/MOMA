@@ -66,14 +66,14 @@ public class WelcomeBean {
 //        for (User user : UserDao.findby_userName("shit").getUsersForFirstUserId()) {
 //            System.out.println(user.getUserName());
 //        }
-        return "test";
+       return "test";
     }
 
     public String doLogin() {
         System.out.println(loginUserName + " and " + loginUserPassword);
         if (UserDao.loginby_userName_pw(loginUserName, loginUserPassword) == null) {
             System.out.println("LoginFail");
-            return "welcome";
+           return "welcome";
         } else {
             System.out.println("LoginSuccessfully");
 
@@ -87,7 +87,7 @@ public class WelcomeBean {
             
 //            System.out.println(session.getAttribute("name").toString());
 
-            return "test";
+           return "test";
         }
     }
 }
