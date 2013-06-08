@@ -45,13 +45,13 @@
                                 <h:outputLabel for="userName">
                                     <h:outputText value="User Name: " />
                                 </h:outputLabel>
-                                <p:inputText styleClass="span3" value="#{personalPageBean.loginUserName}" id="userName" /><br />
+                                <p:inputText styleClass="span3" value="#{welcomeBean.loginUserName}" id="userName" /><br />
                                <div class="controls controls-row"> 
                                     <h:outputLabel for="userPassword">
                                         <h:outputText value="User Password: " />
                                     </h:outputLabel>
-                                    <p:password id="userPassword" value="#{personalPageBean.loginUserPassword}" styleClass="span2" /> 
-                                    <p:commandButton styleClass="span1 btn btn-primary" value="登陆" action="#{personalPageBean.doLogin}"/><br />	
+                                    <p:password id="userPassword" value="#{welcomeBean.loginUserPassword}" styleClass="span2" /> 
+                                    <p:commandButton styleClass="span1 btn btn-primary" value="登陆" action="#{welcomeBean.doLogin}"/><br />	
                               </div> 
                               <!--<p:selectBooleanCheckbox styleClass="checkbox" value="" />  
                                 <h:outputText value=" Remember me" ></h:outputText> -->
@@ -87,7 +87,7 @@
                                 </h:outputLabel>   
                                 <p:password id="newUserPasswordConfirm" feedback="true" inline="true" required="true"/><br />                           
 
-                                <p:commandButton styleClass="btn btn-primary" value="注册" actionListener="#{welcomeBean.doRegistration}" />
+                                <p:commandButton styleClass="btn btn-primary" value="注册" action="#{welcomeBean.doRegistration}" />
                             </h:form>
                         </div>
                     </div>

@@ -61,7 +61,6 @@ public class UserInfoCompletionBean {
 
     public void setUserRealName(String userRealName) {
         System.out.println("InsetMethod");
-        System.out.println(userRealName);
         this.userRealName = userRealName;
         user.setUserRealName(userRealName);
     }
@@ -181,7 +180,7 @@ public class UserInfoCompletionBean {
      * Creates a new instance of userInfoCompletionBean
      */
     public UserInfoCompletionBean() {
-        String personalUserName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
+        String personalUserName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("registerUserName").toString();
         user = UserDao.findby_userName(personalUserName);
         userId = user.getUserId();
         userName = user.getUserName();

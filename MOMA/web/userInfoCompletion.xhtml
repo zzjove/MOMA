@@ -29,24 +29,23 @@
                     <p:panel style="display:inline-block;width:100%"  header="Please Complete the Following Infomation">
                         <h:panelGrid columns="2">
                             <h:outputText value="Real Name"/>
-                            <p:inputText id="realName" value="#{userInfoCompletionBean.userRealName}"/>
+                            <p:inputText id="realName" value="#{userInfoCompletionBean.user.userRealName}"/>
 
                             <h:outputText value="E-mail"/>
-                            <p:autoComplete id ="email" value="#{userInfoCompletionBean.userEmail}"
-                                            completeMethod="#{autoCompleteBean.complete}"/>
+                            <p:autoComplete id ="email" value="#{userInfoCompletionBean.user.userEmail}"
+                                            completeMethod="#{autoCompleteBean.user.complete}"/>
 
                             <h:outputText value="Phone Number"/>
-                            <p:inputMask id ="phoneNumber" value="#{userInfoCompletionBean.phoneNumber}" mask="(999) 999-9999-9999"/>
+                            <p:inputMask id ="phoneNumber" value="#{userInfoCompletionBean.user.phoneNumber}" mask="(999) 999-9999-9999"/>
 
                             <h:outputText value="QQ Number"/>
-                            <p:inputText id="qqNumber" value="#{userInfoCompletionBean.qqNumber}" />
+                            <p:inputText id="qqNumber" value="#{userInfoCompletionBean.user.qqNumber}" />
 
                             <h:outputText value="Address Line1"/>
-                            <p:inputText id="addressLine1" value="#{userInfoCompletionBean.adressFirstLine}"/>
+                            <p:inputText id="addressLine1" value="#{userInfoCompletionBean.user.adressFirstLine}"/>
 
                             <h:outputText value="Address Line2"/>
-                            <p:inputText id="addressLine2" value="#{userInfoCompletionBean.adressSecondLine}"/>
-                            <p:commandButton styleClass="btn btn-primary" value="注册" actionListener="#{userInfoCompletionBean.doCompletion}" />
+                            <p:inputText id="addressLine2" value="#{userInfoCompletionBean.user.adressSecondLine}"/>
                         </h:panelGrid>
                     </p:panel>
 
@@ -54,16 +53,16 @@
                     <p:dialog header="User Information" widgetVar="dialog" showEffect="fold" hideEffect="fold" width="200">
                         <h:panelGrid id="display" columns="2" cellpadding="5">
                             <h:outputText value="Real Name:"/>
-                            <h:outputText value="#{userInfoCompletionBean.userRealName}"/>
+                            <h:outputText value="#{userInfoCompletionBean.user.userRealName}"/>
                             <h:outputText value="E-mail:"/>
-                            <h:outputText value="#{userInfoCompletionBean.userEmail}"/>
+                            <h:outputText value="#{userInfoCompletionBean.user.userEmail}"/>
                             <h:outputText value="Phone Number:"/>
-                            <h:outputText value="#{userInfoCompletionBean.phoneNumber}"/>
+                            <h:outputText value="#{userInfoCompletionBean.user.phoneNumber}"/>
                             <h:outputText value="QQ Number:"/>
-                            <h:outputText value="#{userInfoCompletionBean.qqNumber}"/>
+                            <h:outputText value="#{userInfoCompletionBean.user.qqNumber}"/>
                             <h:outputText value="Address:"/>
-                            <h:outputText value="#{userInfoCompletionBean.adressCountry} #{userInfoCompletionBean.adressProvince} 
-                                          #{userInfoCompletionBean.adressSecondLine} #{userInfoCompletionBean.adressFirstLine}"/>    
+                            <h:outputText value="#{userInfoCompletionBean.user.adressCountry} #{userInfoCompletionBean.user.adressProvince} 
+                                          #{userInfoCompletionBean.user.adressSecondLine} #{userInfoCompletionBean.user.adressFirstLine}"/>    
                         </h:panelGrid>
                     </p:dialog>  
 
