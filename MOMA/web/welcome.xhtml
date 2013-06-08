@@ -43,32 +43,18 @@
                     <div class="span2 pull-right"></div>
                     <div class="span5 pull-right ">
                         <div class="hero-unit">
-<<<<<<< HEAD
-                            <h:form>
-                                <h:outputLabel for="userName">
-                                    <h:outputText value="User Name: " />
-                                </h:outputLabel>
-                                <p:inputText styleClass="span3" value="#{welcomeBean.loginUserName}" id="userName" /><br />
-                               <div class="controls controls-row"> 
-                                    <h:outputLabel for="userPassword">
-                                        <h:outputText value="User Password: " />
-                                    </h:outputLabel>
-                                    <p:password id="userPassword" value="#{welcomeBean.loginUserPassword}" styleClass="span2" /> 
-                                    <p:commandButton styleClass="span1 btn btn-primary" value="登陆" action="#{welcomeBean.doLogin}"/><br />	
-=======
                             <h:form>                               
-                                <p:inputText id="loginUserName" styleClass="span3" value="#{personalPageBean.loginUserName}" />
+                                <p:inputText id="loginUserName" styleClass="span3" value="#{welcomeBean.loginUserName}" />
                                 <p:watermark for="loginUserName" value="用户名" /><br />
                                 <div class="controls controls-row"> 
-                                    <p:password id="loginUserPassword" value="#{personalPageBean.loginUserPassword}" styleClass="span2" /> 
+                                    <p:password id="loginUserPassword" value="#{welcomeBean.loginUserPassword}" styleClass="span2" /> 
                                     <p:watermark for="loginUserPassword" value="密码" />
-                                    <p:commandButton styleClass="span1 btn btn-primary" value="登陆" action="#{personalPageBean.doLogin}" onclick="PrimeFaces.cleanWatermarks()" oncomplete="PrimeFaces.showWatermarks()" /><br />
-                                    
->>>>>>> test2
+                                    <p:commandButton styleClass="span1 btn btn-primary" value="登陆" action="#{welcomeBean.doLogin}" onclick="PrimeFaces.cleanWatermarks()" oncomplete="PrimeFaces.showWatermarks()" /><br />
+
                               </div> 
-                              <p:selectBooleanCheckbox styleClass="checkbox" value="" />  
+                              <!--<p:selectBooleanCheckbox styleClass="checkbox" value="" />  
                                 <h:outputText value=" Remember me" ></h:outputText>
-                                <br />
+                                <br />-->
                                 <h:outputLink value="#">
                                     <h:outputText value="Forget your password?" />
                                 </h:outputLink> 
@@ -98,11 +84,7 @@
                                 <p:watermark for="newUserPasswordConfirm" value="确认密码" />
                                 <br />  
 
-<<<<<<< HEAD
-                                <p:commandButton styleClass="btn btn-primary" value="注册" action="#{welcomeBean.doRegistration}" />
-=======
                                 <p:commandButton styleClass="btn btn-primary" value="注册" actionListener="#{welcomeBean.doRegistration}" onclick="PrimeFaces.cleanWatermarks()" oncomplete="PrimeFaces.showWatermarks()" />
->>>>>>> test2
                             </h:form>
                         </div>
                     </div>
