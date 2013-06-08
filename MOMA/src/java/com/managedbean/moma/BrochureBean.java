@@ -4,6 +4,7 @@
  */
 package com.managedbean.moma;
 
+import com.dao.hibernate.BrochureDao;
 import com.entity.moma.Brochure;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
@@ -81,6 +82,14 @@ public class BrochureBean {
         
     }
             
+    public String newBrochure(){
+        brochure.setBrochureName(this.brochureName);
+        brochure.setBrochureRoot(this.brochureRoot);
+        brochure.setBrochureDescription(this.brochureDescription);
+        BrochureDao.add_brochure(brochure);
+        System.out.println(this.brochureName);
+        return "newBrochureSuccess";
+    }
     
    
 }

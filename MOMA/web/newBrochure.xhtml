@@ -25,16 +25,10 @@ and open the template in the editor.
                 <f:selectItem itemLabel="只限纪念册所有者好友浏览" itemValue="2" />
                 <f:selectItem itemLabel="公开所有人都可以浏览" itemValue="3" />
             </p:selectOneRadio>
-            <p:commandButton value="创建" action="try"></p:commandButton>
+            <p:commandButton value="创建" action="#{brochureBean.newBrochure}"></p:commandButton>
             <p:commandButton value="取消" action="try"></p:commandButton>
             </h:panelGrid> 
         </h:form>
-           
         
-     
-
-      
-        
-     
     </h:body>
 </html>
