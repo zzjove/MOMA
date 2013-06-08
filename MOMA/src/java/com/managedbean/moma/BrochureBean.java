@@ -5,12 +5,15 @@
 package com.managedbean.moma;
 
 import com.dao.hibernate.BrochureDao;
+import com.dao.hibernate.UserDao;
 import com.entity.moma.Brochure;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import java.util.Date;
 import java.util.List;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.validation.constraints.*;
 
 
@@ -19,7 +22,7 @@ import javax.validation.constraints.*;
  * @author ZZ
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class BrochureBean {
 
     private int brochureId;
@@ -83,12 +86,17 @@ public class BrochureBean {
     }
             
     public String newBrochure(){
+        String userName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
+        brochureDate = new Date();
+        System.out.println(userName + " in brochure");
         brochure.setBrochureName(this.brochureName);
         brochure.setBrochureRoot(this.brochureRoot);
         brochure.setBrochureDescription(this.brochureDescription);
+        brochure.setBrochureStartTime(brochureDate);
         BrochureDao.add_brochure(brochure);
         System.out.println(this.brochureName);
-        return "newBrochureSuccess";
+        UserDao.add_user_brochure(userName, brochureName);
+        return "PersonalSpace";
     }
     
    
