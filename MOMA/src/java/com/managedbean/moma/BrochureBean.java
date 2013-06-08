@@ -4,7 +4,7 @@
  */
 package com.managedbean.moma;
 
-import Hibernate.moma.com.Brochure;
+import com.entity.moma.Brochure;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
