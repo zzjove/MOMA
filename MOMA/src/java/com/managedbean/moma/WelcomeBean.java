@@ -62,8 +62,9 @@ public class WelcomeBean {
                 && UserDao.findby_userEmail(user.getUserEmail()) == null) {
             UserDao.add_user(user);
             FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("registerUserName", loginUserName);
-             return "userInfoCompletion";
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("registerUserName", user.getUserName());
+            System.out.println("InDoRegistration");
+            return "userInfoCompletion";
         }
 //        UserDao.add_user_friend("shitVincent","shit");
 //        for (User user : UserDao.findby_userName("shit").getUsersForFirstUserId()) {
