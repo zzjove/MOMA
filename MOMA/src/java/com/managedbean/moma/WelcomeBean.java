@@ -61,7 +61,6 @@ public class WelcomeBean {
         if ((UserDao.findby_userName(user.getUserName()) == null)
                 && UserDao.findby_userEmail(user.getUserEmail()) == null) {
             UserDao.add_user(user);
-
             FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("registerUserName", user.getUserName());
             System.out.println("InDoRegistration");
@@ -71,14 +70,14 @@ public class WelcomeBean {
 //        for (User user : UserDao.findby_userName("shit").getUsersForFirstUserId()) {
 //            System.out.println(user.getUserName());
 //        }
-        return "welcome";
+       return "welcome";
     }
 
     public String doLogin() {
         System.out.println(loginUserName + " and " + loginUserPassword);
         if (UserDao.loginby_userName_pw(loginUserName, loginUserPassword) == null) {
             System.out.println("LoginFail");
-            return "welcome";
+           return "welcome";
         } else {
             System.out.println("LoginSuccessfully");
             FacesContext.getCurrentInstance().getExternalContext().getSession(true);
@@ -96,6 +95,7 @@ public class WelcomeBean {
 
 //            System.out.println(session.getAttribute("name").toString());
 
+          // return "test";
         }
     }
 }
