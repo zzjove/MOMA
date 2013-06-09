@@ -1,4 +1,4 @@
-﻿/*
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -64,7 +64,6 @@ public class WelcomeBean {
             FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("registerUserName", loginUserName);
              return "userInfoCompletion";
-            return "userInfoCompletion";
         }
 //        UserDao.add_user_friend("shitVincent","shit");
 //        for (User user : UserDao.findby_userName("shit").getUsersForFirstUserId()) {
@@ -95,7 +94,7 @@ public class WelcomeBean {
 
 //            System.out.println(session.getAttribute("name").toString());
 
-           return "test";
+          // return "test";
         }
     }
 }
