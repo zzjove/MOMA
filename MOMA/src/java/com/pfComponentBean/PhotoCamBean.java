@@ -10,6 +10,9 @@ import javax.servlet.ServletContext;
 import org.primefaces.event.CaptureEvent;  
   
 public class PhotoCamBean {  
+
+    public PhotoCamBean() {
+    }
      
     private List<String> photos = new ArrayList<String>();  
       
