@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Write Diary</title>
+    </h:head>
+    <h:body>
+        <h2>发表新日志</h2>
+
+        <h:form>
+            <p:messages/>
+            <p:panel style="display:inline-block;width:100%">
+                <h:inputText id="diary_title" value="#{writeDiaryBean.title}" required="true"/>
+                <p:watermark for="diary_title" value="Add a title here." /> 
+                <br/><br/>
+                <h:outputText value="正文  "/>
+                <p:editor id="editor" value="" width="600"/>
+                <p:watermark for="editor" value="Make our memories alive~~" />
+                <br/>
+                <p:commandButton id="submitButton" value="保存" update="display" oncomplete="dlg.show()"  
+                                 icon="ui-icon-disk" />
+                <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade" modal="true">  
+                    <h:outputText id="display" value="#{writeDiaryBean.title} #{writeDiaryBean.content}" escape="false" />  
+                </p:dialog>  
+            </p:panel>
+
+        </h:form>  
+    </h:body>
+</html>
+

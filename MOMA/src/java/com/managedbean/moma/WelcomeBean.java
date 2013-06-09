@@ -61,12 +61,15 @@ public class WelcomeBean {
         if ((UserDao.findby_userName(user.getUserName()) == null)
                 && UserDao.findby_userEmail(user.getUserEmail()) == null) {
             UserDao.add_user(user);
+            FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("registerUserName", loginUserName);
+             return "userInfoCompletion";
         }
 //        UserDao.add_user_friend("shitVincent","shit");
 //        for (User user : UserDao.findby_userName("shit").getUsersForFirstUserId()) {
 //            System.out.println(user.getUserName());
 //        }
-       return "test";
+       return "welcome";
     }
 
     public String doLogin() {

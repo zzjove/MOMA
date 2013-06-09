@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>View Photo</title>
+    </h:head>
+    <h:body>
+        <h2>Photo of MOMA</h2>
+
+        <h:form>
+            <p:messages/>
+            <p:panel style="display:inline-block;width:100%">
+                <p:galleria value="#{viewPhotoBean.images}" var="image" effect="slide" 
+                            panelWidth="500" panelHeight="313">
+                    <p:graphicImage value="./img/album/#{image}" alt="Image Description for #{image}" title="#{image}"/>  
+                </p:galleria>  
+                <br/>
+                <h:panelGrid columns="3">  
+                    <p:inputText id="photo_comment" value=""/>
+                    <p:commandButton type="button" value="提交评论" onclick="pc.capture()"/>    
+                </h:panelGrid>
+                <br/>   
+                <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}"  
+                              mode="advanced"   
+                              update="messages"  
+                              sizeLimit="100000"   
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />  
+
+                <p:growl id="messages" showDetail="true"/>  
+            </p:panel>
+        </h:form>  
+    </h:body>
+</html>
+

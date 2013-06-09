@@ -29,11 +29,11 @@
                     <p:panel style="display:inline-block;width:100%"  header="Please Complete the Following Infomation">
                         <h:panelGrid columns="2">
                             <h:outputText value="Real Name"/>
-                            <p:inputText id="realName" value="#{userInfoCompletionBean.userRealName}"/>
+                            <p:inputText id="realName" value="#{userInfoCompletionBean.userRealName}" required="true"/>
 
                             <h:outputText value="E-mail"/>
                             <p:autoComplete id ="email" value="#{userInfoCompletionBean.userEmail}"
-                                            completeMethod="#{autoCompleteBean.complete}"/>
+                                            completeMethod="#{autoCompleteBean.complete}" required="true"/>
 
                             <h:outputText value="Phone Number"/>
                             <p:inputMask id ="phoneNumber" value="#{userInfoCompletionBean.phoneNumber}" mask="(999) 999-9999-9999"/>
