@@ -64,6 +64,7 @@ public class WelcomeBean {
 
             FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("registerUserName", user.getUserName());
+            System.out.println("InDoRegistration");
             return "userInfoCompletion";
         }
 //        UserDao.add_user_friend("shitVincent","shit");

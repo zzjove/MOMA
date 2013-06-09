@@ -33,7 +33,7 @@
 
                             <h:outputText value="E-mail"/>
                             <p:autoComplete id ="email" value="#{userInfoCompletionBean.user.userEmail}"
-                                            completeMethod="#{autoCompleteBean.user.complete}"/>
+                                            completeMethod="#{autoCompleteBean.complete}"/>
 
                             <h:outputText value="Phone Number"/>
                             <p:inputMask id ="phoneNumber" value="#{userInfoCompletionBean.user.phoneNumber}" mask="(999) 999-9999-9999"/>
