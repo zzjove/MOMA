@@ -12,9 +12,10 @@
         <h:form>
             <p:messages/>
             <p:panel style="display:inline-block;width:100%">
+<!--                <h:outputText value="#{viewPhotoBean.images}"/>-->
                 <p:galleria value="#{viewPhotoBean.images}" var="image" effect="slide" 
                             panelWidth="500" panelHeight="313">
-                    <p:graphicImage value="./img/album/#{image}" alt="Image Description for #{image}" title="#{image}"/>  
+                    <p:graphicImage value="./img/album/#{image}" alt="alt" title="#{image}"/>  
                 </p:galleria>  
                 <br/>
                 <h:panelGrid columns="3">  

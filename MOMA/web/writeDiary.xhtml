@@ -16,7 +16,7 @@
                 <p:watermark for="diary_title" value="Add a title here." /> 
                 <br/><br/>
                 <h:outputText value="正文  "/>
-                <p:editor id="editor" value="" width="600"/>
+                <p:editor id="editor" value="#{writeDiaryBean.content}" width="600"/>
                 <p:watermark for="editor" value="Make our memories alive~~" />
                 <br/>
                 <p:commandButton id="submitButton" value="保存" update="display" oncomplete="dlg.show()"  

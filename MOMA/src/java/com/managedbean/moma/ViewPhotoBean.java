@@ -4,22 +4,26 @@
  */
 package com.managedbean.moma;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+
 
 /**
  *
  * @author Administrator
  */
 @ManagedBean
-@RequestScoped
-public class ViewPhotoBean {
+@SessionScoped
+public class ViewPhotoBean implements Serializable {
 
     private List<String> images;
-
+    @PostConstruct
     public void init() {
+        System.out.println("init_called");
         images = new ArrayList<String>();
         for (int i = 1; i <= 10; i++) {
             images.add(i + ".jpg");
@@ -37,6 +41,5 @@ public class ViewPhotoBean {
     /**
      * Creates a new instance of ViewPhotoBean
      */
-    public ViewPhotoBean() {
-    }
+   
 }
