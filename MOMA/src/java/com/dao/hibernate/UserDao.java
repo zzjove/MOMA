@@ -4,6 +4,7 @@
  */
 package com.dao.hibernate;
 
+import com.entity.moma.Brochure;
 import com.entity.moma.User;
 import java.util.Iterator;
 import java.util.List;
@@ -144,6 +145,22 @@ public class UserDao {
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
         user.getUsersForSecondUserId().add(friend);
+        session.merge(user);
+
+        transaction.commit();
+        session.close();
+        sessionfactory.close();
+    }
+    
+    
+    public static void add_user_brochure(String userName, String brochureName) {
+        User user = UserDao.findby_userName(userName);
+        Brochure brochure = BrochureDao.findby_brochureName(brochureName);
+
+        SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
+        Session session = sessionfactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        user.getBrochures().add(brochure);
         session.merge(user);
 
         transaction.commit();

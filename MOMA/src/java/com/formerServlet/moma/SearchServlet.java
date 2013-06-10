@@ -1,7 +1,7 @@
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
- */7557
+ */
 package com.formerServlet.moma;
 
 import com.dao.hibernate.UserDao;

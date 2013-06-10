@@ -35,9 +35,12 @@
       					
    					</ul>
    					
-                                       <h:form styleClass="navbar-search pull-right">
-                                               <p:inputText id="search_friends" styleClass="search-query" />
-					</h:form>
+                        <h:form styleClass="navbar-search pull-right" >
+                          
+                            <p:inputText id="search" label="search" styleClass="search-query" value="#{searchBean.searchName}" />
+                            <p:watermark for="search" value="找朋友、找同事、找家人" />
+                            
+                        </h:form>
    					<ul class="nav pull-right ">
    						<li>
                                                     <h:outputLink value="#">
@@ -71,7 +74,7 @@
   
     <p:growl id="growl" sticky="true" showDetail="true"/>  
   
-    <p:wizard widgetVar="wiz" flowListener="#{modifyInfoBean.onFlowProcess}">  
+    <p:wizard widgetVar="wiz" flowListener="#{personalPageBean.onFlowProcess}">  
       
         <p:tab id="personal" title="个人">  
   
@@ -83,14 +86,14 @@
                 
                     <h:outputText value="真实姓名: *" />  
                     <p:inputText required="true" label="userRealName"  
-                            value="#{modifyInfoBean.user.userRealName}" />  
+                            value="#{personalPageBean.user.userRealName}" />  
                     
                     <h:outputText value="邮箱: *" />  
-                   <p:autoComplete label="userEmail" value="#{modifyInfoBean.user.userEmail}"
+                    <p:autoComplete label="userEmail" value="#{personalPageBean.user.userEmail}" effect="blind"
                                             completeMethod="#{autoCompleteBean.complete}"/>
               
                     <h:outputText value="Skip to last: " />  
-                    <h:selectBooleanCheckbox value="#{modifyInfoBean.skip}" />  
+                    <h:selectBooleanCheckbox value="#{personalPageBean.skip}" />  
                 </h:panelGrid>  
             </p:panel>  
         </p:tab>  
@@ -102,13 +105,13 @@
                   
                 <h:panelGrid columns="2" columnClasses="label, value">  
                     <h:outputText value="街道: " />  
-                    <p:inputText value="#{modifyInfoBean.user.adressFirstLine}" />  
+                    <p:inputText value="#{personalPageBean.user.adressFirstLine}" />  
                       
                     <h:outputText value="城市: " />  
-                    <p:inputText value="#{modifyInfoBean.user.adressSecondLine}" />  
+                    <p:inputText value="#{personalPageBean.user.adressSecondLine}" />  
                       
                       <h:outputText value="国家"/>
-                           <p:selectOneMenu value="#{modifyInfoBean.user.adressCountry}">
+                           <p:selectOneMenu value="#{personalPageBean.user.adressCountry}">
                                 <!--仅作显示参考：找现成的数据库-->
                                <f:selectItem itemLabel="China" itemValue="China" />  
                                 <f:selectItem itemLabel="Japan" itemValue="Japan" />  
@@ -126,7 +129,7 @@
                            </p:selectOneMenu>
                  
                      <h:outputText value="Skip to last: " />  
-                     <h:selectBooleanCheckbox value="#{modifyInfoBean.skip}" />  
+                     <h:selectBooleanCheckbox value="#{personalPageBean.skip}" />  
                 </h:panelGrid>  
             </p:panel>  
         </p:tab>  
@@ -140,10 +143,10 @@
                  
                       
                     <h:outputText value="电话: " />  
-                    <p:inputText value="#{modifyInfoBean.user.phoneNumber}"/>  
+                    <p:inputText value="#{personalPageBean.user.phoneNumber}"/>  
                       
                     <h:outputText value="qq号: " />  
-                    <p:inputText value="#{modifyInfoBean.user.qqNumber}"/>  
+                    <p:inputText value="#{personalPageBean.user.qqNumber}"/>  
                     
                 </h:panelGrid>  
             </p:panel>  
@@ -155,44 +158,44 @@
                 <h:panelGrid id="confirmation" columns="6">  
                     <h:outputText value="真实姓名: " />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{modifyInfoBean.user.userRealName}" />  
+                                value="#{personalPageBean.user.userRealName}" />  
                       
                     
                      <h:outputText value="邮箱: " />  
                      <h:outputText styleClass="outputLabel"  
-                                value="#{modifyInfoBean.user.userEmail}" />  
+                                value="#{personalPageBean.user.userEmail}" />  
                    
                    <h:outputText value="地址1: " />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{modifyInfoBean.user.adressFirstLine}" />  
+                                value="#{personalPageBean.user.adressFirstLine}" />  
                       
                     <h:outputText value="地址2: " />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{modifyInfoBean.user.adressSecondLine}" />  
+                                value="#{personalPageBean.user.adressSecondLine}" />  
                       
                     <h:outputText value="国家: " />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{modifyInfoBean.user.adressCountry}" />  
+                                value="#{personalPageBean.user.adressCountry}" />  
                       
                     <h:outputText value="省份: " />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{modifyInfoBean.user.adressProvince}" /> 
+                                value="#{personalPageBean.user.adressProvince}" /> 
                     
                     
                     <h:outputText value="电话:" />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{modifyInfoBean.user.phoneNumber}"/>  
+                                value="#{personalPageBean.user.phoneNumber}"/>  
                       
                     <h:outputText value="qq号: " />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{modifyInfoBean.user.qqNumber}" />  
+                                value="#{personalPageBean.user.qqNumber}" />  
                       
                     <h:outputText />  
                     <h:outputText />  
                 </h:panelGrid>  
                   
                 <p:commandButton value="保存修改" update="growl"   
-                            actionListener="#{modifyInfoBean.modifyPersonalInfo}"/>  
+                                 actionListener="#{personalPageBean.modifyPersonalInfo}"/>  
               
             </p:panel>  
         </p:tab>  
