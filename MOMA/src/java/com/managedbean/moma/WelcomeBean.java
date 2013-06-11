@@ -6,7 +6,10 @@ package com.managedbean.moma;
 
 import com.dao.hibernate.UserDao;
 import com.entity.moma.User;
+import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
@@ -55,9 +58,16 @@ public class WelcomeBean {
      */
     public WelcomeBean() {
         user = new User();
+        if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName") != null) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("PersonalSpace.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(WelcomeBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
-    public String doRegistration() {
+    public void doRegistration() {
         if ((UserDao.findby_userName(user.getUserName()) == null)
                 && UserDao.findby_userEmail(user.getUserEmail()) == null) {
             UserDao.add_user(user);
@@ -65,13 +75,23 @@ public class WelcomeBean {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("registerUserName", user.getUserName());
             System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("registerUserName"));
             System.out.println("InDoRegistration");
-            return "userInfoCompletion";
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("userInfoCompletion.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(WelcomeBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+//            return "userInfoCompletion";
         }
-//        UserDao.add_user_friend("shitVincent","shit");
-//        for (User user : UserDao.findby_userName("shit").getUsersForFirstUserId()) {
-//            System.out.println(user.getUserName());
-//        }
-       return "welcome";
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("welcome.xhtml");
+    //        UserDao.add_user_friend("shitVincent","shit");
+    //        for (User user : UserDao.findby_userName("shit").getUsersForFirstUserId()) {
+    //            System.out.println(user.getUserName());
+    //       return "welcome";
+    //       return "welcome";
+        } catch (IOException ex) {
+            Logger.getLogger(WelcomeBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String doLogin() {
