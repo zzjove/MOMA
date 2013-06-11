@@ -1,5 +1,3 @@
-
-
 /*!
  * Bootstrap v2.3.1
  *
@@ -230,7 +228,6 @@ body {
   line-height: 20px;
   color: #333333;
   background-color: #ffffff;
-  backgroud: url(footprint.jpg) no-repeat;
 }
 
 a {
@@ -340,7 +337,7 @@ a:focus {
 }
 
 .span1 {
-  width: 60px
+  width: 60px;
 }
 
 .offset12 {
