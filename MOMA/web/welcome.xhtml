@@ -44,17 +44,14 @@
                     <div class="span5 pull-right ">
                         <div class="hero-unit">
                             <h:form>
-                                <h:outputLabel for="userName">
-                                    <h:outputText value="User Name: " />
-                                </h:outputLabel>
                                 <p:inputText id="loginUserName" styleClass="span3" value="#{welcomeBean.loginUserName}" />
                                 <p:watermark for="loginUserName" value="用户名" /><br />
                                 <div class="controls controls-row"> 
 
                                     <p:password id="loginUserPassword" value="#{welcomeBean.loginUserPassword}" styleClass="span2" /> 
                                     <p:watermark for="loginUserPassword" value="密码" />
-                                    <p:commandButton styleClass="span1 btn btn-primary" value="登陆" action="#{welcomeBean.doLogin}" 
-                                                     onclick="PrimeFaces.cleanWatermarks()" oncomplete="PrimeFaces.showWatermarks()" /><br />
+                                    <h:commandButton styleClass="span1 btn btn-primary" value="登陆" action="#{welcomeBean.doLogin}" 
+                                                     onclick="PrimeFaces.cleanWatermarks()"/><br />
                                 </div> 
                                 <!--<p:selectBooleanCheckbox styleClass="checkbox" value="" />  
                                   <h:outputText value=" Remember me" ></h:outputText>
@@ -73,16 +70,19 @@
                                 <p:inputText id="newUserName" value="#{welcomeBean.user.userName}" required="true" /><br/>
                                 <p:watermark for="newUserName" value="用户名" />
                                 
-                                <p:inputText  id="newUserEmail" value="#{welcomeBean.user.userEmail}" required="true"/><br/>
+                                <p:autoComplete id ="newUserEmail" value="#{welcomeBean.user.userEmail}" effect="fade"
+                                            completeMethod="#{autoCompleteBean.complete}"/>
                                 <p:watermark for="newUserEmail" value="邮箱" />
                                 
-                                <p:password id="newUserPassword" value="#{welcomeBean.user.userPassword}" match="newUserPasswordConfirm" feedback="true" inline="true" required="true"/><br/>
-                                <p:watermark for="newUserPassword" value="您的密码" />
-                                
-                                <p:password id="newUserPasswordConfirm" feedback="true" inline="true" required="true"/><br />  
+                                <p:password id="newUserPassword" value="#{welcomeBean.user.userPassword}" match="newUserPasswordConfirm" feedback="true" inline="true" required="true"/>
+                                <p:watermark for="newUserPassword" value="密码" />
+                                <br/>
+                               
+                                <p:password id="newUserPasswordConfirm" feedback="true" inline="true" required="true"/>                         
                                 <p:watermark for="newUserPasswordConfirm" value="确认密码" />
+                                <br />  
 
-                                <p:commandButton styleClass="btn btn-primary" value="注册" action="#{welcomeBean.doRegistration}" onclick="PrimeFaces.cleanWatermarks()" oncomplete="PrimeFaces.showWatermarks()" />
+                                <h:commandButton styleClass="btn btn-primary" value="注册" action="#{welcomeBean.doRegistration}" onclick="PrimeFaces.cleanWatermarks()" />
                             </h:form>
                         </div>
                     </div>

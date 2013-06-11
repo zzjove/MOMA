@@ -75,4 +75,13 @@ public class BrochureDao {
         transaction.commit();
     }
     
+    
+    public static int getMaxBrochureId() {
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        int maxUserId = (Integer) session.createQuery(
+                "select max(brochure.brochureId) from Brochure brochure").uniqueResult();
+        return maxUserId;
+    }
 }

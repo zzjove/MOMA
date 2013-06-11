@@ -27,8 +27,11 @@ and open the template in the editor.
             </p:selectOneRadio>
             <p:commandButton value="创建" action="#{brochureBean.newBrochure}"></p:commandButton>
             <p:commandButton value="取消" action="try"></p:commandButton>
+            <h:commandButton value="添加日志" action="#{brochureBean.addDiary}" styleClass="btn btn-primary"></h:commandButton>
             </h:panelGrid> 
         </h:form>
-        
+        		<p:button outcome="writeDiary" value="新建一个" styleClass="btn btn-primary">  
+                                    <!--  <f:param name="" value="" />  -->
+                                </p:button>  
     </h:body>
 </html>

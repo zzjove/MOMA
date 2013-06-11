@@ -29,7 +29,7 @@
                     <p:panel style="display:inline-block;width:100%"  header="Please Complete the Following Infomation">
                         <h:panelGrid columns="2">
                             <h:outputText value="Real Name"/>
-                            <p:inputText id="realName" value="#{userInfoCompletionBean.userRealName}"/>
+                            <p:inputText id="realName" value="#{userInfoCompletionBean.user.userRealName}"/>
 
                             <h:outputText value="E-mail"/>
                             <p:autoComplete id ="email" value="#{userInfoCompletionBean.user.userEmail}"
@@ -49,7 +49,8 @@
                         </h:panelGrid>
                     </p:panel>
 
-                    <p:commandButton value="Submit" id="submit" update="display" oncomplete="dialog.show()" actionListener="#{userInfoCompletionBean.doCompletion}" />  
+                    <p:commandButton value="Submit" id="submit" action="#{userInfoCompletionBean.doCompletion}" 
+                                     update="display" oncomplete="dialog.show()" ></p:commandButton>  
                     <p:dialog header="User Information" widgetVar="dialog" showEffect="fold" hideEffect="fold" width="200">
                         <h:panelGrid id="display" columns="2" cellpadding="5">
                             <h:outputText value="Real Name:"/>

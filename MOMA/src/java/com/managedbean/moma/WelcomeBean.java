@@ -63,6 +63,7 @@ public class WelcomeBean {
             UserDao.add_user(user);
             FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("registerUserName", user.getUserName());
+            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("registerUserName"));
             System.out.println("InDoRegistration");
             return "userInfoCompletion";
         }

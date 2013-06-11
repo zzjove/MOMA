@@ -38,6 +38,7 @@ public class BrochureBean {
     Brochure brochure=new Brochure();
     
     public BrochureBean() {
+        System.out.println("for test brochure");
     }  
 
     public int getBrochureType() {
@@ -85,7 +86,7 @@ public class BrochureBean {
         
     }
             
-    public String newBrochure(){
+    public void newBrochure(){
         String userName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
         brochureDate = new Date();
         System.out.println(userName + " in brochure");
@@ -94,9 +95,14 @@ public class BrochureBean {
         brochure.setBrochureDescription(this.brochureDescription);
         brochure.setBrochureStartTime(brochureDate);
         BrochureDao.add_brochure(brochure);
-        System.out.println(this.brochureName);
+        System.out.println(this.brochure.getBrochureId());
         UserDao.add_user_brochure(userName, brochureName);
-        return "PersonalSpace";
+        FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("currentBrochureId", brochure.getBrochureId());
+    }
+    
+    public String addDiary() {
+        return "writeDiary";
     }
     
    

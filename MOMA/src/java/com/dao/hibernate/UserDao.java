@@ -97,7 +97,6 @@ public class UserDao {
         if (user.getUserRealName() == null) {
             user.setUserRealName("RealName");
         }
-        user.setUserId(getMaxUserId());
         session.save(user);
         session.flush();
 

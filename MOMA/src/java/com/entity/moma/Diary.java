@@ -74,6 +74,9 @@ public class Diary  implements java.io.Serializable {
         this.diaryUrl = diaryUrl;
     }
     public String getDiaryTitle() {
+        if (this.diaryTitle == null) {
+            return "";
+        }
         return this.diaryTitle;
     }
     
