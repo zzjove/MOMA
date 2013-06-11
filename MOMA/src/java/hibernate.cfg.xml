@@ -10,12 +10,12 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
-    <mapping resource="com/entity/moma/Photo.hbm.xml"/>
-    <mapping resource="com/entity/moma/User.hbm.xml"/>
-    <mapping resource="com/entity/moma/Blessing.hbm.xml"/>
-    <mapping resource="com/entity/moma/Video.hbm.xml"/>
-    <mapping resource="com/entity/moma/Diary.hbm.xml"/>
-    <mapping resource="com/entity/moma/Brochure.hbm.xml"/>
     <mapping resource="com/entity/moma/Comment.hbm.xml"/>
+    <mapping resource="com/entity/moma/Blessing.hbm.xml"/>
+    <mapping resource="com/entity/moma/Photo.hbm.xml"/>
+    <mapping resource="com/entity/moma/Brochure.hbm.xml"/>
+    <mapping resource="com/entity/moma/Video.hbm.xml"/>
+    <mapping resource="com/entity/moma/User.hbm.xml"/>
+    <mapping resource="com/entity/moma/Diary.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

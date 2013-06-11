@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2013-6-5 8:53:05 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 2013-6-11 14:07:51 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.entity.moma.Brochure" table="brochure" catalog="moma_db">
         <id name="brochureId" type="java.lang.Integer">
@@ -22,6 +22,9 @@
         </property>
         <property name="brochureDescription" type="string">
             <column name="brochure_description" />
+        </property>
+        <property name="brochureImageUrl" type="string">
+            <column name="brochure_image_url" length="45" />
         </property>
         <set name="diaries" inverse="true" lazy="false">
             <key>

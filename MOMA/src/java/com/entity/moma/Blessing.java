@@ -1,5 +1,5 @@
 package com.entity.moma;
-// Generated 2013-6-5 8:53:04 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-11 14:07:50 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
