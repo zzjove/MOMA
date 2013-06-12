@@ -18,7 +18,13 @@
             30
         </session-timeout>
     </session-config>
+<!--    <managed-bean>
+        <description>用户个人信息</description>
+        <managed-bean-name>User</managed-bean-name>
+        <managed-baen-class>com.entity.moma.User</managed-baen-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>-->
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/welcome.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
