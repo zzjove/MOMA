@@ -6,6 +6,7 @@ package com.managedbean.moma;
 
 import com.dao.hibernate.BrochureDao;
 import com.dao.hibernate.DiaryDao;
+import com.entity.moma.Brochure;
 import com.entity.moma.Diary;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
@@ -67,6 +68,7 @@ public class WriteDiaryBean {
         diary.setDiaryUrl(diary.getDiaryUrl() + diary.getDiaryTitle());
         diary.setBrochure(BrochureDao.findby_brochureId(brochureId));
         DiaryDao.add_diary(diary);
+        changeBrochureLatestChange(brochureId);
 //        DiaryDao.add_diary_brochure(diary.getDiaryId(), brochureId);
 //        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("currentBrochureId");
 //        if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentBrochureId") == null) {
@@ -77,5 +79,19 @@ public class WriteDiaryBean {
     public void doModified() {
         diary.setDiaryModifiedTime(new Date());
         DiaryDao.modify_diary(diary);
+    }
+    
+    private void changeBrochureLatestChange(int brochureId) {
+        System.out.println("In changeBrochureLatestChange");
+        Brochure currentBrochure = BrochureDao.findby_brochureId(brochureId);
+        String userNameChangeDiary;
+        if (diary.getUser() != null) {
+            userNameChangeDiary = diary.getUser().getUserName();
+        }
+        else {
+            userNameChangeDiary = "Someone";
+        }
+        currentBrochure.setLatestChange(userNameChangeDiary + " Diary: " + diary.getDiaryTitle());
+        BrochureDao.modify_brochure(currentBrochure);
     }
 }

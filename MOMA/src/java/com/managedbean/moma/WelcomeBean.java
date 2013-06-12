@@ -87,8 +87,7 @@ public class WelcomeBean {
     //        UserDao.add_user_friend("shitVincent","shit");
     //        for (User user : UserDao.findby_userName("shit").getUsersForFirstUserId()) {
     //            System.out.println(user.getUserName());
-    //       return "welcome";
-    //       return "welcome";
+
         } catch (IOException ex) {
             Logger.getLogger(WelcomeBean.class.getName()).log(Level.SEVERE, null, ex);
         }

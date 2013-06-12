@@ -95,8 +95,8 @@ public class BrochureBean {
         brochure.setBrochureDescription(this.brochureDescription);
         brochure.setBrochureStartTime(brochureDate);
         BrochureDao.add_brochure(brochure);
-        System.out.println(this.brochure.getBrochureId());
-        UserDao.add_user_brochure(userName, brochureName);
+        System.out.println(brochure.getBrochureId());
+        UserDao.add_user_brochure(userName, brochure.getBrochureId());
         FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("currentBrochureId", brochure.getBrochureId());
     }

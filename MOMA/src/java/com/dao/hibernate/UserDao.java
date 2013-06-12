@@ -59,6 +59,21 @@ public class UserDao {
             return null;
         }
     }
+    
+    
+    public static List<User> findby_userRealName(String userRealName) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "from User as user where user.userRealName=:userRealName";
+        Query query = session.createQuery(hql);
+        query.setString("userRealName", userRealName);
+        List userList = (List<User>) query.list();
+
+        session.close();
+
+        return userList;
+    }
 
     public static User findby_userEmail(String userEmail) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -143,6 +158,7 @@ public class UserDao {
         SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
+        user.getUsersForFirstUserId().add(friend);
         user.getUsersForSecondUserId().add(friend);
         session.merge(user);
 
@@ -152,14 +168,29 @@ public class UserDao {
     }
     
     
-    public static void add_user_brochure(String userName, String brochureName) {
+    public static void add_user_brochure(String userName, int brochureId) {
         User user = UserDao.findby_userName(userName);
-        Brochure brochure = BrochureDao.findby_brochureName(brochureName);
+        Brochure brochure = BrochureDao.findby_brochureId(brochureId);
 
         SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
         user.getBrochures().add(brochure);
+        session.merge(user);
+
+        transaction.commit();
+        session.close();
+        sessionfactory.close();
+    }
+    
+    public static void add_user_follow_brochure(String userName , int brochureId) {
+        User user = UserDao.findby_userName(userName);
+        Brochure brochure = BrochureDao.findby_brochureId(brochureId);
+
+        SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
+        Session session = sessionfactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        user.getBrochures_1().add(brochure);
         session.merge(user);
 
         transaction.commit();
