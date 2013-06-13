@@ -18,12 +18,37 @@
             30
         </session-timeout>
     </session-config>
-<!--    <managed-bean>
+    <!--    <managed-bean>
         <description>用户个人信息</description>
         <managed-bean-name>User</managed-bean-name>
         <managed-baen-class>com.entity.moma.User</managed-baen-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>-->
+    
+     <!-- ############################################# -->
+    <!-- # File upload                                      # -->
+    <!-- ############################################# -->
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>
+            org.primefaces.webapp.filter.FileUploadFilter
+        </filter-class>
+        <init-param>
+            <param-name>thresholdSize</param-name>
+            <param-value>51200</param-value>
+        </init-param>
+         
+<!--        <init-param>
+            <param-name>uploadDirectory</param-name>
+            <param-value>/img/album</param-value>
+        </init-param>-->
+       
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
     <welcome-file-list>
         <welcome-file>faces/welcome.xhtml</welcome-file>
     </welcome-file-list>

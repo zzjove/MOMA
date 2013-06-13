@@ -12,23 +12,29 @@
         <h:form>
             <p:messages/>
             <p:panel style="display:inline-block;width:100%">
+
                 <p:galleria value="#{viewPhotoBean.images}" var="image" effect="slide" 
                             panelWidth="500" panelHeight="313">
-                    <p:graphicImage value="./img/album/#{image}" alt="Image Description for #{image}" title="#{image}"/>  
+                    <p:graphicImage value="./img/album/#{image}" alt="alt" title="#{image}"/>  
                 </p:galleria>  
                 <br/>
                 <h:panelGrid columns="3">  
-                    <p:inputText id="photo_comment" value=""/>
-                    <p:commandButton type="button" value="提交评论" onclick="pc.capture()"/>    
+                    <p:inputTextarea rows="6" cols="33" value="#{viewPhotoBean.photo_comment}"/> 
+                    <p:commandButton type="button" value="评论" title="Icon Only"/>    
                 </h:panelGrid>
                 <br/>   
-                <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}"  
-                              mode="advanced"   
-                              update="messages"  
-                              sizeLimit="100000"   
-                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />  
+                <h:form enctype="multipart/form-data"> 
+                    <h:outputText value="上传新照片" style=""/>
+                    <br/><br/>
+                    <p:fileUpload fileUploadListener="#{viewPhotoBean.handleFileUpload}"  
+                                  mode="advanced"   
+                                  update="messages"  
+                                  sizeLimit="1000000"   
+                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
+                                  description="Select Images"/>  
 
-                <p:growl id="messages" showDetail="true"/>  
+                    <p:growl id="messages" showDetail="true"/> 
+                </h:form>
             </p:panel>
         </h:form>  
     </h:body>
