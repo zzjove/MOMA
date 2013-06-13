@@ -11,7 +11,7 @@
 
         <h:form>
             <p:messages/>
-            <p:panel style="display:inline-block;width:100%">
+            <p:panel style="display:inline-block;width:80%">
                 <h:inputText id="diary_title" value="#{writeDiaryBean.title}" required="true"/>
                 <p:watermark for="diary_title" value="Add a title here." /> 
                 <br/><br/>
@@ -21,7 +21,7 @@
                 <br/>
                 <p:commandButton id="submitButton" value="保存" update="display" oncomplete="dlg.show()"  
                                  icon="ui-icon-disk" />
-                <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade" modal="true">  
+                <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade" modal="true" width="400" height="400">  
                     <h:outputText id="display" value="#{writeDiaryBean.title} #{writeDiaryBean.content}" escape="false" />  
                 </p:dialog>  
             </p:panel>
