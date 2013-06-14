@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2013-6-5 8:53:05 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 2013-6-11 21:21:21 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.entity.moma.Brochure" table="brochure" catalog="moma_db">
         <id name="brochureId" type="java.lang.Integer">
@@ -23,25 +23,31 @@
         <property name="brochureDescription" type="string">
             <column name="brochure_description" />
         </property>
+        <property name="brochureImageUrl" type="string">
+            <column name="brochure_image_url" length="45" />
+        </property>
+        <property name="latestChange" type="string">
+            <column name="latest_change" />
+        </property>
         <set name="diaries" inverse="true">
             <key>
                 <column name="diary_brochure_fk" not-null="true" />
             </key>
             <one-to-many class="com.entity.moma.Diary" />
         </set>
-        <set name="blessings" inverse="true">
+        <set name="blessings" inverse="true" lazy="false">
             <key>
                 <column name="blessing_brochure_fk" not-null="true" />
             </key>
             <one-to-many class="com.entity.moma.Blessing" />
         </set>
-        <set name="videos" inverse="true">
+        <set name="videos" inverse="true" lazy="false">
             <key>
                 <column name="video_brochure_fk" not-null="true" />
             </key>
             <one-to-many class="com.entity.moma.Video" />
         </set>
-        <set name="users" inverse="false" table="user_brochure_relationship">
+        <set name="users" inverse="false" table="user_brochure_relationship" lazy="false">
             <key>
                 <column name="relationship_brochure_id" not-null="true" />
             </key>
@@ -49,11 +55,19 @@
                 <column name="relationship_user_id" not-null="true" />
             </many-to-many>
         </set>
-        <set name="photos" inverse="true">
+        <set name="photos" inverse="true" lazy="false">
             <key>
                 <column name="photo_brochure_fk" not-null="true" />
             </key>
             <one-to-many class="com.entity.moma.Photo" />
+        </set>
+        <set name="users_1" inverse="true" table="user_follow_brochure">
+            <key>
+                <column name="brochure_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.entity.moma.User">
+                <column name="user_id" not-null="true" />
+            </many-to-many>
         </set>
     </class>
 </hibernate-mapping>

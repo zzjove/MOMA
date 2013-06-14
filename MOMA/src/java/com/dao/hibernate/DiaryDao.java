@@ -4,12 +4,16 @@
  */
 package com.dao.hibernate;
 
+import com.entity.moma.Brochure;
 import com.entity.moma.Diary;
+import com.entity.moma.User;
 import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -109,6 +113,32 @@ public class DiaryDao {
         session.flush();
 
         transaction.commit();
+    }
+    
+    public static void add_diary_brochure(int diaryId, int  brochureId) {
+        Diary diary = DiaryDao.findby_diaryId(diaryId);
+        Brochure brochure = BrochureDao.findby_brochureId(brochureId);
+
+        SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
+        Session session = sessionfactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        brochure.getDiaries().add(diary);
+        diary.setBrochure(brochure);
+        session.merge(diary);
+
+        transaction.commit();
+        session.close();
+        sessionfactory.close();
+    }
+    
+    
+    public static int getMaxDiaryId() {
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        int maxUserId = (Integer) session.createQuery(
+                "select max(diary.diaryId) from Diary diary").uniqueResult();
+        return maxUserId;
     }
     
 }

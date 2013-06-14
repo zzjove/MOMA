@@ -34,7 +34,7 @@ public class BrochureDao {
         }
     }
     
-    public static Brochure findby_brochureName(String brochureName) {
+    public static List<Brochure> findby_brochureName(String brochureName) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         
@@ -43,14 +43,8 @@ public class BrochureDao {
         query.setString("brochureName",brochureName);
         List brochureList = (List<Brochure>) query.list();
         session.close();
-
-        Iterator it = brochureList.iterator();
-        if (it.hasNext()) {
-            Brochure brochure = (Brochure) it.next();
-            return brochure;
-        } else {
-            return null;
-        }
+        
+        return brochureList;
     }
     
     public static void add_brochure(Brochure brochure) {
@@ -75,4 +69,13 @@ public class BrochureDao {
         transaction.commit();
     }
     
+    
+    public static int getMaxBrochureId() {
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        int maxUserId = (Integer) session.createQuery(
+                "select max(brochure.brochureId) from Brochure brochure").uniqueResult();
+        return maxUserId;
+    }
 }

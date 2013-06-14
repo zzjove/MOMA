@@ -60,7 +60,7 @@ public class PersonalPageServlet extends HttpServlet {
         SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
-        userofPage.addFriend(friendUser);
+//        userofPage.addFriend(friendUser);
         session.merge(userofPage);
         transaction.commit();
     }
@@ -69,7 +69,7 @@ public class PersonalPageServlet extends HttpServlet {
         SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
-        userofPage.removeFriend(friendUser);
+//        userofPage.removeFriend(friendUser);
         session.merge(userofPage);
         transaction.commit();
 }
@@ -78,7 +78,7 @@ public class PersonalPageServlet extends HttpServlet {
         SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
-        userofPage.addBrochure(userBrochure);
+//        userofPage.addBrochure(userBrochure);
         session.merge(userofPage);
         transaction.commit();
     }
@@ -87,7 +87,7 @@ public class PersonalPageServlet extends HttpServlet {
         SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
-        userofPage.removeBrochure(userBrochure);
+//        userofPage.removeBrochure(userBrochure);
         session.merge(userofPage);
         transaction.commit();
     }

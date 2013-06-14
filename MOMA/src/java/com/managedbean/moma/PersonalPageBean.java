@@ -5,11 +5,14 @@
 package com.managedbean.moma;
 
 import com.dao.hibernate.UserDao;
+import com.entity.moma.Brochure;
 import com.entity.moma.User;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.FlowEvent;
 
 /**
  *
@@ -19,24 +22,25 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class PersonalPageBean {
 
-    private String loginUserName;
-    private String loginUserPassword;
     private User user;
+    private Brochure brochure;
+    private boolean skip;
+    private static Logger logger = Logger.getLogger(PersonalPageBean.class.getName());
 
-    public String getLoginUserName() {
-        return loginUserName;
+    public Brochure getBrochure() {
+        return brochure;
     }
 
-    public void setLoginUserName(String loginUserName) {
-        this.loginUserName = loginUserName;
+    public void setBrochure(Brochure brochure) {
+        this.brochure = brochure;
     }
 
-    public String getLoginUserPassword() {
-        return loginUserPassword;
+    public static Logger getLogger() {
+        return logger;
     }
 
-    public void setLoginUserPassword(String loginUserPassword) {
-        this.loginUserPassword = loginUserPassword;
+    public static void setLogger(Logger logger) {
+        PersonalPageBean.logger = logger;
     }
 
     public User getUser() {
@@ -51,28 +55,34 @@ public class PersonalPageBean {
      * Creates a new instance of PersonalPageBean
      */
     public PersonalPageBean() {
+        String userName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
+        System.out.println(userName);
+        user = UserDao.findby_userName(userName);
     }
 
-    public String doLogin() {
-        System.out.println(loginUserName + " and " + loginUserPassword);
-        if (UserDao.loginby_userName_pw(loginUserName, loginUserPassword) == null) {
-            System.out.println("LoginFail");
-            return "welcome";
+    public boolean isSkip() {
+        return skip;
+    }
+
+    public void setSkip(boolean skip) {
+        this.skip = skip;
+    }
+
+    public String onFlowProcess(FlowEvent event) {
+        logger.info("Current wizard step:" + event.getOldStep());
+        logger.info("Next step:" + event.getNewStep());
+        if (skip) {
+            skip = false;   //reset in case user goes back  
+            return "confirm";
         } else {
-            System.out.println("LoginSuccessfully");
-            user = UserDao.findby_userName(loginUserName);
-            if ("RealName".equals(user.getUserRealName())) {
-                
-                FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userName", loginUserName);
-
-//                String testSession = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
-//                System.out.println(testSession);
-
-                return "userInfoCompletion";
-            } else {
-                return "test";
-            }
+            return event.getNewStep();
         }
     }
+
+    public void modifyPersonalInfo() {
+        System.out.println("InDoModify");
+        System.out.println(user.getUserRealName());
+        UserDao.modify_user(user);
+    }
+    
 }
