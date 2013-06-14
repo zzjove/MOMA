@@ -47,6 +47,19 @@ public class BrochureDao {
         return brochureList;
     }
     
+    
+    public static List<Brochure> findby_userName(String userName) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        
+        String hql="select brochure from Brochure as brochure , User as user where user.userName=:userName";
+        Query query = session.createQuery(hql);
+        query.setString("userName",userName);
+        List brochureList = (List<Brochure>) query.list();
+        session.close();
+        
+        return brochureList;
+    }
     public static void add_brochure(Brochure brochure) {
         
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();

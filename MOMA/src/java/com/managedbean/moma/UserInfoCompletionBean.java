@@ -199,6 +199,7 @@ public class UserInfoCompletionBean {
     public void doCompletion() {
         System.out.println("InDoCompletion");
         System.out.println(user.getUserRealName());
+        user.setUserPortraitUrl("img/portrait.png");
         UserDao.modify_user(user);
     }
 }

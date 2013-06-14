@@ -15,7 +15,7 @@
 
                 <p:galleria value="#{viewPhotoBean.images}" var="image" effect="slide" 
                             panelWidth="500" panelHeight="313">
-                    <p:graphicImage value="./img/album/#{image}" alt="alt" title="#{image}"/>  
+                    <p:graphicImage value="#{image.photoUrl}" alt="alt" title="#{image.photoTitle}"/>  
                 </p:galleria>  
                 <br/>
                 <h:panelGrid columns="3">  
@@ -31,7 +31,8 @@
                                   update="messages"  
                                   sizeLimit="1000000"   
                                   allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
-                                  description="Select Images"/>  
+                                  />  
+                    <!--description="Select Images"-->
 
                     <p:growl id="messages" showDetail="true"/> 
                 </h:form>

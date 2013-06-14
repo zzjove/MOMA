@@ -72,21 +72,15 @@ public class PhotoDao {
         }
     }
 
-    public static Photo findby_brochureId(int brochureId) {
+    public static List<Photo> findby_brochureId(int brochureId) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         String sql = "select * from Photo where photo_brochure_fk=";
         List photoList = session.createSQLQuery(sql + brochureId + ";")
                 .addEntity(Photo.class).list();
-
-        Iterator it = photoList.iterator();
-        if (it.hasNext()) {
-            Photo photo = (Photo) it.next();
-            return photo;
-        } else {
-            return null;
-        }
+        
+        return photoList;
     }
 
     public static void add_photo(Photo photo) {

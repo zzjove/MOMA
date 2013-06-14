@@ -4,6 +4,10 @@
  */
 package com.managedbean.moma;
 
+import com.dao.hibernate.BrochureDao;
+import com.dao.hibernate.PhotoDao;
+import com.entity.moma.Brochure;
+import com.entity.moma.Photo;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,25 +30,27 @@ import org.primefaces.event.FileUploadEvent;
 @ManagedBean
 @SessionScoped
 public class ViewPhotoBean implements Serializable {
-
-    private List<String> images;
+    
+    private Brochure brochure;
+    private ArrayList<Photo> images;
     private String photo_comment;
 
     @PostConstruct
     public void init() {
+        brochure = BrochureDao.findby_brochureId(1);
+        images = (ArrayList<Photo>) PhotoDao.findby_brochureId(brochure.getBrochureId());
         System.out.println("init_called");
-        images = new ArrayList<String>();
        //这里仅按数字命名作为测试用，实际应该一个一个插入arraylist。。另外还需在上传按钮处加actionListner同步加入相片
-        for (int i = 1; i <= 10; i++) {
-            images.add(i + ".jpg");
-        }
+//        for (int i = 1; i <= 10; i++) {
+//            images.add(i + ".jpg");
+//        }
     }
 
-    public List<String> getImages() {
+    public ArrayList<Photo> getImages() {
         return images;
     }
 
-    public void setImages(List<String> images) {
+    public void setImages(ArrayList<Photo> images) {
         this.images = images;
     }
 
@@ -56,11 +62,20 @@ public class ViewPhotoBean implements Serializable {
         this.photo_comment = photo_comment;
     }
 
+    public Brochure getBrochure() {
+        return brochure;
+    }
+
+    public void setBrochure(Brochure brochure) {
+        this.brochure = brochure;
+    }
+    
     public void handleFileUpload(FileUploadEvent event) {
         FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
+        System.out.println(brochure.getBrochureId());
         try {
-            File targetFolder = new File("D:\\赵青\\MOMA\\M\\MOMA\\web\\img\\album");
+            File targetFolder = new File("/Users/bianshujun/Downloads/MOMA/MOMA/web/img/album");
             //注意：有关上传照片的小问题。。这里new File（）里的路径必须写本地的实际路径，运行时注意更改
             InputStream inputStream = event.getFile().getInputstream();
             OutputStream out = new FileOutputStream(new File(targetFolder,
@@ -74,7 +89,7 @@ public class ViewPhotoBean implements Serializable {
             inputStream.close();
             out.flush();
             out.close();
-            System.out.println("程序执行了哇！！！！！！！！！！");
+            System.out.println("In handleFileUpload");
         } catch (IOException e) {
             e.printStackTrace();
         }

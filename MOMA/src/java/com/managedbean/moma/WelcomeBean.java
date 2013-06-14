@@ -60,7 +60,7 @@ public class WelcomeBean {
         user = new User();
         if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName") != null) {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("PersonalSpace.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("userHomePage.xhtml");
             } catch (IOException ex) {
                 Logger.getLogger(WelcomeBean.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -103,7 +103,8 @@ public class WelcomeBean {
             FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userName", loginUserName);
             
-            return "PersonalSpace";
+            return "userHomePage";
+//            return "PersonalSpace";
 //            return "PersonalSpace";
 //            FacesContext facesContext = FacesContext.getCurrentInstance();
 //            ExternalContext extContext = facesContext.getExternalContext();
