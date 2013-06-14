@@ -26,7 +26,7 @@ import org.primefaces.event.FileUploadEvent;
 @ManagedBean
 @SessionScoped
 public class ViewPhotoBean implements Serializable {
-
+    private String brochureName;
     private List<String> images;
     private String photo_comment;
 
@@ -38,6 +38,14 @@ public class ViewPhotoBean implements Serializable {
         for (int i = 1; i <= 10; i++) {
             images.add(i + ".jpg");
         }
+    }
+
+    public String getBrochureName() {
+        return brochureName;
+    }
+
+    public void setBrochureName(String brochureName) {
+        this.brochureName = brochureName;
     }
 
     public List<String> getImages() {

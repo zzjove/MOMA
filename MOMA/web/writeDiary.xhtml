@@ -7,11 +7,23 @@
         <title>Write Diary</title>
     </h:head>
     <h:body>
-        <h2>发表新日志</h2>
+
 
         <h:form>
             <p:messages/>
-            <p:panel style="display:inline-block;width:80%">
+            <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; height: 600px; position:relative;left: 20%;">
+                <h:outputText value="Write Diary" style="font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+                              font-size: 35px;
+                              line-height: 35px;
+                              position: relative;
+                              font-weight: 400;
+                              color: rgba(26,89,120,0.9);
+                              text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+                              padding: 0px 0px 5px 0px;" />
+                <p:commandLink id="enterBroList" action="diaryList.xhtml" style="margin-right:20px; position: absolute; left: 55%;"  ajax="false">  
+                    <h:outputText value="返回我的日记列表-->" style="font-family: BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;" />  
+                </p:commandLink>
+                <br/><br/>
                 <h:inputText id="diary_title" value="#{writeDiaryBean.title}" required="true"/>
                 <p:watermark for="diary_title" value="Add a title here." /> 
                 <br/><br/>
