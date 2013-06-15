@@ -25,7 +25,7 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>-->
     
-     <!-- ############################################# -->
+    <!-- ############################################# -->
     <!-- # File upload                                      # -->
     <!-- ############################################# -->
     <filter>
@@ -37,11 +37,6 @@
             <param-name>thresholdSize</param-name>
             <param-value>51200</param-value>
         </init-param>
-         
-<!--        <init-param>
-            <param-name>uploadDirectory</param-name>
-            <param-value>/img/album</param-value>
-        </init-param>-->
        
     </filter>
     
