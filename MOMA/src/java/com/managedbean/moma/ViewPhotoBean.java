@@ -30,7 +30,6 @@ import org.primefaces.event.FileUploadEvent;
 @ManagedBean
 @SessionScoped
 public class ViewPhotoBean implements Serializable {
-    
     private Brochure brochure;
     private ArrayList<Photo> images;
     private String photo_comment;
@@ -45,7 +44,6 @@ public class ViewPhotoBean implements Serializable {
 //            images.add(i + ".jpg");
 //        }
     }
-
     public ArrayList<Photo> getImages() {
         return images;
     }
@@ -75,7 +73,7 @@ public class ViewPhotoBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
         System.out.println(brochure.getBrochureId());
         try {
-            File targetFolder = new File("/Users/bianshujun/Downloads/MOMA/MOMA/web/img/album");
+            File targetFolder = new File("/Users/bianshujun/NetBeansProjects/MOMA/web/img/album");
             //注意：有关上传照片的小问题。。这里new File（）里的路径必须写本地的实际路径，运行时注意更改
             InputStream inputStream = event.getFile().getInputstream();
             OutputStream out = new FileOutputStream(new File(targetFolder,

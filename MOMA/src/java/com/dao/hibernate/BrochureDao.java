@@ -5,6 +5,7 @@
 package com.dao.hibernate;
 
 import com.entity.moma.Brochure;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Query;
@@ -16,7 +17,7 @@ import org.hibernate.Transaction;
  * @author bianshujun
  */
 public class BrochureDao {
-    
+
     public static Brochure findby_brochureId(int brochureId) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
@@ -33,35 +34,47 @@ public class BrochureDao {
             return null;
         }
     }
-    
+
     public static List<Brochure> findby_brochureName(String brochureName) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        
-        String hql="from Brochure where brochure_name=:brochureName";
+
+        String hql = "from Brochure where brochure_name=:brochureName";
         Query query = session.createQuery(hql);
-        query.setString("brochureName",brochureName);
+        query.setString("brochureName", brochureName);
         List brochureList = (List<Brochure>) query.list();
         session.close();
-        
+
         return brochureList;
     }
+
     
-    
-    public static List<Brochure> findby_userName(String userName) {
+    //这个数据库查询语句有待改进。。不能使用。。
+    public static ArrayList<Brochure> findby_userName(String userName) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        
-        String hql="select brochure from Brochure as brochure , User as user where user.userName=:userName";
+//        String hql= "select brochure from Brochure brochure inner join brochure.users user where user.userName=:userName";
+        String hql = "from User u left join u.brochures b where u.userName=:userName";
         Query query = session.createQuery(hql);
-        query.setString("userName",userName);
-        List brochureList = (List<Brochure>) query.list();
+        query.setString("userName", userName);
+        List list = (List<Brochure>) query.list();
+        ArrayList brochureList = new ArrayList();
+        Iterator it = list.iterator();
+        while (it.hasNext()) {
+
+            Object[] obj = (Object[]) it.next();
+            Brochure brochure = (Brochure)obj[1];
+            brochureList.add(brochure);
+            System.out.println(brochure.getBrochureName());
+
+        }
         session.close();
-        
+
         return brochureList;
     }
+
     public static void add_brochure(Brochure brochure) {
-        
+
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
@@ -70,19 +83,18 @@ public class BrochureDao {
 
         transaction.commit();
     }
-    
+
     public static void modify_brochure(Brochure brochure) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        
+
 //        session.merge(brochure);
         session.update(brochure);
         session.flush();
-        
+
         transaction.commit();
     }
-    
-    
+
     public static int getMaxBrochureId() {
 
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();

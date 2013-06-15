@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Friends</title>
          <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
@@ -118,50 +119,34 @@
             </div>
             <br />
             <div class="row">
-                <ul class="thumbnails">
-                    <li class="span2">
+                <h:dataTable value="#{friendsBean.userFriendList}" var="friend" styleClass="thumbnails">
+                       <f:facet name="header">
+                           <h:outputText value="好友列表" />
+                       </f:facet>
+                    <h:column>
                         <div class="thumbnail">
-                            <img src="img/portrait.png" alt=""/>
-                            <h4>shitVincent</h4>
-                            <a class="btn btn-success btn-mini" href="#">进入主页</a>
-                            <a class="btn btn-danger btn-mini" href="#">解除关系</a>
+                            <h:graphicImage value="#{friend.userPortraitUrl}" width="100" />  
+                            <h:outputText value="#{friend.userName}" />
+                            <h:form>
+                                <h:outputLink styleClass="btn btn-success btn-mini" value="userHomePage.xhtml">
+                                    <h:outputText value="进入主页"/>
+                                    <f:param name="friendName" value="#{friend.userName}"></f:param>
+                                </h:outputLink>
+                            </h:form>
+                            <h:form>
+                                 <h:commandLink styleClass="btn btn-danger btn-mini" action="#{friendsBean.doRedirect}"  >
+                                    <h:outputText value="解除关系"/>
+                                </h:commandLink>
+                            </h:form>
+                            
                         </div>
-                    </li>
-
-                    <li class="span2">
-                        <div class="thumbnail">
-                            <img src="img/portrait.png" alt="" />
-                            <h4>巴蒂</h4>
-                            <a class="btn btn-success btn-mini" href="#">进入主页</a>
-                            <a class="btn btn-danger btn-mini" href="#">解除关系</a>
-                        </div>
-                    </li>
-                    <li class="span2">
-                        <div class="thumbnail">
-                            <img src="img/portrait.png" alt="" />
-                            <h4>科比</h4>
-                            <a class="btn btn-success btn-mini" href="#">进入主页</a>
-                            <a class="btn btn-danger btn-mini" href="#">解除关系</a>
-                        </div>
-                    </li>
-                    <li class="span2">
-                        <div class="thumbnail">
-                            <img src="img/portrait.png" alt="" />
-                            <h4>潘石屹</h4>
-                            <a class="btn btn-success btn-mini" href="#">进入主页</a>
-                            <a class="btn btn-danger btn-mini" href="#">解除关系</a>
-                        </div>
-                    </li>
-                    <li class="span2">
-                        <div class="thumbnail">
-                            <img src="img/portrait.png" alt="" />
-                            <h4>严俊杰</h4>
-                            <a class="btn btn-success btn-mini" href="#">进入主页</a>
-                            <a class="btn btn-danger btn-mini" href="#">解除关系</a>
-                        </div>
-                    </li>
-
-                </ul>
+                        
+                    </h:column>
+                
+                
+                </h:dataTable>
+                
+                
             </div>
         </div>
         <script src="http://code.jquery.com/jquery.js"></script>

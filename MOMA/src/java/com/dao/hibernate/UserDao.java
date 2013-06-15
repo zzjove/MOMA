@@ -94,7 +94,7 @@ public class UserDao {
             return null;
         }
     }
-
+        
     public static int getMaxUserId() {
 
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();

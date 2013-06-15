@@ -9,35 +9,35 @@
         <title>Write Diary</title>
     </h:head>
     <h:body>
-        <h2>发表新日志</h2>
+
 
         <h:form>
             <p:messages/>
-<<<<<<< HEAD
+            <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; height: 600px; position:relative;left: 20%;">
+                <h:outputText value="Write Diary" style="font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+                              font-size: 35px;
+                              line-height: 35px;
+                              position: relative;
+                              font-weight: 400;
+                              color: rgba(26,89,120,0.9);
+                              text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+                              padding: 0px 0px 5px 0px;" />
+                <p:commandLink id="enterBroList" action="diaryList.xhtml" style="margin-right:20px; position: absolute; left: 55%;"  ajax="false">  
+                    <h:outputText value="返回我的日记列表-->" style="font-family: BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;" />  
+                </p:commandLink>
+                <br/><br/>
+            </p:panel>
             <p:panel style="display:inline-block;width:100%">
                 <h:inputText id="diary_title" value="#{writeDiaryBean.diary.diaryTitle}" required="true"/>
-=======
-            <p:panel style="display:inline-block;width:80%">
-                <h:inputText id="diary_title" value="#{writeDiaryBean.title}" required="true"/>
->>>>>>> origin/elena
                 <p:watermark for="diary_title" value="Add a title here." /> 
                 <br/><br/>
                 <h:outputText value="正文  "/>
                 <p:editor id="editor" value="#{writeDiaryBean.content}" width="600"/>
-<<<<<<< HEAD
                 <br/>
                 <p:commandButton id="submitButton" value="保存" update="display" oncomplete="dlg.show()"  action="#{writeDiaryBean.doCompletion}"
                                  icon="ui-icon-disk" ></p:commandButton>
                 <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade" modal="true">  
                     <h:outputText id="display" value="#{writeDiaryBean.diary.diaryTitle} #{writeDiaryBean.content}" escape="false" />  
-=======
-                <p:watermark for="editor" value="Make our memories alive~~" />
-                <br/>
-                <p:commandButton id="submitButton" value="保存" update="display" oncomplete="dlg.show()"  
-                                 icon="ui-icon-disk" />
-                <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade" modal="true" width="400" height="400">  
-                    <h:outputText id="display" value="#{writeDiaryBean.title} #{writeDiaryBean.content}" escape="false" />  
->>>>>>> origin/elena
                 </p:dialog>  
             </p:panel>
 

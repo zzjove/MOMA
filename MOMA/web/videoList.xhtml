@@ -4,11 +4,10 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>MOMA-Photo-</title>
+        <title>MOMA-Video List-#{videoListBean.brochure}</title>
     </h:head>
     <h:body>
         <h:form>
-            <p:messages/>
             <div class="jiathis_share_slide jiathis_share_32x32" id="jiathis_share_slide">
                 <div class="jiathis_share_slide_top" id="jiathis_share_title"></div>
                 <div class="jiathis_share_slide_inner">
@@ -39,43 +38,39 @@
                 <p:menuitem value="Video" icon="/img/brochureIcon/video.png" url="videoList.xhtml"/>  
                 <p:menuitem value="Photo" icon="/img/brochureIcon/photo.png" url="viewPhoto.xhtml"/>    
             </p:dock>
-            <p:panel style="display:inline-block;width:60%; position:relative;left: 20%; top: 70px;">
-                <h:outputText value="MOMA-#{viewPhotoBean.brochure.brochureName}-查看相册" style="font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
-                              font-size: 20px;
-                              line-height: 20px;
-                              position: relative;
-                              font-weight: 500;
-                              color: rgba(26,89,120,0.9);
-                              text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
-                              padding: 0px 0px 5px 0px;"/>
-                <p:commandButton id="upLoadPhoto" value="上传新照片" onclick="dlg.show();" type="button" style="position: relative;left: 55%;"/>
-                <br/>
-                <p:dialog id="upLoad" header="上传新照片" widgetVar="dlg" modal="true" height="200">  
-                    <h:form enctype="multipart/form-data">
-                        <br/><br/>
-                        <p:fileUpload fileUploadListener="#{viewPhotoBean.handleFileUpload}"  
-                                      mode="advanced"   
-                                      update="messages"  
-                                      sizeLimit="1000000"   
-                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
-                                      />  
-                        <!--description="Select Images"-->
+            <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; height: 600px; position:relative;left: 20%; top: 70px;">
 
-                        <p:growl id="messages" showDetail="true"/> 
-                    </h:form> 
-                </p:dialog>
-                <p:galleria value="#{viewPhotoBean.images}" var="image" effect="slide" 
-                            panelWidth="500" panelHeight="313">
-                    <p:graphicImage value="#{image.photoUrl}" alt="alt" title="#{image.photoTitle}"/>  
-                </p:galleria>  
+                <h:outputText value="MOMA-#{videoListBean.brochure}-视频列表" style="font-size: 16pt;  "/>
+                <p:commandButton id="upLoadPhoto" value="上传新视频" onclick="dlg.show();" type="button" style="position: relative;left: 55%;"/>
                 <br/>
-                <h:panelGrid columns="3">  
-                    <p:inputTextarea rows="4" cols="60" value="#{viewPhotoBean.photo_comment}"/> 
-                    <p:commandButton type="button" value="评论" title="Icon Only"/>    
-                </h:panelGrid>
-                <br/>   
+                <p:dialog id="upLoad" header="上传新视频" widgetVar="dlg" modal="true" height="100" width="400">  
+                    
+                    <p:inputText id ="videoLink" value="#{viewVideoBean.uploadUrl}" size="35"/>
+                        <p:watermark for="videoLink" value="http://将视频链接粘贴到这里" />
+                        <p:spacer width="5"/>
+                        <p:commandButton value="发布"/> 
+                        <!--补充actionlistner-->
+                        <p:growl id="messages" showDetail="true"/> 
+                     
+                </p:dialog>
+                <h:outputText value="         共 #{videoListBean.videoesCount}个视频 " style="font-size: 9px;"/>
+                <p:separator/>
+                <p:accordionPanel value="#{videoListBean.videoes}" var="video">  
+                    <p:tab title="#{video.name}">  
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <p:media value="video.url" width="420" height="315" player="flash"/>  
+
+                            <h:panelGrid columns="1" cellpadding="10">  
+                                <h:outputText value="#{video.user} 上传了 #{video.name}" style="font-weight: bold"/>  
+                                <h:outputText value="#{video.description}" style="font-weight: bold"/>  
+                                <h:outputText value="上传于 #{video.updateTime}" style="font-weight: bold"/>  
+                            </h:panelGrid>  
+                        </h:panelGrid>  
+                        <p:separator/>
+                    </p:tab>  
+                </p:accordionPanel>
             </p:panel>
-        </h:form>  
+        </h:form>
     </h:body>
 </html>
 

@@ -11,72 +11,82 @@
     </h:head>
     <h:body>
         <h:form>
-            <p:spacer width="50"/>
-            <p:layout  style="min-width: 300px;
-                       min-height: 800px;
-                       " id="layout" fullPage="false">  
-                <p:layoutUnit position="west" resizable="true" size="370px"  collapsible="true" effect="drop" gutter="20">  
-                    <h:form>
-                        <p:messages/>
-                        <p:panel style="display:inline-block;"  >
-                            <h:panelGrid columns="2" cellpadding="10">  
-                                <p:graphicImage value="#{userHomePageBean.user.userPortraitUrl}" width="100" />  
 
-                                <h:panelGrid columns="1" cellpadding="10">  
-                                    <h:outputText value="#{userHomePageBean.user.userName}" style="font-weight: bold" />  
-                                    <p:commandLink id="userInfo"  style="margin-right:20px;" ajax="false">  
-                                        <!--缺省action 响应参数上面一句用的是action还是actionListner不确定。。初步确定效果就是弹出严俊杰做的那个wizard，或者用dialog组件 -->
-                                        <h:outputText value="查看个人资料" />  
-                                    </p:commandLink>  
-                                </h:panelGrid> 
-                            </h:panelGrid>  
-                            <p:separator/>
-                            <h:outputText value="What's up."/>
-                            <br/>
+            <p:messages/>
+            <p:panel style="display:inline-block; width: 25%; height: 400px; position:relative;left: 20%;"  >
+                <h:panelGrid columns="2" cellpadding="10">  
+                    <p:graphicImage value="#{userHomePageBean.user.userPortraitUrl}" width="100" />  
 
-                        </p:panel>
-                    </h:form> 
-                    <br/><br/>
+                    <h:panelGrid columns="1" cellpadding="10">  
+                        <h:outputText value="#{userHomePageBean.user.userName}" style="font-weight: bold" />  
+                        <p:commandLink id="userInfo"  style="margin-right:20px;" ajax="false">  
+                            <!--缺省action 响应参数上面一句用的是action还是actionListner不确定。。初步确定效果就是弹出严俊杰做的那个wizard，或者用dialog组件 -->
+                            <h:outputText value="查看个人资料" />  
+                        </p:commandLink>  
+                    </h:panelGrid> 
+                </h:panelGrid>  
+                <p:separator/>
+                <h:outputText value="What's up."/>
+                <br/>
+                <h:outputText value="#{userHomePageBean.user.latestUpdate.content}"/>
+                <br/>
+                <h:outputText value="-- This is updated in #{userHomePageBean.user.latestUpdate.brochure}"/>
+                <br/>
+                <p:commandLink id="enterBroList" action="PersonalSpace.xhtml" style="margin-right:20px; position: absolute; bottom: 5px;"  ajax="false">  
+                    <h:outputText value="进入我的纪念册列表->" />  
+                </p:commandLink>
+            </p:panel>
+        </h:form> 
+        <br/><br/>
 
-                </p:layoutUnit>  
-                <p:spacer width="30"></p:spacer>
-                <p:layoutUnit position="center" size="500">  
-                    <h:form>
-                        <p:messages/>
-                        <h3>纪念册更新</h3>
-                        <p:separator/>
-                        <p:accordionPanel multiple="true" value="#{userHomePageBean.updates}" var="update">  
-                            <p:tab title="#{update.brochure.brochureName}">  
-                                <h:panelGrid columns="2" cellpadding="10">  
-                                    <p:graphicImage value="#{update.brochure.brochureImageUrl}" width="100"/>
-                                    <h:commandLink value="#{update.brochure.brochureName}" actionListener="#{userHomePageBean.toBrochure}">
-                                        <f:param name="brochureId" value="#{update.brochure.brochureId}"></f:param>
-                                    </h:commandLink>
-                                    <!--以下就是根据更新内容的不同做不同的显示处理-->
-                                    <c:if test="#{update.type} == text">
-                                        <p:inputTextarea rows="6" cols="60" value="#{update.content}" />
-                                    </c:if>
-                                    <c:if test="#{update.type} == photo">
-                                        <p:imageSwitch effect="shuffle">  
-                                            <ui:repeat value="#{update.content}" var="image">  
-                                                <p:graphicImage value="/img/album/#{image}.jpg" />  
-                                            </ui:repeat>  
-                                        </p:imageSwitch>  
-                                    </c:if>
-                                    <c:if test="#{update.type} == video">
-                                        <p:media value="#{update.content}" width="420" height="315" player="flash"/>
-                                        <!--put the link directly in the "value" parameter, e.g. http://www.youtube.com/v/KZnUr8lcqjo-->
-                                    </c:if>
+        <h:form>
 
-                                </h:panelGrid>  
-                            </p:tab>
-                        </p:accordionPanel>  
-                    </h:form> 
-
-                </p:layoutUnit>  
-            </p:layout>
-
+            <p:carousel id="recommendedBros" value="#{userHomePageBean.recommendedBros}" var="brochure" 
+                        itemStyleClass="carItem" style="width: 25%; height: 300px; position:relative;left: 20%; ">  
+                <f:facet name="header">  
+                    推荐 
+                </f:facet>  
+                <h:panelGrid columns="1" style="width:100%" cellpadding="5">  
+                    <p:graphicImage value="/img/brochure/#{brochure.name}.jpg"/>   
+                    <!--                                 这里我突然有一个想法，纪念册图片上传以后，以纪念册名字命名，找的时候路径就是固定的了，变名字就好了-->
+                    <p:commandLink id="recommandedBro1" style="margin-right:20px;" ajax="false">  
+                        <h:outputText value="#{brochure.name}" />  
+                    </p:commandLink>
+                    <h:outputText value="#{brochure.description}}" />  
+                </h:panelGrid>  
+            </p:carousel>  
         </h:form>
+
+
+        <p:panel style="display:inline-block; height: 600px; position:absolute;left: 47%;right: 20%;top:7px;"  >
+            <p:messages/>
+            <h3>纪念册更新</h3>
+            <p:separator/>
+            <p:accordionPanel multiple="true" value="#{userHomePageBean.updates}" var="update">  
+                <p:tab title="#{update.brochure.brochureName}">  
+                    <h:panelGrid columns="2" cellpadding="10">  
+                        <p:graphicImage value="#{update.brochure.brochureImageUrl}" width="100"/>
+                        <!--以下就是根据更新内容的不同做不同的显示处理-->
+                        <c:if test="#{update.type} == text">
+                            <p:inputTextarea rows="6" cols="60" value="#{update.content}" />
+                        </c:if>
+                        <c:if test="#{update.type} == photo">
+                            <p:imageSwitch effect="shuffle">  
+                                <ui:repeat value="#{update.content}" var="image">  
+                                    <p:graphicImage value="/img/album/#{image}.jpg" />  
+                                </ui:repeat>  
+                            </p:imageSwitch>  
+                        </c:if>
+                        <c:if test="#{update.type} == video">
+                            <p:media value="#{update.content}" width="420" height="315" player="flash"/>
+                            <!--put the link directly in the "value" parameter, e.g. http://www.youtube.com/v/KZnUr8lcqjo-->
+                        </c:if>
+
+                    </h:panelGrid>  
+                </p:tab>
+            </p:accordionPanel> 
+        </p:panel>
+
     </h:body>
 </html>
 
