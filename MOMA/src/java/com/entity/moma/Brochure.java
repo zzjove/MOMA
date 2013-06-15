@@ -1,5 +1,5 @@
 package com.entity.moma;
-// Generated 2013-6-11 21:21:20 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-16 3:35:49 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -20,6 +20,8 @@ public class Brochure  implements java.io.Serializable {
      private String brochureDescription;
      private String brochureImageUrl;
      private String latestChange;
+     private String latestChangeType;
+     private Integer brochureVisit;
      private Set<Diary> diaries = new HashSet<Diary>(0);
      private Set<Blessing> blessings = new HashSet<Blessing>(0);
      private Set<Video> videos = new HashSet<Video>(0);
@@ -37,7 +39,7 @@ public class Brochure  implements java.io.Serializable {
         this.brochureType = brochureType;
         this.brochureRoot = brochureRoot;
     }
-    public Brochure(String brochureName, Date brochureStartTime, int brochureType, int brochureRoot, String brochureDescription, String brochureImageUrl, String latestChange, Set<Diary> diaries, Set<Blessing> blessings, Set<Video> videos, Set<User> users, Set<Photo> photos, Set<User> users_1) {
+    public Brochure(String brochureName, Date brochureStartTime, int brochureType, int brochureRoot, String brochureDescription, String brochureImageUrl, String latestChange, String latestChangeType, Integer brochureVisit, Set<Diary> diaries, Set<Blessing> blessings, Set<Video> videos, Set<User> users, Set<Photo> photos, Set<User> users_1) {
        this.brochureName = brochureName;
        this.brochureStartTime = brochureStartTime;
        this.brochureType = brochureType;
@@ -45,6 +47,8 @@ public class Brochure  implements java.io.Serializable {
        this.brochureDescription = brochureDescription;
        this.brochureImageUrl = brochureImageUrl;
        this.latestChange = latestChange;
+       this.latestChangeType = latestChangeType;
+       this.brochureVisit = brochureVisit;
        this.diaries = diaries;
        this.blessings = blessings;
        this.videos = videos;
@@ -108,6 +112,20 @@ public class Brochure  implements java.io.Serializable {
     
     public void setLatestChange(String latestChange) {
         this.latestChange = latestChange;
+    }
+    public String getLatestChangeType() {
+        return this.latestChangeType;
+    }
+    
+    public void setLatestChangeType(String latestChangeType) {
+        this.latestChangeType = latestChangeType;
+    }
+    public Integer getBrochureVisit() {
+        return this.brochureVisit;
+    }
+    
+    public void setBrochureVisit(Integer brochureVisit) {
+        this.brochureVisit = brochureVisit;
     }
     public Set<Diary> getDiaries() {
         return this.diaries;

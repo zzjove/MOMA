@@ -6159,3 +6159,7 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+
+.pp {
+    opacity: 0 ;
+}

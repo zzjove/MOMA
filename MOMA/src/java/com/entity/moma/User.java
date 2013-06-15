@@ -1,5 +1,5 @@
 package com.entity.moma;
-// Generated 2013-6-11 21:21:20 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-16 3:35:49 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -26,12 +26,14 @@ public class User  implements java.io.Serializable {
      private String userGender;
      private Integer userAge;
      private Set<User> usersForFirstUserId = new HashSet<User>(0);
+     private Set<GroupOwner> groupOwners = new HashSet<GroupOwner>(0);
      private Set<User> usersForSecondUserId = new HashSet<User>(0);
      private Set<Diary> diaries = new HashSet<Diary>(0);
      private Set<Brochure> brochures = new HashSet<Brochure>(0);
      private Set<Brochure> brochures_1 = new HashSet<Brochure>(0);
      private Set<Video> videos = new HashSet<Video>(0);
      private Set<Photo> photos = new HashSet<Photo>(0);
+     private Set<Comment> comments = new HashSet<Comment>(0);
      private Set<Blessing> blessings = new HashSet<Blessing>(0);
 
     public User() {
@@ -44,7 +46,7 @@ public class User  implements java.io.Serializable {
         this.userPassword = userPassword;
         this.userEmail = userEmail;
     }
-    public User(String userName, String userRealName, String userPassword, String userEmail, String phoneNumber, Integer qqNumber, String adressFirstLine, String adressSecondLine, Integer adressCountry, Integer adressProvince, String userPortraitUrl, String userGender, Integer userAge, Set<User> usersForFirstUserId, Set<User> usersForSecondUserId, Set<Diary> diaries, Set<Brochure> brochures, Set<Brochure> brochures_1, Set<Video> videos, Set<Photo> photos, Set<Blessing> blessings) {
+    public User(String userName, String userRealName, String userPassword, String userEmail, String phoneNumber, Integer qqNumber, String adressFirstLine, String adressSecondLine, Integer adressCountry, Integer adressProvince, String userPortraitUrl, String userGender, Integer userAge, Set<User> usersForFirstUserId, Set<GroupOwner> groupOwners, Set<User> usersForSecondUserId, Set<Diary> diaries, Set<Brochure> brochures, Set<Brochure> brochures_1, Set<Video> videos, Set<Photo> photos, Set<Comment> comments, Set<Blessing> blessings) {
        this.userName = userName;
        this.userRealName = userRealName;
        this.userPassword = userPassword;
@@ -59,12 +61,14 @@ public class User  implements java.io.Serializable {
        this.userGender = userGender;
        this.userAge = userAge;
        this.usersForFirstUserId = usersForFirstUserId;
+       this.groupOwners = groupOwners;
        this.usersForSecondUserId = usersForSecondUserId;
        this.diaries = diaries;
        this.brochures = brochures;
        this.brochures_1 = brochures_1;
        this.videos = videos;
        this.photos = photos;
+       this.comments = comments;
        this.blessings = blessings;
     }
    
@@ -194,6 +198,13 @@ public class User  implements java.io.Serializable {
     public void setUsersForFirstUserId(Set<User> usersForFirstUserId) {
         this.usersForFirstUserId = usersForFirstUserId;
     }
+    public Set<GroupOwner> getGroupOwners() {
+        return this.groupOwners;
+    }
+    
+    public void setGroupOwners(Set<GroupOwner> groupOwners) {
+        this.groupOwners = groupOwners;
+    }
     public Set<User> getUsersForSecondUserId() {
         return this.usersForSecondUserId;
     }
@@ -235,6 +246,13 @@ public class User  implements java.io.Serializable {
     
     public void setPhotos(Set<Photo> photos) {
         this.photos = photos;
+    }
+    public Set<Comment> getComments() {
+        return this.comments;
+    }
+    
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
     public Set<Blessing> getBlessings() {
         return this.blessings;

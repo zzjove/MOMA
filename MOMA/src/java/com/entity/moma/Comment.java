@@ -1,5 +1,5 @@
 package com.entity.moma;
-// Generated 2013-6-11 21:21:20 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-16 3:35:49 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -10,6 +10,7 @@ public class Comment  implements java.io.Serializable {
 
 
      private Integer commentId;
+     private User user;
      private String commentUrl;
      private int commentTargetId;
      private int commentBrochureType;
@@ -18,7 +19,8 @@ public class Comment  implements java.io.Serializable {
     public Comment() {
     }
 
-    public Comment(String commentUrl, int commentTargetId, int commentBrochureType, int commentBrochureId) {
+    public Comment(User user, String commentUrl, int commentTargetId, int commentBrochureType, int commentBrochureId) {
+       this.user = user;
        this.commentUrl = commentUrl;
        this.commentTargetId = commentTargetId;
        this.commentBrochureType = commentBrochureType;
@@ -31,6 +33,13 @@ public class Comment  implements java.io.Serializable {
     
     public void setCommentId(Integer commentId) {
         this.commentId = commentId;
+    }
+    public User getUser() {
+        return this.user;
+    }
+    
+    public void setUser(User user) {
+        this.user = user;
     }
     public String getCommentUrl() {
         return this.commentUrl;

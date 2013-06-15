@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2013-6-11 21:21:21 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 2013-6-16 3:35:50 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.entity.moma.Brochure" table="brochure" catalog="moma_db">
         <id name="brochureId" type="java.lang.Integer">
@@ -28,6 +28,12 @@
         </property>
         <property name="latestChange" type="string">
             <column name="latest_change" />
+        </property>
+        <property name="latestChangeType" type="string">
+            <column name="latest_change_type" length="45" />
+        </property>
+        <property name="brochureVisit" type="java.lang.Integer">
+            <column name="brochure_visit" />
         </property>
         <set name="diaries" inverse="true">
             <key>
@@ -61,7 +67,7 @@
             </key>
             <one-to-many class="com.entity.moma.Photo" />
         </set>
-        <set name="users_1" inverse="true" table="user_follow_brochure">
+        <set name="users_1" inverse="true" table="user_follow_brochure" lazy="false">
             <key>
                 <column name="brochure_id" not-null="true" />
             </key>

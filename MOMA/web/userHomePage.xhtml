@@ -27,14 +27,11 @@
                 </h:panelGrid>  
                 <p:separator/>
                 <h:outputText value="What's up."/>
-                <br/>
-                <h:outputText value="#{userHomePageBean.user.latestUpdate.content}"/>
-                <br/>
-                <h:outputText value="-- This is updated in #{userHomePageBean.user.latestUpdate.brochure}"/>
-                <br/>
-                <p:commandLink id="enterBroList" action="PersonalSpace.xhtml" style="margin-right:20px; position: absolute; bottom: 5px;"  ajax="false">  
-                    <h:outputText value="进入我的纪念册列表->" />  
-                </p:commandLink>
+
+                <h:outputLink id="enterBroList" value="PersonalSpace.xhtml" style="margin-right:20px; position: absolute; bottom: 5px;" >  
+                    <f:param name="personalSpaceUserName" value="#{userHomePageBean.user.userName}"></f:param>
+                    <h:outputText value="进入纪念册列表->" />  
+                </h:outputLink>
             </p:panel>
         </h:form> 
         <br/><br/>
@@ -47,12 +44,12 @@
                     推荐 
                 </f:facet>  
                 <h:panelGrid columns="1" style="width:100%" cellpadding="5">  
-                    <p:graphicImage value="/img/brochure/#{brochure.name}.jpg"/>   
+                    <p:graphicImage value="#{brochure.brochureImageUrl}" width="50"/>   
                     <!--                                 这里我突然有一个想法，纪念册图片上传以后，以纪念册名字命名，找的时候路径就是固定的了，变名字就好了-->
-                    <p:commandLink id="recommandedBro1" style="margin-right:20px;" ajax="false">  
-                        <h:outputText value="#{brochure.name}" />  
+                    <p:commandLink id="recommandedBro1" style="margin-right:20px;" ajax="false" >  
+                        <h:outputText value="#{brochure.brochureName}" />  
                     </p:commandLink>
-                    <h:outputText value="#{brochure.description}}" />  
+                    <h:outputText value="#{brochure.brochureDescription}" />  
                 </h:panelGrid>  
             </p:carousel>  
         </h:form>

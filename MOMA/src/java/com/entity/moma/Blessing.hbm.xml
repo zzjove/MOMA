@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2013-6-11 21:21:21 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 2013-6-16 3:35:50 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.entity.moma.Blessing" table="blessing" catalog="moma_db">
         <id name="blessingId" type="java.lang.Integer">

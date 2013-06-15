@@ -92,6 +92,7 @@ public class WriteDiaryBean {
             userNameChangeDiary = "Someone";
         }
         currentBrochure.setLatestChange(userNameChangeDiary + " Diary: " + diary.getDiaryTitle());
+        currentBrochure.setLatestChangeType("diary");
         BrochureDao.modify_brochure(currentBrochure);
     }
 }

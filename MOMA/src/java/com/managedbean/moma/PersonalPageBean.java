@@ -55,7 +55,10 @@ public class PersonalPageBean {
      * Creates a new instance of PersonalPageBean
      */
     public PersonalPageBean() {
-        String userName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
+        String userName = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("personalSpaceUserName");
+        if (userName == null) {
+            userName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
+        }
         System.out.println(userName);
         user = UserDao.findby_userName(userName);
     }

@@ -6,8 +6,10 @@ package com.managedbean.moma;
 
 import com.dao.hibernate.BrochureDao;
 import com.dao.hibernate.PhotoDao;
+import com.dao.hibernate.UserDao;
 import com.entity.moma.Brochure;
 import com.entity.moma.Photo;
+import com.entity.moma.User;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,7 +17,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -30,6 +35,7 @@ import org.primefaces.event.FileUploadEvent;
 @ManagedBean
 @SessionScoped
 public class ViewPhotoBean implements Serializable {
+
     private Brochure brochure;
     private ArrayList<Photo> images;
     private String photo_comment;
@@ -38,12 +44,9 @@ public class ViewPhotoBean implements Serializable {
     public void init() {
         brochure = BrochureDao.findby_brochureId(1);
         images = (ArrayList<Photo>) PhotoDao.findby_brochureId(brochure.getBrochureId());
-        System.out.println("init_called");
-       //这里仅按数字命名作为测试用，实际应该一个一个插入arraylist。。另外还需在上传按钮处加actionListner同步加入相片
-//        for (int i = 1; i <= 10; i++) {
-//            images.add(i + ".jpg");
-//        }
+        System.out.println(images.size() + "init_called");
     }
+
     public ArrayList<Photo> getImages() {
         return images;
     }
@@ -67,13 +70,16 @@ public class ViewPhotoBean implements Serializable {
     public void setBrochure(Brochure brochure) {
         this.brochure = brochure;
     }
-    
+
     public void handleFileUpload(FileUploadEvent event) {
         FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        System.out.println(brochure.getBrochureId());
         try {
-            File targetFolder = new File("/Users/bianshujun/NetBeansProjects/MOMA/web/img/album");
+            File file = new File("/Users/bianshujun/Downloads/MOMA/MOMA/web/img/" + brochure.getBrochureId() + "/photo");
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            File targetFolder = new File("/Users/bianshujun/Downloads/MOMA/MOMA/web/img/" + brochure.getBrochureId() + "/photo");
             //注意：有关上传照片的小问题。。这里new File（）里的路径必须写本地的实际路径，运行时注意更改
             InputStream inputStream = event.getFile().getInputstream();
             OutputStream out = new FileOutputStream(new File(targetFolder,
@@ -87,13 +93,40 @@ public class ViewPhotoBean implements Serializable {
             inputStream.close();
             out.flush();
             out.close();
+
+            String userName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
+            User user = UserDao.findby_userName(userName);
+            Photo newPhoto = new Photo();
+            newPhoto.setPhotoTitle(event.getFile().getFileName());
+            newPhoto.setBrochure(brochure);
+            newPhoto.setUser(user);
+            newPhoto.setPhotoStartTime(new Date());
+            System.out.println(event.getFile().getFileName());
+            newPhoto.setPhotoUrl("./img/" + brochure.getBrochureId() + "/photo/" + event.getFile().getFileName());
+            PhotoDao.add_photo(newPhoto);
+            changeBrochureLatestChange(brochure, newPhoto);
+            images = (ArrayList<Photo>) PhotoDao.findby_brochureId(brochure.getBrochureId());
             System.out.println("In handleFileUpload");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("viewPhoto.xhtml");
+            System.out.println("IN redirect");
+        } catch (IOException ex) {
+            Logger.getLogger(ViewPhotoBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void changeBrochureLatestChange(Brochure brochure, Photo photo) {
+        System.out.println("In changeBrochureLatestChange");
+        String userNameChangeDiary = photo.getUser().getUserName();
+        brochure.setLatestChange(userNameChangeDiary + " Photo: " + photo.getPhotoTitle());
+        brochure.setLatestChangeType("photo");
+        BrochureDao.modify_brochure(brochure);
     }
 }
 /**
  * Creates a new instance of ViewPhotoBean
  */
-

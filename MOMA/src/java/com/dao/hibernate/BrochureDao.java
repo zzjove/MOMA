@@ -48,6 +48,18 @@ public class BrochureDao {
         return brochureList;
     }
 
+    public static List<Brochure> findby_maxBrochureVisit(int brochureVisit) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "from Brochure where brochure_visit=:brochureVisit";
+        Query query = session.createQuery(hql);
+        query.setInteger("brochureVisit", brochureVisit);
+        List brochureList = (List<Brochure>) query.list();
+        session.close();
+
+        return brochureList;
+    }
     
     //这个数据库查询语句有待改进。。不能使用。。
     public static ArrayList<Brochure> findby_userName(String userName) {
@@ -103,4 +115,14 @@ public class BrochureDao {
                 "select max(brochure.brochureId) from Brochure brochure").uniqueResult();
         return maxUserId;
     }
+    
+    public static int getMaxBrochureVisited() {
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        int brochureVisit = (Integer) session.createQuery(
+                "select max(brochure.brochureVisit) from Brochure brochure").uniqueResult();
+        return brochureVisit;
+    }
+    
 }
