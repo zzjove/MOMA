@@ -1,5 +1,5 @@
 package com.entity.moma;
-// Generated 2013-6-16 3:35:49 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-16 12:29:23 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -16,16 +16,26 @@ public class Video  implements java.io.Serializable {
      private Date videoStartTime;
      private String videoUrl;
      private String videoTitle;
+     private Date videoModifyTime;
 
     public Video() {
     }
 
+	
     public Video(Brochure brochure, User user, Date videoStartTime, String videoUrl, String videoTitle) {
+        this.brochure = brochure;
+        this.user = user;
+        this.videoStartTime = videoStartTime;
+        this.videoUrl = videoUrl;
+        this.videoTitle = videoTitle;
+    }
+    public Video(Brochure brochure, User user, Date videoStartTime, String videoUrl, String videoTitle, Date videoModifyTime) {
        this.brochure = brochure;
        this.user = user;
        this.videoStartTime = videoStartTime;
        this.videoUrl = videoUrl;
        this.videoTitle = videoTitle;
+       this.videoModifyTime = videoModifyTime;
     }
    
     public Integer getVideoId() {
@@ -69,6 +79,13 @@ public class Video  implements java.io.Serializable {
     
     public void setVideoTitle(String videoTitle) {
         this.videoTitle = videoTitle;
+    }
+    public Date getVideoModifyTime() {
+        return this.videoModifyTime;
+    }
+    
+    public void setVideoModifyTime(Date videoModifyTime) {
+        this.videoModifyTime = videoModifyTime;
     }
 
 

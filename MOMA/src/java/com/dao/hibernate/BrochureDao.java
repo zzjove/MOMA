@@ -60,7 +60,7 @@ public class BrochureDao {
 
         return brochureList;
     }
-    
+        
     //这个数据库查询语句有待改进。。不能使用。。
     public static ArrayList<Brochure> findby_userName(String userName) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -124,5 +124,6 @@ public class BrochureDao {
                 "select max(brochure.brochureVisit) from Brochure brochure").uniqueResult();
         return brochureVisit;
     }
+    
     
 }

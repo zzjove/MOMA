@@ -8,7 +8,8 @@ import com.dao.hibernate.BrochureDao;
 import com.dao.hibernate.UserDao;
 import com.entity.moma.Brochure;
 import com.entity.moma.User;
-import com.helperClass.moma.UpdateInfo;
+import com.helperClass.moma.BrochureUpdate;
+import com.helperClass.moma.UserUpdate;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +28,24 @@ import javax.faces.context.FacesContext;
 public class UserHomePageBean {
 
     private User user;
-    private ArrayList<UpdateInfo> updates;
+    private ArrayList<UserUpdate> userUpdate = new ArrayList();
+    private ArrayList<BrochureUpdate> brochureUpdates = new ArrayList();
     private ArrayList<Brochure> recommendedBros = new ArrayList();
 
-    public List<UpdateInfo> getUpdates() {
-        return updates;
+    public ArrayList<UserUpdate> getUserUpdate() {
+        return userUpdate;
     }
 
-    public void setUpdates(ArrayList<UpdateInfo> updates) {
-        this.updates = updates;
+    public void setUserUpdate(ArrayList<UserUpdate> userUpdate) {
+        this.userUpdate = userUpdate;
+    }
+
+    public List<BrochureUpdate> getBrochureUpdates() {
+        return brochureUpdates;
+    }
+
+    public void setBrochureUpdates(ArrayList<BrochureUpdate> brochureUpdates) {
+        this.brochureUpdates = brochureUpdates;
     }
 
     public ArrayList<Brochure> getRecommendedBros() {
@@ -63,15 +73,32 @@ public class UserHomePageBean {
             userName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
         }
         user = UserDao.findby_userName(userName);
-        updates = new ArrayList();
+        getlatestUpdate();
         getRecommandBrochure();
-//        ArrayList<Brochure> brochureList = (ArrayList<Brochure>) BrochureDao.findby_userName(userName);
-        ArrayList<Brochure> brochureList = new ArrayList(user.getBrochures());
-        System.out.println("brochurelist is " + brochureList.size());
-        for (Brochure tempBrochure : brochureList) {
-            System.out.println("brochureId is " + tempBrochure.getBrochureId());
-            UpdateInfo update = new UpdateInfo(tempBrochure);
-            updates.add(update);
+        getFollowBrochureLatestChange();
+
+    }
+
+    private void getlatestUpdate() {
+        ArrayList<Brochure> latestChangeBrochureList = new ArrayList();
+        ArrayList<Brochure> allBrochureList = new ArrayList(user.getBrochures());
+        if (!allBrochureList.isEmpty()) {
+            Brochure brochureTest = allBrochureList.get(0);
+            System.out.println("date is " + brochureTest.getBrochureModifyTime());
+            while (latestChangeBrochureList.size() < 6) {
+                Brochure temp_brochure = allBrochureList.get(0);
+                for (Brochure brochure : allBrochureList) {
+                    if (brochure.getBrochureModifyTime().after(temp_brochure.getBrochureModifyTime())) {
+                        temp_brochure = brochure;
+                    }
+                }
+                latestChangeBrochureList.add(temp_brochure);
+                allBrochureList.remove(temp_brochure);
+                userUpdate.add(new UserUpdate(temp_brochure));
+            }
+            for (Brochure brochure : latestChangeBrochureList) {
+                System.out.println("IN Latest update" + brochure.getBrochureId());
+            }
         }
     }
 
@@ -82,7 +109,7 @@ public class UserHomePageBean {
         int counter = 0;
         while (true) {
             System.out.println(counter);
-            counter ++ ;
+            counter++;
             int randomUserNumber = (int) (Math.random() * currentUser.getUsersForSecondUserId().size());
             ArrayList recommandFriendList = new ArrayList(currentUser.getUsersForSecondUserId());
             User friend = (User) recommandFriendList.get(randomUserNumber);
@@ -91,22 +118,45 @@ public class UserHomePageBean {
                 int randomBrochureNumber = (int) (Math.random() * friend.getBrochures().size());
                 ArrayList recommandBrochureList = new ArrayList(friend.getBrochures());
                 Brochure brochure = (Brochure) recommandBrochureList.get(randomBrochureNumber);
-                if (recommendedBros.contains(brochure))
+                if (recommendedBros.contains(brochure)) {
                     continue;
+                }
                 recommendedBros.add(brochure);
                 break;
             }
-            if (counter >= 20) 
+            if (counter >= 20) {
                 break;
+            }
         }
-        
-        
-        
+
+        for (Brochure brochure : recommendedBros) {
+            System.out.println("recommandedbros is " + brochure.getBrochureId());
+        }
+
+    }
+
+    private void getFollowBrochureLatestChange() {
+        ArrayList<Brochure> brochureList = new ArrayList(user.getBrochures_1());
+        System.out.println("brochurelist is " + brochureList.size());
+        for (Brochure tempBrochure : brochureList) {
+            System.out.println("brochureId is " + tempBrochure.getBrochureId());
+            BrochureUpdate update = new BrochureUpdate(tempBrochure);
+            brochureUpdates.add(update);
+        }
     }
 
     public void toBrochure() {
         System.out.println("In toBrochure");
         String brochureName = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("brochureId");
         System.out.println("in to brochure " + brochureName);
+    }
+    
+    public boolean isHost() {
+        String userName = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("friendName");
+        if (userName == null) {
+            return true;
+        }
+        else 
+            return false;
     }
 }

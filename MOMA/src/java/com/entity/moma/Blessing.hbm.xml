@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2013-6-16 3:35:50 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 2013-6-16 12:29:24 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.entity.moma.Blessing" table="blessing" catalog="moma_db">
         <id name="blessingId" type="java.lang.Integer">
@@ -14,8 +14,8 @@
         <many-to-one name="brochure" class="com.entity.moma.Brochure" fetch="select">
             <column name="blessing_brochure_fk" not-null="true" />
         </many-to-one>
-        <property name="blessingStartTime" type="date">
-            <column name="blessing_start_time" length="10" not-null="true" />
+        <property name="blessingStartTime" type="timestamp">
+            <column name="blessing_start_time" length="19" not-null="true" />
         </property>
         <property name="blessingUrl" type="string">
             <column name="blessing_url" not-null="true" unique="true" />

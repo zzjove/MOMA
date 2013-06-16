@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>选择要加入的分组</title>
+    </h:head>
+    <h:body>
+        <h:outputText value="#{friendUserName}" />
+        
+        <h:form>
+        <h:outputLabel value="分组: " />
+                <h:selectOneMenu value="#{userGroupTestBean.chosedGroupName}" converter="groupOwnerConverter"> 
+                    <f:selectItems value="#{userGroupTestBean.groupNameList}"/>             
+                </h:selectOneMenu>
+        
+        <h:commandLink value="确认加入" action="#{userGroupTestBean.doAdd}" >
+            <f:param name="friendUserName" value="#{friendUserName}" />
+        </h:commandLink>
+        </h:form>
+    </h:body>
+</html>
+

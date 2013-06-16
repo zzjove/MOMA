@@ -1,5 +1,5 @@
 package com.entity.moma;
-// Generated 2013-6-16 3:35:49 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-16 12:29:23 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -15,6 +15,7 @@ public class Brochure  implements java.io.Serializable {
      private Integer brochureId;
      private String brochureName;
      private Date brochureStartTime;
+     private Date brochureModifyTime;
      private int brochureType;
      private int brochureRoot;
      private String brochureDescription;
@@ -39,9 +40,10 @@ public class Brochure  implements java.io.Serializable {
         this.brochureType = brochureType;
         this.brochureRoot = brochureRoot;
     }
-    public Brochure(String brochureName, Date brochureStartTime, int brochureType, int brochureRoot, String brochureDescription, String brochureImageUrl, String latestChange, String latestChangeType, Integer brochureVisit, Set<Diary> diaries, Set<Blessing> blessings, Set<Video> videos, Set<User> users, Set<Photo> photos, Set<User> users_1) {
+    public Brochure(String brochureName, Date brochureStartTime, Date brochureModifyTime, int brochureType, int brochureRoot, String brochureDescription, String brochureImageUrl, String latestChange, String latestChangeType, Integer brochureVisit, Set<Diary> diaries, Set<Blessing> blessings, Set<Video> videos, Set<User> users, Set<Photo> photos, Set<User> users_1) {
        this.brochureName = brochureName;
        this.brochureStartTime = brochureStartTime;
+       this.brochureModifyTime = brochureModifyTime;
        this.brochureType = brochureType;
        this.brochureRoot = brochureRoot;
        this.brochureDescription = brochureDescription;
@@ -77,6 +79,13 @@ public class Brochure  implements java.io.Serializable {
     
     public void setBrochureStartTime(Date brochureStartTime) {
         this.brochureStartTime = brochureStartTime;
+    }
+    public Date getBrochureModifyTime() {
+        return this.brochureModifyTime;
+    }
+    
+    public void setBrochureModifyTime(Date brochureModifyTime) {
+        this.brochureModifyTime = brochureModifyTime;
     }
     public int getBrochureType() {
         return this.brochureType;

@@ -7,11 +7,14 @@ package com.managedbean.moma;
 import com.dao.hibernate.BrochureDao;
 import com.dao.hibernate.UserDao;
 import com.entity.moma.Brochure;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.*;
@@ -89,11 +92,18 @@ public class BrochureBean {
     public void newBrochure(){
         String userName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
         brochureDate = new Date();
+//        SimpleDateFormat   dateFormat = new   SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+//        try {
+//            brochureDate = dateFormat.parse((new Date()).toString());
+//        } catch (ParseException ex) {
+//            Logger.getLogger(BrochureBean.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         System.out.println(userName + " in brochure");
         brochure.setBrochureName(this.brochureName);
         brochure.setBrochureRoot(this.brochureRoot);
         brochure.setBrochureDescription(this.brochureDescription);
         brochure.setBrochureStartTime(brochureDate);
+        brochure.setBrochureModifyTime(brochureDate);
         BrochureDao.add_brochure(brochure);
         System.out.println(brochure.getBrochureId());
         UserDao.add_user_brochure(userName, brochure.getBrochureId());

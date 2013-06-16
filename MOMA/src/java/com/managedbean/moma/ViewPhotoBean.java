@@ -122,6 +122,7 @@ public class ViewPhotoBean implements Serializable {
     private void changeBrochureLatestChange(Brochure brochure, Photo photo) {
         System.out.println("In changeBrochureLatestChange");
         String userNameChangeDiary = photo.getUser().getUserName();
+        brochure.setBrochureModifyTime(new Date());
         brochure.setLatestChange(userNameChangeDiary + " Photo: " + photo.getPhotoTitle());
         brochure.setLatestChangeType("photo");
         BrochureDao.modify_brochure(brochure);

@@ -6,12 +6,14 @@ package com.helperClass.moma;
 
 import com.dao.hibernate.BrochureDao;
 import com.entity.moma.Brochure;
+import com.entity.moma.User;
+import java.util.ArrayList;
 
 /**
  *
  * @author bianshujun
  */
-public class UpdateInfo {
+public class BrochureUpdate {
 
     Brochure brochure;
     String type;
@@ -41,7 +43,7 @@ public class UpdateInfo {
         this.type = type;
     }
 
-    public UpdateInfo(Brochure brochure) {
+    public BrochureUpdate(Brochure brochure) {
         System.out.println("In UpdateInfo Construction");
         this.brochure = brochure;
         this.type = brochure.getLatestChangeType();
@@ -53,5 +55,6 @@ public class UpdateInfo {
             System.out.println("brochure latest change is null");
         }
     }
+
 
 }

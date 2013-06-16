@@ -1,5 +1,5 @@
 package com.entity.moma;
-// Generated 2013-6-16 3:35:49 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-16 12:29:23 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -17,6 +17,7 @@ public class Photo  implements java.io.Serializable {
      private String photoUrl;
      private String photoTitle;
      private String photoLocation;
+     private Date photoModifyTime;
 
     public Photo() {
     }
@@ -29,13 +30,14 @@ public class Photo  implements java.io.Serializable {
         this.photoUrl = photoUrl;
         this.photoTitle = photoTitle;
     }
-    public Photo(User user, Brochure brochure, Date photoStartTime, String photoUrl, String photoTitle, String photoLocation) {
+    public Photo(User user, Brochure brochure, Date photoStartTime, String photoUrl, String photoTitle, String photoLocation, Date photoModifyTime) {
        this.user = user;
        this.brochure = brochure;
        this.photoStartTime = photoStartTime;
        this.photoUrl = photoUrl;
        this.photoTitle = photoTitle;
        this.photoLocation = photoLocation;
+       this.photoModifyTime = photoModifyTime;
     }
    
     public Integer getPhotoId() {
@@ -86,6 +88,13 @@ public class Photo  implements java.io.Serializable {
     
     public void setPhotoLocation(String photoLocation) {
         this.photoLocation = photoLocation;
+    }
+    public Date getPhotoModifyTime() {
+        return this.photoModifyTime;
+    }
+    
+    public void setPhotoModifyTime(Date photoModifyTime) {
+        this.photoModifyTime = photoModifyTime;
     }
 
 

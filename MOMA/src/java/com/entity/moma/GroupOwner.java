@@ -1,5 +1,5 @@
 package com.entity.moma;
-// Generated 2013-6-16 3:35:49 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-16 12:29:23 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
