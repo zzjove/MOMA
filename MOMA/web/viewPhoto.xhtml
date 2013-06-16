@@ -5,15 +5,73 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>MOMA-Photo-</title>
+         <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
         <style type="text/css">
-
+             .accordion-toggle{
+                background-color: #F3F3F3;
+                opacity: 0.6;
+            }
+            .editer{
+                display: block;
+                font-family: Georgia;
+                color: #0057CC;       
+                margin-left: 10%;
+            }
             .loginPage {
                 background-color:#ffffff;
                 background-image:url(img/bg.jpg);
             }
         </style>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".overEnlargeBtn").click(function() {
+                    $(".overEnlargeTarget").animate({height: "300px", width: "300px", opacity: '0.4'}, "slow");
+                });
+            });
+        </script>
     </h:head>
     <h:body styleClass="loginPage">
+         <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <h:outputLink styleClass="brand" value="#">
+                        <h:outputText value="MOMA" />
+                    </h:outputLink>
+                    <ul class="nav">
+                        <li><h:outputLink value="#">
+                                <h:outputText value="首页" />
+                            </h:outputLink>
+                        </li>
+                        <li class="active">
+                            <h:outputLink value="#">
+                                <h:outputText value="我的纪念册" />
+                            </h:outputLink>
+                        </li>
+                        <li>
+                            <h:outputLink value="Friends.xhtml">
+                                <h:outputText value="我的好友" />
+                            </h:outputLink>
+                        </li>
+
+                    </ul>
+
+                    <h:form styleClass="navbar-search pull-right" >
+
+                        <p:inputText id="search" label="search" styleClass="search-query" value="#{searchBean.searchName}" />
+                        <p:watermark for="search" value="找朋友、找同事、找家人" />
+
+                    </h:form>
+                    <ul class="nav pull-right ">
+                        <li>
+                            <h:outputLink value="#">
+                                <h:outputText value="搜索好友/纪念册" />
+                            </h:outputLink>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
         <h:form >
             <p:messages/>
             <div class="jiathis_share_slide jiathis_share_32x32" id="jiathis_share_slide">
