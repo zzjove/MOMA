@@ -10,10 +10,20 @@
             <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
             <title>Welcome to MOMA</title>
             <style>
-                body{
+                .loginPage {
+                    background-color:#ffffff;
+                    background-image:url(img/bg.jpg);
+                }
+                .mainPanelBackgroud{
                     background-image: url("./img/personalSpaceBG1.jpg");
                     background-repeat:no-repeat;
                     background-size:cover;
+
+                }
+
+                body{
+                    background-color:#ffffff;
+                    background-image:url(img/bg.jpg);
                 }
                 .accordion-toggle{
                     background-color: #F3F3F3;
@@ -42,8 +52,9 @@
                             <h:outputText value="MOMA" />
                         </h:outputLink>
                         <ul class="nav">
-                            <li><h:outputLink value="#">
-                                    <h:outputText value="首页" />
+                            <li><h:outputLink value="userHomePage.xhtml">
+                                    <!--上面的这个链接要处理一下，改成登陆者的个人主页-->
+                                    <h:outputText value="个人主页" />
                                 </h:outputLink>
                             </li>
                             <li class="active">
@@ -76,8 +87,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="row " >
                 <h4 style="color: #F3F3F3;font-family: Georgia; margin-left: 20px;display: inline;">
                     You will never regret having on-line memories like these.
@@ -89,266 +98,278 @@
                     </p:button>  	  
                 </div>
             </div>
+            <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; min-height: 600px; position:relative;left: 20%; top: 70px;" styleClass="mainPanelBackgroud">
+                <p:accordionPanel multiple="true" value="#{tabBean.players}" var="player">  
+                    <p:tab title="Godfather Part I">  
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <p:graphicImage value="/images/godfather/godfather1.jpg" />  
+                            <h:outputText  
+                                value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.   
+                                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. T  
+                                hrough Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect,   
+                                but given to ruthless violence whenever anything stands against the good of the family." />  
+                        </h:panelGrid>  
+                    </p:tab>  
+                </p:accordionPanel>
+                <div class="row accordion" style="padding-top:20px;padding-left:5px;" id="accordion2">
+                    <div class="accordion-group">
+                        <div class="accordion-heading ">
+                            <div data-toggle="tooltip"  title="最后于2013年6月11日由周壮更改" >
+                                <a class="accordion-toggle"  data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" >
+                                    这里放的是纪念册的标题
+                                </a>
+                            </div>
+                        </div>
+                        <div id="collapseOne" class="accordion-body collapse in" >
+                            <div class="accordion-inner" style="">  
+                                <div style="border-style:ridge;border-color: #F3F3F3;width: 300px;margin-left: 20px; padding: 5px;display: inline-block">
+                                    <img src="img/brochure.jpg" alt="brochure" />
+                                </div>
 
-            <div class="row accordion" style="padding-top:20px;padding-left:5px;" id="accordion2">
-                <div class="accordion-group">
-                    <div class="accordion-heading ">
-                        <div data-toggle="tooltip"  title="最后于2013年6月11日由周壮更改" >
-                            <a class="accordion-toggle"  data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" >
-                                这里放的是纪念册的标题
+                                <div style="width: 300px;display: inline-block;background-color: #C1F7ED;opacity: 0.4;margin-left: 20px;position: absolute;left: 350px;">
+                                    <h3 class="editer" style="margin-left:5%;font-size: 20px;">那些年错过的大雨，那些年错过的爱情，好想告诉你，告诉你我没有忘记</h3>
+                                </div>  
+
+                                <p:notificationBar position="top" effect="slide" widgetVar="bar" styleClass="top">  
+                                    <h:outputText value="Feel free to edit your own brochure!" style="color:#FFCC00;font-size:36px;" />  
+                                </p:notificationBar>
+
+                                <button class="btn btn-info" style="position:relative;top:85px;margin-left: 10px;">浏览</button>
+                                <button class="btn btn-success" style="position:relative;top:85px;margin-left: 10px;" action="diaryList.xhtml">编辑</button>
+                                <button class="btn btn-danger" style="position:relative;top:85px;margin-left: 10px;">删除</button>
+
+                                <div style="width: 80px;display: inline-block;background-color: #79BCF2;opacity: 0.9;margin-left: 20px;position: absolute;right:10px;">
+                                    <h4 class="editer">周壮</h4>
+                                    <h4 class="editer">赵青</h4>
+                                    <h4 class="editer">卞舒俊</h4>
+                                    <h4 class="editer">严俊捷</h4>
+                                    <h4 class="editer">乔茜</h4>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                                同济大学软件学院
                             </a>
                         </div>
-                    </div>
-                    <div id="collapseOne" class="accordion-body collapse in" >
-                        <div class="accordion-inner" style="">  
-                            <div style="border-style:ridge;border-color: #F3F3F3;width: 300px;margin-left: 20px; padding: 5px;display: inline-block">
-                                <img src="img/brochure.jpg" alt="brochure" />
+                        <div id="collapseTwo" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <div class="span1"> </div>
+                                <ul class="thumbnails">
+                                    <li class="span3">
+                                        <div class="thumbnail overEnlargeTarget" >
+                                            <img src="img/brochure.jpg" alt="brochure"/>
+                                            <h4>The first brochure</h4>
+                                            <p>Description is...</p>
+                                            <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
+                                                <h:outputText value="浏览" />
+                                            </h:outputLink>
+                                            <h:outputLink styleClass="btn btn-success" value="#">
+                                                <h:outputText value="编辑" />
+                                            </h:outputLink>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
+                        </div>
+                    </div>
 
-                            <div style="width: 300px;display: inline-block;background-color: #C1F7ED;opacity: 0.4;margin-left: 20px;position: absolute;left: 350px;">
-                                <h3 class="editer" style="margin-left:5%;font-size: 20px;">那些年错过的大雨，那些年错过的爱情，好想告诉你，告诉你我没有忘记</h3>
-                            </div>  
-                            
-                            <p:notificationBar position="top" effect="slide" widgetVar="bar" styleClass="top">  
-                                <h:outputText value="Feel free to edit your own brochure!" style="color:#FFCC00;font-size:36px;" />  
-                            </p:notificationBar>
-                            
-                            <button class="btn btn-info" style="position:relative;top:85px;margin-left: 10px;">浏览</button>
-                            <button class="btn btn-success" style="position:relative;top:85px;margin-left: 10px;" action="diaryList.xhtml">编辑</button>
-                            <button class="btn btn-danger" style="position:relative;top:85px;margin-left: 10px;">删除</button>
 
-                            <div style="width: 80px;display: inline-block;background-color: #79BCF2;opacity: 0.9;margin-left: 20px;position: absolute;right:10px;">
-                                <h4 class="editer">周壮</h4>
-                                <h4 class="editer">赵青</h4>
-                                <h4 class="editer">卞舒俊</h4>
-                                <h4 class="editer">严俊捷</h4>
-                                <h4 class="editer">乔茜</h4>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                                同济谷歌营
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <div class="span1"> </div>
+                                <ul class="thumbnails">
+                                    <li class="span3">
+                                        <div class="thumbnail overEnlargeTarget" >
+                                            <img src="img/brochure.jpg" alt="brochure"/>
+                                            <h4>The first brochure</h4>
+                                            <p>Description is...</p>
+                                            <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
+                                                <h:outputText value="浏览" />
+                                            </h:outputLink>
+                                            <h:outputLink styleClass="btn btn-success" value="#">
+                                                <h:outputText value="编辑" />
+                                            </h:outputLink>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
-
-
-
                         </div>
                     </div>
-                </div>
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                            同济大学软件学院
-                        </a>
-                    </div>
-                    <div id="collapseTwo" class="accordion-body collapse">
-                        <div class="accordion-inner">
-                            <div class="span1"> </div>
-                            <ul class="thumbnails">
-                                <li class="span3">
-                                    <div class="thumbnail overEnlargeTarget" >
-                                        <img src="img/brochure.jpg" alt="brochure"/>
-                                        <h4>The first brochure</h4>
-                                        <p>Description is...</p>
-                                        <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
-                                            <h:outputText value="浏览" />
-                                        </h:outputLink>
-                                        <h:outputLink styleClass="btn btn-success" value="#">
-                                            <h:outputText value="编辑" />
-                                        </h:outputLink>
-                                    </div>
-                                </li>
-                            </ul>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                                情侣
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <div class="span1"> </div>
+                                <ul class="thumbnails">
+                                    <li class="span3">
+                                        <div class="thumbnail overEnlargeTarget" >
+                                            <img src="img/brochure.jpg" alt="brochure"/>
+                                            <h4>The first brochure</h4>
+                                            <p>Description is...</p>
+                                            <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
+                                                <h:outputText value="浏览" />
+                                            </h:outputLink>
+                                            <h:outputLink styleClass="btn btn-success" value="#">
+                                                <h:outputText value="编辑" />
+                                            </h:outputLink>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                            同济谷歌营
-                        </a>
-                    </div>
-                    <div id="collapseTwo" class="accordion-body collapse">
-                        <div class="accordion-inner">
-                            <div class="span1"> </div>
-                            <ul class="thumbnails">
-                                <li class="span3">
-                                    <div class="thumbnail overEnlargeTarget" >
-                                        <img src="img/brochure.jpg" alt="brochure"/>
-                                        <h4>The first brochure</h4>
-                                        <p>Description is...</p>
-                                        <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
-                                            <h:outputText value="浏览" />
-                                        </h:outputLink>
-                                        <h:outputLink styleClass="btn btn-success" value="#">
-                                            <h:outputText value="编辑" />
-                                        </h:outputLink>
-                                    </div>
-                                </li>
-                            </ul>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                                实在不知道该取什么名字
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <div class="span1"> </div>
+                                <ul class="thumbnails">
+                                    <li class="span3">
+                                        <div class="thumbnail overEnlargeTarget" >
+                                            <img src="img/brochure.jpg" alt="brochure"/>
+                                            <h4>The first brochure</h4>
+                                            <p>Description is...</p>
+                                            <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
+                                                <h:outputText value="浏览" />
+                                            </h:outputLink>
+                                            <h:outputLink styleClass="btn btn-success" value="#">
+                                                <h:outputText value="编辑" />
+                                            </h:outputLink>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                            情侣
-                        </a>
-                    </div>
-                    <div id="collapseTwo" class="accordion-body collapse">
-                        <div class="accordion-inner">
-                            <div class="span1"> </div>
-                            <ul class="thumbnails">
-                                <li class="span3">
-                                    <div class="thumbnail overEnlargeTarget" >
-                                        <img src="img/brochure.jpg" alt="brochure"/>
-                                        <h4>The first brochure</h4>
-                                        <p>Description is...</p>
-                                        <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
-                                            <h:outputText value="浏览" />
-                                        </h:outputLink>
-                                        <h:outputLink styleClass="btn btn-success" value="#">
-                                            <h:outputText value="编辑" />
-                                        </h:outputLink>
-                                    </div>
-                                </li>
-                            </ul>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                                东北一家子
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <div class="span1"> </div>
+                                <ul class="thumbnails">
+                                    <li class="span3">
+                                        <div class="thumbnail overEnlargeTarget" >
+                                            <img src="img/brochure.jpg" alt="brochure"/>
+                                            <h4>The first brochure</h4>
+                                            <p>Description is...</p>
+                                            <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
+                                                <h:outputText value="浏览" />
+                                            </h:outputLink>
+                                            <h:outputLink styleClass="btn btn-success" value="#">
+                                                <h:outputText value="编辑" />
+                                            </h:outputLink>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                            实在不知道该取什么名字
-                        </a>
-                    </div>
-                    <div id="collapseTwo" class="accordion-body collapse">
-                        <div class="accordion-inner">
-                            <div class="span1"> </div>
-                            <ul class="thumbnails">
-                                <li class="span3">
-                                    <div class="thumbnail overEnlargeTarget" >
-                                        <img src="img/brochure.jpg" alt="brochure"/>
-                                        <h4>The first brochure</h4>
-                                        <p>Description is...</p>
-                                        <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
-                                            <h:outputText value="浏览" />
-                                        </h:outputLink>
-                                        <h:outputLink styleClass="btn btn-success" value="#">
-                                            <h:outputText value="编辑" />
-                                        </h:outputLink>
-                                    </div>
-                                </li>
-                            </ul>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                                这个标题要取得长一点这样可以看到不一样的效果
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <div class="span1"> </div>
+                                <ul class="thumbnails">
+                                    <li class="span3">
+                                        <div class="thumbnail overEnlargeTarget" >
+                                            <img src="img/brochure.jpg" alt="brochure"/>
+                                            <h4>The first brochure</h4>
+                                            <p>Description is...</p>
+                                            <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
+                                                <h:outputText value="浏览" />
+                                            </h:outputLink>
+                                            <h:outputLink styleClass="btn btn-success" value="#">
+                                                <h:outputText value="编辑" />
+                                            </h:outputLink>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                            东北一家子
-                        </a>
-                    </div>
-                    <div id="collapseTwo" class="accordion-body collapse">
-                        <div class="accordion-inner">
-                            <div class="span1"> </div>
-                            <ul class="thumbnails">
-                                <li class="span3">
-                                    <div class="thumbnail overEnlargeTarget" >
-                                        <img src="img/brochure.jpg" alt="brochure"/>
-                                        <h4>The first brochure</h4>
-                                        <p>Description is...</p>
-                                        <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
-                                            <h:outputText value="浏览" />
-                                        </h:outputLink>
-                                        <h:outputLink styleClass="btn btn-success" value="#">
-                                            <h:outputText value="编辑" />
-                                        </h:outputLink>
-                                    </div>
-                                </li>
-                            </ul>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwooo">
+                                怎么还有啊
+                            </a>
+                        </div>
+                        <div id="collapseTwooo" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <div class="span1"> </div>
+                                <ul class="thumbnails">
+                                    <li class="span3">
+                                        <div class="thumbnail overEnlargeTarget" >
+                                            <img src="img/brochure.jpg" alt="brochure"/>
+                                            <h4>The first brochure</h4>
+                                            <p>Description is...</p>
+                                            <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
+                                                <h:outputText value="浏览" />
+                                            </h:outputLink>
+                                            <h:outputLink styleClass="btn btn-success" value="#">
+                                                <h:outputText value="编辑" />
+                                            </h:outputLink>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                            这个标题要取得长一点这样可以看到不一样的效果
-                        </a>
-                    </div>
-                    <div id="collapseTwo" class="accordion-body collapse">
-                        <div class="accordion-inner">
-                            <div class="span1"> </div>
-                            <ul class="thumbnails">
-                                <li class="span3">
-                                    <div class="thumbnail overEnlargeTarget" >
-                                        <img src="img/brochure.jpg" alt="brochure"/>
-                                        <h4>The first brochure</h4>
-                                        <p>Description is...</p>
-                                        <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
-                                            <h:outputText value="浏览" />
-                                        </h:outputLink>
-                                        <h:outputLink styleClass="btn btn-success" value="#">
-                                            <h:outputText value="编辑" />
-                                        </h:outputLink>
-                                    </div>
-                                </li>
-                            </ul>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwoo">
+                                最后一个
+                            </a>
+                        </div>
+                        <div id="collapseTwoo" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <div class="span1"> </div>
+                                <ul class="thumbnails">
+                                    <li class="span3">
+                                        <div class="thumbnail overEnlargeTarget" >
+                                            <img src="img/brochure.jpg" alt="brochure"/>
+                                            <h4>The first brochure</h4>
+                                            <p>Description is...</p>
+                                            <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
+                                                <h:outputText value="浏览" />
+                                            </h:outputLink>
+                                            <h:outputLink styleClass="btn btn-success" value="#">
+                                                <h:outputText value="编辑" />
+                                            </h:outputLink>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwooo">
-                            怎么还有啊
-                        </a>
-                    </div>
-                    <div id="collapseTwooo" class="accordion-body collapse">
-                        <div class="accordion-inner">
-                            <div class="span1"> </div>
-                            <ul class="thumbnails">
-                                <li class="span3">
-                                    <div class="thumbnail overEnlargeTarget" >
-                                        <img src="img/brochure.jpg" alt="brochure"/>
-                                        <h4>The first brochure</h4>
-                                        <p>Description is...</p>
-                                        <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
-                                            <h:outputText value="浏览" />
-                                        </h:outputLink>
-                                        <h:outputLink styleClass="btn btn-success" value="#">
-                                            <h:outputText value="编辑" />
-                                        </h:outputLink>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwoo">
-                            最后一个
-                        </a>
-                    </div>
-                    <div id="collapseTwoo" class="accordion-body collapse">
-                        <div class="accordion-inner">
-                            <div class="span1"> </div>
-                            <ul class="thumbnails">
-                                <li class="span3">
-                                    <div class="thumbnail overEnlargeTarget" >
-                                        <img src="img/brochure.jpg" alt="brochure"/>
-                                        <h4>The first brochure</h4>
-                                        <p>Description is...</p>
-                                        <h:outputLink styleClass="btn btn-primary overEnlargeBtn" value="#">
-                                            <h:outputText value="浏览" />
-                                        </h:outputLink>
-                                        <h:outputLink styleClass="btn btn-success" value="#">
-                                            <h:outputText value="编辑" />
-                                        </h:outputLink>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div> 
+                </div> 
 
 
 
@@ -357,8 +378,13 @@
 
 
 
-            <script src="http://code.jquery.com/jquery.js"></script>
-            <script src="./js/bootstrap.js"></script>
+                <script src="http://code.jquery.com/jquery.js"></script>
+                <script src="./js/bootstrap.js"></script>
+            </p:panel>
+            <!-- UJian Button BEGIN -->
+            <script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&amp;fade=1&amp;uid=1799823"></script>
+            <a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+            <!-- UJian Button END -->
         </h:body>
     </f:view>
 </html>
