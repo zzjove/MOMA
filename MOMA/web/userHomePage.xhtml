@@ -134,17 +134,17 @@
                                 <p:graphicImage value="/img/brochure/#{myBroUpdate.brochure.name}.jpg" width="100"/>
                                 <!--上面图片的路径你就自己改吧~-->
                                 <!--以下就是根据更新内容的不同做不同的显示处理-->
-                                <c:if test="#{myBroUpdate.type} == text">
+                                <c:if test="#{myBroUpdate.type} == 'text'">
                                     <p:inputTextarea rows="6" cols="60" value="#{myBroUpdate.content}" />
                                 </c:if>
-                                <c:if test="#{myBroUpdate.type} == photo">
+                                <c:if test="#{myBroUpdate.type} == 'photo'">
                                     <p:imageSwitch effect="shuffle">  
                                         <ui:repeat value="#{myBroUpdate.content}" var="image">  
                                             <p:graphicImage value="/img/album/#{image}.jpg" />  
                                         </ui:repeat>  
                                     </p:imageSwitch>  
                                 </c:if>
-                                <c:if test="#{myBroUpdatee.type} == video">
+                                <c:if test="#{myBroUpdatee.type} == 'video'">
                                     <p:media value="#{myBroUpdate.content}" width="420" height="315" player="flash"/>
                                     <!--put the link directly in the "value" parameter, e.g. http://www.youtube.com/v/KZnUr8lcqjo-->
                                 </c:if>
@@ -161,17 +161,17 @@
                             <p:graphicImage value="/img/brochure/#{followedBroUpdate.brochure.name}.jpg" width="100"/>
                             <!--上面图片的路径你就自己改吧~-->
                             <!--以下就是根据更新内容的不同做不同的显示处理-->
-                            <c:if test="#{followedBroUpdate.type} == text">
+                            <c:if test="#{followedBroUpdate.type} == 'text'">
                                 <p:inputTextarea rows="6" cols="60" value="#{followedBroUpdate.content}" />
                             </c:if>
-                            <c:if test="#{followedBroUpdate.type} == photo">
+                            <c:if test="#{followedBroUpdate.type} == 'photo'">
                                 <p:imageSwitch effect="shuffle">  
                                     <ui:repeat value="#{followedBroUpdate.content}" var="image">  
                                         <p:graphicImage value="/img/album/#{image}.jpg" />  
                                     </ui:repeat>  
                                 </p:imageSwitch>  
                             </c:if>
-                            <c:if test="#{followedBroUpdatee.type} == video">
+                            <c:if test="#{followedBroUpdatee.type} == 'video'">
                                 <p:media value="#{followedBroUpdate.content}" width="420" height="315" player="flash"/>
                                 <!--put the link directly in the "value" parameter, e.g. http://www.youtube.com/v/KZnUr8lcqjo-->
                             </c:if>
@@ -193,17 +193,17 @@
                                 <p:graphicImage value="/img/brochure/#{myBroUpdate.brochure.name}.jpg" width="100"/>
                                 <!--上面图片的路径你就自己改吧~-->
                                 <!--以下就是根据更新内容的不同做不同的显示处理-->
-                                <c:if test="#{myBroUpdate.type} == text">
+                                <c:if test="#{myBroUpdate.type} == 'text'">
                                     <p:inputTextarea rows="6" cols="60" value="#{myBroUpdate.content}" />
                                 </c:if>
-                                <c:if test="#{myBroUpdate.type} == photo">
+                                <c:if test="#{myBroUpdate.type} == 'photo'">
                                     <p:imageSwitch effect="shuffle">  
                                         <ui:repeat value="#{myBroUpdate.content}" var="image">  
                                             <p:graphicImage value="/img/album/#{image}.jpg" />  
                                         </ui:repeat>  
                                     </p:imageSwitch>  
                                 </c:if>
-                                <c:if test="#{myBroUpdatee.type} == video">
+                                <c:if test="#{myBroUpdatee.type} == 'video'">
                                     <p:media value="#{myBroUpdate.content}" width="420" height="315" player="flash"/>
                                     <!--put the link directly in the "value" parameter, e.g. http://www.youtube.com/v/KZnUr8lcqjo-->
                                 </c:if>

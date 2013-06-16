@@ -4,7 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <f:view contentType="text/html">
         <h:head>
             <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
@@ -98,19 +99,42 @@
                     </p:button>  	  
                 </div>
             </div>
-            <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; min-height: 600px; position:relative;left: 20%; top: 70px;" styleClass="mainPanelBackgroud">
-                <p:accordionPanel multiple="true" value="#{tabBean.players}" var="player">  
-                    <p:tab title="Godfather Part I">  
-                        <h:panelGrid columns="2" cellpadding="10">  
-                            <p:graphicImage value="/images/godfather/godfather1.jpg" />  
-                            <h:outputText  
-                                value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.   
-                                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. T  
-                                hrough Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect,   
-                                but given to ruthless violence whenever anything stands against the good of the family." />  
+            
+            <!--修改后动态显示，根据这个改-->
+            <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; min-height: 600px; position:relative;left: 20%; top: 70px;" styleClass="mainPanelBackgroud" >
+                <p:accordionPanel multiple="true" value="#{personalSpaceBean.brochures}" var="brochure">  
+                    <p:tab title="brochure.name" titletip="最后于#{brochure.latestEdit.time}由#{brochure.latestEdit.user}更改" style="padding-top:20px;padding-left:5px;">  
+                        <h:panelGrid columns="3" cellpadding="10">  
+                            <p:graphicImage  value="#{brochure.imageUrl}" style="border-style:ridge;border-color: #F3F3F3;width: 300px;margin-left: 20px; padding: 5px;display: inline-block" />
+                            <h:form>
+                                <h:outputText  value="#{brochure.description}" style="width: 250px;display: inline-block;background-color: #C1F7ED;opacity: 0.4;margin-left: 20px;position: absolute;left: 350px;"/>
+                                <c:if test="#{personalSpace.isHost}"> 
+                                    <button class="btn btn-info" style="position:relative;top:85px;margin-left: 10px;">浏览</button>
+                                    <button class="btn btn-success" style="position:relative;top:85px;margin-left: 10px;" url="diaryList.html" >编辑</button>
+                                    <button class="btn btn-danger" style="position:relative;top:85px;margin-left: 10px;">删除</button>
+                                </c:if>
+                                <c:if test="#{!personalSpace.isHost}">
+                                    <button class="btn btn-info" style="position:relative;top:85px;margin-left: 10px;">浏览</button>
+                                </c:if>
+
+                            </h:form>
+
+                            <p:dataList value="#{personalSpaceBean.brochures.members}" var="member" id="member"  
+                                        paginator="true" rows="5"  
+                                        paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}"  
+                                        rowsPerPageTemplate="5" type="none"
+                                        style="width: 80px;display: inline-block;background-color: #79BCF2;opacity: 0.9;margin-left: 20px;position: absolute;right:10px;"> 
+                                <p:commandLink title="前往个人主页" action="member.userHomePageUrl">  
+                                    <h:outputText value="#{member.name}" style="margin-left:10px" />  
+                                </p:commandLink>  
+                            </p:dataList>
                         </h:panelGrid>  
                     </p:tab>  
                 </p:accordionPanel>
+                
+                
+                
+                <!--以下先保留原内容-->
                 <div class="row accordion" style="padding-top:20px;padding-left:5px;" id="accordion2">
                     <div class="accordion-group">
                         <div class="accordion-heading ">
@@ -126,16 +150,13 @@
                                     <img src="img/brochure.jpg" alt="brochure" />
                                 </div>
 
-                                <div style="width: 300px;display: inline-block;background-color: #C1F7ED;opacity: 0.4;margin-left: 20px;position: absolute;left: 350px;">
+                                <div style="width: 250px;display: inline-block;background-color: #C1F7ED;opacity: 0.4;margin-left: 20px;position: absolute;left: 350px;">
                                     <h3 class="editer" style="margin-left:5%;font-size: 20px;">那些年错过的大雨，那些年错过的爱情，好想告诉你，告诉你我没有忘记</h3>
                                 </div>  
 
-                                <p:notificationBar position="top" effect="slide" widgetVar="bar" styleClass="top">  
-                                    <h:outputText value="Feel free to edit your own brochure!" style="color:#FFCC00;font-size:36px;" />  
-                                </p:notificationBar>
 
                                 <button class="btn btn-info" style="position:relative;top:85px;margin-left: 10px;">浏览</button>
-                                <button class="btn btn-success" style="position:relative;top:85px;margin-left: 10px;" action="diaryList.xhtml">编辑</button>
+                                <button class="btn btn-success" style="position:relative;top:85px;margin-left: 10px;" url="/diaryList.xhtml" >编辑</button>
                                 <button class="btn btn-danger" style="position:relative;top:85px;margin-left: 10px;">删除</button>
 
                                 <div style="width: 80px;display: inline-block;background-color: #79BCF2;opacity: 0.9;margin-left: 20px;position: absolute;right:10px;">
