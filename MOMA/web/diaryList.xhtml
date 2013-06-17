@@ -5,15 +5,73 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>MOMA-Diary List-#{diaryListBean.brochure}</title>
+            <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
         <style type="text/css">
 
             .loginPage {
                 background-color:#ffffff;
                 background-image:url(img/bg.jpg);
             }
+                 .accordion-toggle{
+                    background-color: #F3F3F3;
+                    opacity: 0.6;
+                }
+                .editer{
+                    display: block;
+                    font-family: Georgia;
+                    color: #0057CC;       
+                    margin-left: 10%;
+                }
         </style>
     </h:head>
     <h:body styleClass="loginPage">
+        <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <h:outputLink styleClass="brand" value="#">
+                            <h:outputText value="MOMA" />
+                        </h:outputLink>
+                        <ul class="nav">
+                            <li><h:outputLink value="userHomePage.xhtml">
+                                    <!--上面的这个链接要处理一下，改成登陆者的个人主页-->
+                                    <h:outputText value="个人主页" />
+                                </h:outputLink>
+                            </li>
+                            <li class="active">
+                                <h:outputLink value="#">
+                                    <h:outputText value="我的纪念册" />
+                                </h:outputLink>
+                            </li>
+                            <li>
+                                <h:outputLink value="Friends.xhtml">
+                                    <h:outputText value="我的好友" />
+                                </h:outputLink>
+                            </li>
+
+                        </ul>
+
+                        <h:form styleClass="navbar-search pull-right" >
+
+                            <p:inputText id="search" label="search" styleClass="search-query" value="#{searchBean.searchName}" />
+                            <p:watermark for="search" value="找朋友、找同事、找家人" />
+
+                        </h:form>
+                        <ul class="nav pull-right ">
+                            <li>
+                                <h:outputLink value="#">
+                                    <h:outputText value="新建纪念册" />
+                                </h:outputLink>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row " >
+                <h4 style="color: #F3F3F3;font-family: Georgia; margin-left: 20px;display: inline;">
+                    You will never regret having on-line memories like these.
+                </h4>
+            </div>
         <h:form>
             <div class="jiathis_share_slide jiathis_share_32x32" id="jiathis_share_slide">
                 <div class="jiathis_share_slide_top" id="jiathis_share_title"></div>

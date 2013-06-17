@@ -110,7 +110,7 @@
                                 <h:outputText  value="#{brochure.description}" style="width: 250px;display: inline-block;background-color: #C1F7ED;opacity: 0.4;margin-left: 20px;position: absolute;left: 350px;"/>
                                 <c:if test="#{personalSpace.isHost}"> 
                                     <button class="btn btn-info" style="position:relative;top:85px;margin-left: 10px;">浏览</button>
-                                    <button class="btn btn-success" style="position:relative;top:85px;margin-left: 10px;" url="diaryList.html" >编辑</button>
+                                    <p:button outcome="diaryList" value="编辑"  class="btn btn-success" style="position:relative;top:85px;margin-left: 10px;"></p:button>
                                     <button class="btn btn-danger" style="position:relative;top:85px;margin-left: 10px;">删除</button>
                                 </c:if>
                                 <c:if test="#{!personalSpace.isHost}">
