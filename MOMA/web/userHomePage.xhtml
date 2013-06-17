@@ -45,12 +45,18 @@
                         <h:outputText value="MOMA" />
                     </h:outputLink>
                     <ul class="nav">
-                        <li><h:outputLink value="#">
+                        <li>
+                            <h:outputLink value="welcome.xhtml">
                                 <h:outputText value="首页" />
                             </h:outputLink>
                         </li>
-                        <li class="active">
-                            <h:outputLink value="#">
+                             <li>
+                            <h:outputLink value="userHomePage.xhtml">
+                                <h:outputText value="个人主页" />
+                            </h:outputLink>
+                        </li>
+                        <li>
+                            <h:outputLink value="PersonalSpace.xhtml">
                                 <h:outputText value="我的纪念册" />
                             </h:outputLink>
                         </li>
@@ -89,12 +95,33 @@
                         <h:outputText value="#{userHomePageBean.user.name}" style="font-weight: bold" />  
                         <p:commandLink id="userInfo"  style="margin-right:20px;" ajax="false">  
                             <!--缺省action 响应参数上面一句用的是action还是actionListner不确定。。初步确定效果就是弹出严俊杰做的那个wizard，或者用dialog组件 -->
-                            <h:outputText value="修改个人资料" style="font-size:14px;"/>
+                            <h:outputText value="修改个人资料" style="font-size:14px;" onclick="dlg.show();"/>
                         </p:commandLink>
-                        <p:commandLink id="changeAvatar"  style="margin-right:20px;" ajax="false">  
-                            <!--缺省action 响应参数上面一句用的是action还是actionListner不确定。。初步确定效果就是弹出严俊杰做的那个wizard，或者用dialog组件 -->
-                            <h:outputText value="修改头像" style="font-size:14px;"/>
-                        </p:commandLink>
+
+                        <p:commandButton id="upLoadPhoto" value="修改头像" onclick="dlg.show();" type="button"/>
+                        <br/>
+                        <p:dialog id="upLoad" header="修改头像" widgetVar="dlg" modal="true" height="400" width="600">
+                            <p:panel style="display:inline-block; width: 60%; min-height: 300px; position:relative;left: 20%;"  >
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:panelGrid columns="1" cellpadding="5">
+                                        <h:outputText value="当前头像"/>
+                                        <p:separator/>
+                                        <h:graphicImage value="#{userHomePageBean.user.image}"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="1" cellpadding="5">
+                                        <h:outputText value="上传新头像"/>
+                                        <p:separator/>
+                                        <p:fileUpload  value="#{userHomePageBean.user.image}" mode="simple" fileUploadListener="#{userHomePageBean.handleFileUpload}" 
+                                                       update="messages"  
+                                                       sizeLimit="1000000"   
+                                                       allowTypes="/(\.|\/)(gif|jpe?g|png)$/" oncomplete="dlg.hide()"/> 
+                                        <p:growl id="messages" showDetail="true"/>
+                                    </h:panelGrid>
+
+                                </h:panelGrid>
+                            </p:panel>
+                        </p:dialog>
+
                     </h:panelGrid> 
                 </h:panelGrid>  
                 <p:separator/>
@@ -105,24 +132,25 @@
             </p:panel>
         </h:form> 
         <br/><br/>
-        <h:form>
 
-            <p:carousel id="recommendedBros" value="#{userHomePageBean.recommendedBros}" var="brochure" 
-                        itemStyleClass="carItem" style="width: 25%; min-height: 300px; position:relative;left: 20%; ">  
-                <f:facet name="header">  
-                    推荐 
-                </f:facet>  
-                <h:panelGrid columns="1" style="width:100%" cellpadding="5">  
-                    <p:graphicImage value="/img/brochure/#{brochure.name}.jpg"/>   
-                    <!--                                 这里我突然有一个想法，纪念册图片上传以后，以纪念册名字命名，找的时候路径就是固定的了，变名字就好了-->
-                    <p:commandLink id="recommandedBro1" style="margin-right:20px;" ajax="false">  
-                        <h:outputText value="#{brochure.name}" />  
-                    </p:commandLink>
-                    <h:outputText value="#{brochure.description}" />  
-                </h:panelGrid>  
-            </p:carousel>  
-        </h:form>
-
+        <c:if test="#{userHomePage.isHost}">
+            <h:form>
+                <p:carousel id="recommendedBros" value="#{userHomePageBean.recommendedBros}" var="brochure" 
+                            itemStyleClass="carItem" style="width: 25%; min-height: 300px; position:relative;left: 20%; ">  
+                    <f:facet name="header">  
+                        推荐 
+                    </f:facet>  
+                    <h:panelGrid columns="1" style="width:100%" cellpadding="5">  
+                        <p:graphicImage value="/img/brochure/#{brochure.name}.jpg"/>   
+                        <!--                                 这里我突然有一个想法，纪念册图片上传以后，以纪念册名字命名，找的时候路径就是固定的了，变名字就好了-->
+                        <p:commandLink id="recommandedBro1" style="margin-right:20px;" ajax="false">  
+                            <h:outputText value="#{brochure.name}" />  
+                        </p:commandLink>
+                        <h:outputText value="#{brochure.description}" />  
+                    </h:panelGrid>  
+                </p:carousel>  
+            </h:form>
+        </c:if>
 
         <c:if test="#{userHomePage.isHost}">
             <p:tabView id="upDate"  style="display:inline-block; min-height: 900px; position:absolute;left: 47%;right: 20%;top:60px;"  >  

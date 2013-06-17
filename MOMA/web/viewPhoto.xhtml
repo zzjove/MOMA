@@ -38,12 +38,18 @@
                         <h:outputText value="MOMA" />
                     </h:outputLink>
                     <ul class="nav">
-                        <li><h:outputLink value="#">
+                        <li>
+                            <h:outputLink value="welcome.xhtml">
                                 <h:outputText value="首页" />
                             </h:outputLink>
                         </li>
-                        <li class="active">
-                            <h:outputLink value="#">
+                             <li>
+                            <h:outputLink value="userHomePage.xhtml">
+                                <h:outputText value="个人主页" />
+                            </h:outputLink>
+                        </li>
+                        <li>
+                            <h:outputLink value="PersonalSpace.xhtml">
                                 <h:outputText value="我的纪念册" />
                             </h:outputLink>
                         </li>
@@ -53,20 +59,6 @@
                             </h:outputLink>
                         </li>
 
-                    </ul>
-
-                    <h:form styleClass="navbar-search pull-right" >
-
-                        <p:inputText id="search" label="search" styleClass="search-query" value="#{searchBean.searchName}" />
-                        <p:watermark for="search" value="找朋友、找同事、找家人" />
-
-                    </h:form>
-                    <ul class="nav pull-right ">
-                        <li>
-                            <h:outputLink value="#">
-                                <h:outputText value="搜索好友/纪念册" />
-                            </h:outputLink>
-                        </li>
                     </ul>
 
                 </div>
