@@ -25,7 +25,7 @@ public class FriendsDao {
         String sql = "select * from Friends where second_user_id =";
         List photoList = session.createSQLQuery(sql + userId + ";")
                 .addEntity(Photo.class).list();
-        
+        transaction.commit();
         return photoList;
     }
 }

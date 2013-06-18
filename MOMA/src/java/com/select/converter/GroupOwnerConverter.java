@@ -5,7 +5,7 @@
 package com.select.converter;
 
 import com.entity.moma.GroupOwner;
-import com.managedbean.moma.UserGroupTestBean;
+import com.managedbean.moma.FriendsBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -17,14 +17,14 @@ import javax.faces.convert.FacesConverter;
  */
 public class GroupOwnerConverter implements Converter {
 
-    private UserGroupTestBean controller;
+    private FriendsBean controller;
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        controller = (UserGroupTestBean) context.getApplication().getELResolver().getValue(context.getELContext(), null, "userGroupTestBean");
+        controller = (FriendsBean) context.getApplication().getELResolver().getValue(context.getELContext(), null, "friendsBean");
         GroupOwner owner = controller.findByGroupName(value);
-        System.out.println(value + "in converter");
-        return owner;
+        System.out.println(value + " in converter");
+        return owner; 
     }
 
     @Override

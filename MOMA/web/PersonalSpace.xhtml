@@ -73,9 +73,6 @@
 
                         <h:form styleClass="navbar-search pull-right" >
 
-                            <p:inputText id="search" label="search" styleClass="search-query" value="#{searchBean.searchName}" />
-                            <p:watermark for="search" value="找朋友、找同事、找家人" />
-
                         </h:form>
                         <ul class="nav pull-right ">
                             <li>
@@ -103,29 +100,31 @@
             <!--修改后动态显示，根据这个改-->
             <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; min-height: 600px; position:relative;left: 20%; top: 70px;" styleClass="mainPanelBackgroud" >
                 <p:accordionPanel multiple="true" value="#{personalSpaceBean.brochures}" var="brochure">  
-                    <p:tab title="brochure.name" titletip="最后于#{brochure.latestEdit.time}由#{brochure.latestEdit.user}更改" style="padding-top:20px;padding-left:5px;">  
+                    <p:tab title="#{brochure.brochureName}" titletip="最后于#{brochure.brochureModifyTime}由brochure.latestEdit.user更改" styleClass="padding-top:20px;padding-left:5px;">  
                         <h:panelGrid columns="3" cellpadding="10">  
-                            <p:graphicImage  value="#{brochure.imageUrl}" style="border-style:ridge;border-color: #F3F3F3;width: 300px;margin-left: 20px; padding: 5px;display: inline-block" />
-                            <h:form>
-                                <h:outputText  value="#{brochure.description}" style="width: 250px;display: inline-block;background-color: #C1F7ED;opacity: 0.4;margin-left: 20px;position: absolute;left: 350px;"/>
-                                <c:if test="#{personalSpace.isHost}"> 
+                            <p:graphicImage  value="#{brochure.brochureImageUrl}" style="border-style:ridge;border-color: #F3F3F3;width: 300px;margin-left: 20px; padding: 5px;display: inline-block" />
+                            <h:form>S
+                                <h:outputText  value="#{brochure.brochureDescription}" style="width: 250px;display: inline-block;background-color: #C1F7ED;opacity: 0.4;margin-left: 20px;position: absolute;left: 350px;"/>
+                                <c:if test="#{personalSpaceBean.host}"> 
                                     <button class="btn btn-info" style="position:relative;top:85px;margin-left: 10px;">浏览</button>
-                                    <button class="btn btn-success" style="position:relative;top:85px;margin-left: 10px;" url="diaryList.html" >编辑</button>
+                                    <h:outputLink class="btn btn-success" style="position:relative;top:85px;margin-left: 10px;" value="diaryList.xhtml" >编辑
+                                        <f:param name="brochureToeditId" value="#{brochure.brochureId}"></f:param>
+                                    </h:outputLink>
                                     <button class="btn btn-danger" style="position:relative;top:85px;margin-left: 10px;">删除</button>
                                 </c:if>
-                                <c:if test="#{!personalSpace.isHost}">
+                                <c:if test="#{!personalSpaceBean.host}">
                                     <button class="btn btn-info" style="position:relative;top:85px;margin-left: 10px;">浏览</button>
                                 </c:if>
 
                             </h:form>
 
-                            <p:dataList value="#{personalSpaceBean.brochures.members}" var="member" id="member"  
+                            <p:dataList value="personalSpaceBean.brochures.members" var="member" id="member"  
                                         paginator="true" rows="5"  
                                         paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}"  
                                         rowsPerPageTemplate="5" type="none"
                                         style="width: 80px;display: inline-block;background-color: #79BCF2;opacity: 0.9;margin-left: 20px;position: absolute;right:10px;"> 
                                 <p:commandLink title="前往个人主页" action="member.userHomePageUrl">  
-                                    <h:outputText value="#{member.name}" style="margin-left:10px" />  
+                                    <h:outputText value="member.name" style="margin-left:10px" />  
                                 </p:commandLink>  
                             </p:dataList>
                         </h:panelGrid>  

@@ -29,7 +29,8 @@ public class UserDao {
         List userList = session.createSQLQuery(sql + userId + ";")
                 .addEntity(User.class).list();
 
-        session.close();
+        transaction.commit();
+//        session.close();
 
         Iterator it = userList.iterator();
         if (it.hasNext()) {
@@ -49,7 +50,8 @@ public class UserDao {
         query.setString("userName", userName);
         List userList = (List<User>) query.list();
 
-        session.close();
+        transaction.commit();
+//        session.close();
 
         Iterator it = userList.iterator();
         if (it.hasNext()) {
@@ -70,7 +72,8 @@ public class UserDao {
         query.setString("userRealName", userRealName);
         List userList = (List<User>) query.list();
 
-        session.close();
+        transaction.commit();
+//        session.close();
 
         return userList;
     }
@@ -84,7 +87,8 @@ public class UserDao {
         query.setString("userEmail", userEmail);
         List userList = (List<User>) query.list();
 
-        session.close();
+        transaction.commit();
+//        session.close();
 
         Iterator it = userList.iterator();
         if (it.hasNext()) {
@@ -101,6 +105,7 @@ public class UserDao {
         Transaction transaction = session.beginTransaction();
         int maxUserId = (Integer) session.createQuery(
                 "select max(user.userId) from User user").uniqueResult();
+        transaction.commit();
         return maxUserId;
     }
 
@@ -139,7 +144,8 @@ public class UserDao {
         query.setString("userName", userName);
         List userList = (List<User>) query.list();
 
-        session.close();
+        transaction.commit();
+//        session.close();
 
         Iterator it = userList.iterator();
         if (it.hasNext()) {

@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>MOMA-Diary List-#{diaryListBean.brochure}</title>
         <style type="text/css">
@@ -40,27 +41,28 @@
             <!-- JiaThis Button BEGIN -->
 
             <p:dock position="top">  
-                <p:menuitem value="Home" icon="/img/brochureIcon/home.png" url="userHomePage.xhtml"/>  
+                <p:menuitem value="Home" icon="/img/brochureIcon/home.png" url="userHomePage.xhtml"/>
                 <p:menuitem value="Diary" icon="/img/brochureIcon/diary.png" url="diaryList.xhtml"/>  
                 <p:menuitem value="Video" icon="/img/brochureIcon/video.png" url="videoList.xhtml"/>  
                 <p:menuitem value="Photo" icon="/img/brochureIcon/photo.png" url="viewPhoto.xhtml"/>    
             </p:dock>
             <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; height: 600px; position:relative;left: 20%; top: 70px;">
-                <h:outputText value="MOMA-#{diaryListBean.brochure}-日记列表" style="font-size: 16pt;  "/>
-                <p:commandLink id="writeDiary" action="writeDiary.xhtml" style="margin-right:20px; position: relative;left: 55%;"  ajax="false">  
+                <h:outputText value="MOMA-#{diaryListBean.brochure.brochureName}-日记列表" style="font-size: 16pt;  "/>
+                <h:outputLink id="writeDiary" style="margin-right:20px; position: relative;left: 55%;" value="writeDiary.xhtml">  
+                    <f:param name="editBrochureId" value="#{diaryListBean.brochure.brochureId}"></f:param>
                     <h:outputText value="Write Diary" style="font-family: Matura MT Script Capitals" />  
-                </p:commandLink>
+                </h:outputLink>
 
                 <br/><br/>
-                <h:outputText value="         共 #{diaryListBean.Count}篇日志 " style="font-size: 9px;"/>
+                <h:outputText value="         共 #{diaryListBean.diaryCount}篇日志 " style="font-size: 9px;"/>
                 <p:separator/>
-                <p:accordionPanel value="#{diaryListBean.diaries}" var="diary">  
-                    <p:tab title="#{diary.title}">  
+                <p:accordionPanel value="#{diaryListBean.diaryList}" var="diary">  
+                    <p:tab title="#{diary.diaryTitle}">  
                         <h:panelGrid columns="1" cellpadding="10">  
                             <h:outputText value="diary.snapshot"/>
                             <h:panelGrid columns="2" cellpadding="20">  
-                                <h:outputText value="#{video.user} 上传了 #{video.name}" style="font-weight: bold"/> 
-                                <h:outputText value="上传于 #{video.updateTime}" style="font-weight: bold"/>  
+                                <h:outputText value="#{diary.user.userName} 上传了 #{diary.diaryTitle}" style="font-weight: bold"/> 
+                                <h:outputText value="上传于 #{diary.diaryModifiedTime}" style="font-weight: bold"/>  
                             </h:panelGrid>  
                         </h:panelGrid>  
                         <p:separator/>

@@ -29,7 +29,7 @@ and open the template in the editor.
   
     <p:growl id="growl" sticky="true" showDetail="true"/>  
   
-    <p:wizard widgetVar="wiz" flowListener="<#{personalPageBean.onFlowProcess}">  
+    <p:wizard widgetVar="wiz" flowListener="<#{personalSpaceBean.onFlowProcess}">  
       
         <p:tab id="personal" title="个人">  
   
@@ -41,14 +41,14 @@ and open the template in the editor.
                 
                     <h:outputText value="真实姓名: *" />  
                     <p:inputText required="true" label="userRealName"  
-                            value="#{personalPageBean.user.userRealName}" />  
+                            value="#{personalSpaceBean.user.userRealName}" />  
                     
                     <h:outputText value="邮箱: *" />  
-                    <p:autoComplete label="userEmail" value="#{personalPageBean.user.userEmail}" effect="blind"
+                    <p:autoComplete label="userEmail" value="#{personalSpaceBean.user.userEmail}" effect="blind"
                                             completeMethod="#{autoCompleteBean.complete}"/>
               
                     <h:outputText value="Skip to last: " />  
-                    <h:selectBooleanCheckbox value="#{personalPageBean.skip}" />  
+                    <h:selectBooleanCheckbox value="#{personalSpaceBean.skip}" />  
                 </h:panelGrid>  
             </p:panel>  
         </p:tab>  
@@ -60,13 +60,13 @@ and open the template in the editor.
                   
                 <h:panelGrid columns="2" columnClasses="label, value">  
                     <h:outputText value="街道: " />  
-                    <p:inputText value="#{personalPageBean.user.adressFirstLine}" />  
+                    <p:inputText value="#{personalSpaceBean.user.adressFirstLine}" />  
                       
                     <h:outputText value="城市: " />  
-                    <p:inputText value="#{personalPageBean.user.adressSecondLine}" />  
+                    <p:inputText value="#{personalSpaceBean.user.adressSecondLine}" />  
                       
                       <h:outputText value="国家"/>
-                           <p:selectOneMenu value="#{personalPageBean.user.adressCountry}">
+                           <p:selectOneMenu value="#{personalSpaceBean.user.adressCountry}">
                                 仅作显示参考：找现成的数据库
                                <f:selectItem itemLabel="China" itemValue="China" />  
                                 <f:selectItem itemLabel="Japan" itemValue="Japan" />  
@@ -84,7 +84,7 @@ and open the template in the editor.
                            </p:selectOneMenu>
                  
                      <h:outputText value="Skip to last: " />  
-                     <h:selectBooleanCheckbox value="#{personalPageBean.skip}" />  
+                     <h:selectBooleanCheckbox value="#{personalSpaceBean.skip}" />  
                 </h:panelGrid>  
             </p:panel>  
         </p:tab>  
@@ -98,10 +98,10 @@ and open the template in the editor.
                  
                       
                     <h:outputText value="电话: " />  
-                    <p:inputText value="#{personalPageBean.user.phoneNumber}"/>  
+                    <p:inputText value="#{personalSpaceBean.user.phoneNumber}"/>  
                       
                     <h:outputText value="qq号: " />  
-                    <p:inputText value="#{personalPageBean.user.qqNumber}"/>  
+                    <p:inputText value="#{personalSpaceBean.user.qqNumber}"/>  
                     
                 </h:panelGrid>  
             </p:panel>  
@@ -113,44 +113,44 @@ and open the template in the editor.
                 <h:panelGrid id="confirmation" columns="6">  
                     <h:outputText value="真实姓名: " />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{personalPageBean.user.userRealName}" />  
+                                value="#{personalSpaceBean.user.userRealName}" />  
                       
                     
                      <h:outputText value="邮箱: " />    
                      <h:outputText styleClass="outputLabel"  
-                                value="#{personalPageBean.user.userEmail}" />  
+                                value="#{personalSpaceBean.user.userEmail}" />  
                    
                    <h:outputText value="地址1: " />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{personalPageBean.user.adressFirstLine}" />  
+                                value="#{personalSpaceBean.user.adressFirstLine}" />  
                       
                     <h:outputText value="地址2: " />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{personalPageBean.user.adressSecondLine}" />  
+                                value="#{personalSpaceBean.user.adressSecondLine}" />  
                       
                     <h:outputText value="国家: " />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{personalPageBean.user.adressCountry}" />  
+                                value="#{personalSpaceBean.user.adressCountry}" />  
                       
                     <h:outputText value="省份: " />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{personalPageBean.user.adressProvince}" /> 
+                                value="#{personalSpaceBean.user.adressProvince}" /> 
                     
                     
                     <h:outputText value="电话:" />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{personalPageBean.user.phoneNumber}"/>  
+                                value="#{personalSpaceBean.user.phoneNumber}"/>  
                       
                     <h:outputText value="qq号: " />  
                     <h:outputText styleClass="outputLabel"  
-                                value="#{personalPageBean.user.qqNumber}" />  
+                                value="#{personalSpaceBean.user.qqNumber}" />  
                       
                     <h:outputText />  
                     <h:outputText />  
                 </h:panelGrid>  
                   
                 <p:commandButton value="保存修改" update="growl"   
-                                 actionListener="#{personalPageBean.modifyPersonalInfo}"/>  
+                                 actionListener="#{personalSpaceBean.modifyPersonalInfo}"/>  
               
             </p:panel>  
         </p:tab>  

@@ -25,7 +25,8 @@ public class PhotoDao {
         List photoList = session.createSQLQuery(sql + photoId + ";")
                 .addEntity(Photo.class).list();
 
-        session.close();
+        transaction.commit();
+//        session.close();
 
         Iterator it = photoList.iterator();
         if (it.hasNext()) {
@@ -44,7 +45,8 @@ public class PhotoDao {
         Query query = session.createQuery(hql);
         query.setString("photourl", photourl);
         List photoList = (List<Photo>) query.list();
-        session.close();
+        transaction.commit();
+//        session.close();
 
         Iterator it = photoList.iterator();
         if (it.hasNext()) {
@@ -62,7 +64,7 @@ public class PhotoDao {
         String sql = "select * from Photo where photo_user_fk=";
         List photoList = session.createSQLQuery(sql + userId + ";")
                 .addEntity(Photo.class).list();
-
+        transaction.commit();
         Iterator it = photoList.iterator();
         if (it.hasNext()) {
             Photo photo = (Photo) it.next();
@@ -79,7 +81,7 @@ public class PhotoDao {
         String sql = "select * from Photo where photo_brochure_fk=";
         List photoList = session.createSQLQuery(sql + brochureId + ";")
                 .addEntity(Photo.class).list();
-        
+        transaction.commit();
         return photoList;
     }
 

@@ -4,17 +4,13 @@
  */
 package com.managedbean.moma;
 
-import com.dao.hibernate.FriendsDao;
 import com.dao.hibernate.GroupDao;
 import com.dao.hibernate.UserDao;
 import com.entity.moma.GroupOwner;
 import com.entity.moma.User;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -29,8 +25,6 @@ import javax.faces.model.SelectItem;
 public class FriendsBean {
     private User user ;
     private List<GroupOwner> groupList;
-    private Set<User> users1, users2, users3;
-    private User user1, user2, user3, user4, user5, user6, user7, user8, user9;
     private String chosedGroupName;
     private List<User> userFriendList;
     
@@ -41,6 +35,25 @@ public class FriendsBean {
     public void setUserFriendSet(List<User> userFriendList) {
         this.userFriendList = userFriendList;
     }
+
+    public List<GroupOwner> getGroupList() {
+        return groupList;
+    }
+
+    public void setGroupList(List<GroupOwner> groupList) {
+        this.groupList = groupList;
+    }
+
+    public String getChosedGroupName() {
+        return chosedGroupName;
+    }
+
+    public void setChosedGroupName(String chosedGroupName) {
+        System.out.println("In set method " + chosedGroupName);
+        this.chosedGroupName = chosedGroupName;
+    }
+    
+    
     /**
      * Creates a new instance of FriendsBean
      */
@@ -49,7 +62,8 @@ public class FriendsBean {
         user = UserDao.findby_userName(userName);
         userFriendList = new ArrayList(user.getUsersForFirstUserId());
         System.out.println("userFriendList is " + userFriendList.size());
-//        groupList = GroupDao.findby_ownerId(user.getUserId());
+        groupList = GroupDao.findby_ownerId(user.getUserId());
+        System.out.println("groupList size is " + groupList.size());
     }
     
     public void doRedirect() {
@@ -86,10 +100,10 @@ public class FriendsBean {
 
     public String doAdd() {
         String selectedName = chosedGroupName;
-        System.out.println(selectedName + "in doAdd");
+        System.out.println("seleectedName is " + selectedName + " in doAdd");
 
         String userName = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("friendUserName");
-        System.out.println(userName + "in doAdd");
+        System.out.println("userName is " + userName + " in doAdd");
 
         User userTemp = UserDao.findby_userName(userName);
         userTemp.setUserPortraitUrl("img/portrait.png");
@@ -98,13 +112,15 @@ public class FriendsBean {
                 
                 ownerTemp.getUsers().add(userTemp);
                 //存入数据库
+                GroupDao.modify_group(ownerTemp);
+                
                 ArrayList tempList = new ArrayList(ownerTemp.getUsers());
                 userFriendList = tempList;
             }
         }
         
         
-        return "UserFriends";
+        return "Friends";
     }
 
     public GroupOwner findByGroupName(String groupName) {

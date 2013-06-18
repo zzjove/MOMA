@@ -4,11 +4,9 @@
  */
 package com.dao.hibernate;
 
-import com.entity.moma.Diary;
 import com.entity.moma.GroupOwner;
-import com.entity.moma.User;
-import java.util.Iterator;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -22,13 +20,14 @@ public class GroupDao {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
-        String sql = "select * from GroupOwner where owner_id=";
-        List groupOwnerList = session.createSQLQuery(sql + userId + ";")
-                .addEntity(Diary.class).list();
+        String hql = "from GroupOwner where owner_id=:userId";
+        Query query = session.createQuery(hql);
+        query.setInteger("userId", userId);
+        List groupList = (List<GroupOwner>) query.list();
+        transaction.commit();
+//        session.close();
 
-        session.close();
-
-        return groupOwnerList;
+        return groupList;
     }
 
     public static void add_group(GroupOwner groupOwner) {
@@ -42,7 +41,7 @@ public class GroupDao {
         transaction.commit();
     }
 
-    public static void modify_user(GroupOwner groupOwner) {
+    public static void modify_group(GroupOwner groupOwner) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 

@@ -29,10 +29,9 @@
 
 
                         <h:form styleClass="navbar-search pull-right" >
-
-                            <p:inputText id="search" styleClass="search-query" value="#{searchBean.searchName}" />
+                            <p:inputText id="search" styleClass="search-query" value="#{welcomeBean.searchName}" />
                             <p:watermark for="search" value="找朋友、找同事、找家人" />
-                            <h:commandButton styleClass="pp" id="searchSubmit" action="#{searchBean.doSearch}" />
+                            <h:commandButton styleClass="pp" id="searchSubmit" action="#{welcomeBean.doSearch}" />
                         </h:form>
 
                     </div>
@@ -44,13 +43,15 @@
                     <div class="span5 ">
                         <div class="hero-unit"  style="padding:40px 10px 30px 50px;margin-top:30px;opacity: 0.8;">
                             <h:form>
-                                <p:inputText id="loginUserName" styleClass="span3" value="#{welcomeBean.loginUserName}" />
-                                <p:watermark for="loginUserName" value="用户名" /><br />
+                                <p:inputText id="loginUserName" styleClass="span3" value="#{welcomeBean.loginUserName}" required="true"/>
+                                <p:message for="loginUserName" id="loginUserNameMessage" />
+                                <p:watermark for="loginUserName" value="用户名" />
 
-                                <p:password id="loginUserPassword" value="#{welcomeBean.loginUserPassword}" styleClass="span2" /> 
+                                <p:password id="loginUserPassword" value="#{welcomeBean.loginUserPassword}" styleClass="span2" required="true" /> 
+                                <p:message for="loginUserPassword" id="loginUserPasswordMessage" />
                                 <p:watermark for="loginUserPassword" value="密码" />
-                                <h:commandButton styleClass="span1 btn btn-primary" value="登陆" action="#{welcomeBean.doLogin}" 
-                                                 onclick="PrimeFaces.cleanWatermarks()"/><br />
+                                <h:commandButton styleClass="span1 btn btn-primary" value="登录" action="#{welcomeBean.doLogin}" 
+                                                 onclick="PrimeFaces.cleanWatermarks()"/>
 
                                 <!--<p:selectBooleanCheckbox styleClass="checkbox" value="" />  
                                   <h:outputText value=" Remember me" ></h:outputText>
@@ -66,20 +67,24 @@
                         <div class="hero-unit" style="padding:40px 10px 30px 50px;opacity: 0.8;">
                             <div class="text-left" style="font-family: Georgia;">刚刚来到MOMA？</div>
                             <h:form>
-                                <p:inputText id="newUserName" value="#{welcomeBean.user.userName}" required="true" /><br/>
+                                <p:inputText id="newUserName" value="#{welcomeBean.user.userName}" required="true" />
+                                <p:message for="newUserName" id="newUserNameMessage" />
                                 <p:watermark for="newUserName" value="用户名" />
 
                                 <p:autoComplete id ="newUserEmail" value="#{welcomeBean.user.userEmail}" effect="fade"
-                                                completeMethod="#{autoCompleteBean.complete}"/>
+                                                completeMethod="#{autoCompleteBean.complete}" validator="#{emailValidator.validate}" required="true"/>
+                                <p:message for="newUserEmail" id="newUserEmailMessage" />
                                 <p:watermark for="newUserEmail" value="邮箱" />
 
                                 <p:password id="newUserPassword" value="#{welcomeBean.user.userPassword}" match="newUserPasswordConfirm" feedback="true" inline="true" required="true"/>
+                                <p:message for="newUserPassword" id="newUserPasswordMessage" />
                                 <p:watermark for="newUserPassword" value="密码" />
-                                <br/>
 
-                                <p:password id="newUserPasswordConfirm" feedback="true" inline="true" required="true"/>                         
+
+                                <p:password id="newUserPasswordConfirm" feedback="true" inline="true" required="true"/>   
+                                <p:message for="newUserPasswordConfirm" id="newUserPasswordConfirmMessage" />
                                 <p:watermark for="newUserPasswordConfirm" value="确认密码" />
-                                <br />  
+
 
                                 <h:commandButton styleClass="btn btn-primary" value="注册" action="#{welcomeBean.doRegistration}" onclick="PrimeFaces.cleanWatermarks()" />
                             </h:form>

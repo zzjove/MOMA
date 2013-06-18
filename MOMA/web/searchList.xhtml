@@ -4,7 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>MOMA-Search List-#{searchListBean.userName}</title>
+        <title>MOMA-Search List-#{searchListBean.searchName}</title>
         <style type="text/css">
 
             .loginPage {
@@ -17,40 +17,40 @@
         <h:form>
 
             <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; height: 600px; position:relative;left: 20%; top: 70px;">
-                <h:outputText value="MOMA-搜索#{searchListBean.searchKey}的结果" style="font-size: 16pt;  "/>
+                <h:outputText value="MOMA-搜索#{searchListBean.searchName}的结果" style="font-size: 16pt;  "/>
                 <p:commandLink id="backToMainPage" action="userHomePage.xhtml" style="margin-right:20px; position: relative;left: 55%;"  ajax="false">  
                     <h:outputText value="返回个人主页" style="font-family: Matura MT Script Capitals" />  
                 </p:commandLink>
 
                 <br/><br/>
-                <h:outputText value="         共搜索到 #{friendListBean.Count}个好友 " style="font-size: 12px;"/>
+                <h:outputText value="         共搜索到 #{searchListBean.searchUserCount}个好友 " style="font-size: 12px;"/>
                 <p:separator/>
-                <p:accordionPanel value="#{friendListBean.friends}" var="friend">  
+                <p:accordionPanel value="#{searchListBean.searchUserList}" var="friend">  
                     <p:tab>  
-                        <h:panelGrid columns="3" cellpadding="10">  
-                            <p:graphicImage value="#{friend.avatarUrl}" alt="Avatar" title="#{friend.name}"/>
-                            <p:commandLink action="#{friend.userHomePageUrl}">
-                                <h:outputText value="#{friend.name}"/>
-                            </p:commandLink>
-                            <commandButton value="加为好友" />
+<!--                        <h:panelGrid columns="3" cellpadding="10">  
+                            <p:graphicImage value="{friend.userPortraitUrl}" alt="Avatar" title="{friend.userName}"/>
+                            <h:outputLink value="UserHomePage.xhtml">
+                                <h:outputText value="{friend.userName}"/>
+                            </h:outputLink>-->
+                            <h:commandButton value="加为好友" />
                             <!--这个commandButton的actionListener就你根据后台加啦-->
-                        </h:panelGrid>  
+                        <!--</h:panelGrid>-->  
                         <p:separator/>
                     </p:tab>  
                 </p:accordionPanel>
 
-                <h:outputText value="         共搜索到 #{friendListBean.Count}个纪念册 " style="font-size: 12px;"/>
+                <h:outputText value="         共搜索到 #{searchListBean.searchBrochureCount}个纪念册 " style="font-size: 12px;"/>
                 <p:separator/>
-                <p:accordionPanel value="#{friendListBean.brochures}" var="brochure">  
+                <p:accordionPanel value="#{searchListBean.searchBrochureList}" var="brochure">  
                     <p:tab>  
                         <h:panelGrid columns="3" cellpadding="10">  
-                            <p:graphicImage value="#{brochure.imageUrl}" alt="Image" title="#{brochure.name}"/>
-                            <p:commandLink action="#{brochure.viewBrochureUrl}">
+                            <p:graphicImage value="#{brochure.brochureImageUrl}" alt="Image" title="#{brochure.brochureName}"/>
+                            <p:commandLink action="#brochure.viewBrochureUrl">
                                 <!--目前这个viewBrochure的页面还没做，暂且空着-->
-                                <h:outputText value="#{brochure.name}"/>
+                                <h:outputText value="#{brochure.brochureName}"/>
                             </p:commandLink>
                             
-                            <commandButton value="加关注" />
+                            <h:commandButton value="加关注" />
                         </h:panelGrid>  
                         <p:separator/>
                     </p:tab>  

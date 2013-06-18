@@ -24,7 +24,8 @@ public class VideoDao {
         List videoList = session.createSQLQuery(sql + videoId + ";")
                 .addEntity(Video.class).list();
 
-        session.close();
+        transaction.commit();
+//        session.close();
 
         Iterator it = videoList.iterator();
         if (it.hasNext()) {
@@ -43,7 +44,8 @@ public class VideoDao {
         Query query = session.createQuery(hql);
         query.setString("videourl", videourl);
         List videoList = (List<Video>) query.list();
-        session.close();
+        transaction.commit();
+//        session.close();
 
         Iterator it = videoList.iterator();
         if (it.hasNext()) {
@@ -62,6 +64,7 @@ public class VideoDao {
         List videoList = session.createSQLQuery(sql + userId + ";")
                 .addEntity(Video.class).list();
 
+        transaction.commit();
         Iterator it = videoList.iterator();
         if (it.hasNext()) {
             Video video = (Video) it.next();
@@ -71,21 +74,15 @@ public class VideoDao {
         }
     }
 
-    public static Video findby_brochureId(int brochureId) {
+    public static List<Video> findby_brochureId(int brochureId) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         String sql = "select * from Video where video_brochure_fk=";
         List videoList = session.createSQLQuery(sql + brochureId + ";")
                 .addEntity(Video.class).list();
-
-        Iterator it = videoList.iterator();
-        if (it.hasNext()) {
-            Video video = (Video) it.next();
-            return video;
-        } else {
-            return null;
-        }
+        transaction.commit();
+        return videoList;
     }
 
     public static void add_video(Video video) {

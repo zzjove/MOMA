@@ -24,8 +24,8 @@ public class BlessingDao {
         String sql = "select * from Blessing where blessing_id=";
         List blessingList = session.createSQLQuery(sql + blessingId + ";")
                 .addEntity(Blessing.class).list();
-
-        session.close();
+        transaction.commit();
+//        session.close();
 
         Iterator it = blessingList.iterator();
         if (it.hasNext()) {
@@ -44,7 +44,8 @@ public class BlessingDao {
         Query query = session.createQuery(hql);
         query.setString("blessingurl", blessingurl);
         List blessingList = (List<Blessing>) query.list();
-        session.close();
+        transaction.commit();
+//        session.close();
 
         Iterator it = blessingList.iterator();
         if (it.hasNext()) {
@@ -63,6 +64,7 @@ public class BlessingDao {
         List blessingList = session.createSQLQuery(sql + userId + ";")
                 .addEntity(Blessing.class).list();
 
+        transaction.commit();
         Iterator it = blessingList.iterator();
         if (it.hasNext()) {
             Blessing blessing = (Blessing) it.next();
@@ -79,7 +81,7 @@ public class BlessingDao {
         String sql = "select * from Blessing where blessing_brochure_fk=";
         List blessingList = session.createSQLQuery(sql + brochureId + ";")
                 .addEntity(Blessing.class).list();
-
+        transaction.commit();
         Iterator it = blessingList.iterator();
         if (it.hasNext()) {
             Blessing blessing = (Blessing) it.next();

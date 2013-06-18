@@ -1,8 +1,8 @@
-﻿/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.managedbean.moma;
+
+
+
 
 import com.dao.hibernate.BrochureDao;
 import com.dao.hibernate.PhotoDao;
@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
@@ -33,15 +34,14 @@ import org.primefaces.event.FileUploadEvent;
  * @author Administrator
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class ViewPhotoBean implements Serializable {
 
     private Brochure brochure;
     private ArrayList<Photo> images;
     private String photo_comment;
 
-    @PostConstruct
-    public void init() {
+    public ViewPhotoBean() {
         brochure = BrochureDao.findby_brochureId(1);
         images = (ArrayList<Photo>) PhotoDao.findby_brochureId(brochure.getBrochureId());
         System.out.println(images.size() + "init_called");
@@ -75,11 +75,11 @@ public class ViewPhotoBean implements Serializable {
         FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
         try {
-            File file = new File("/Users/bianshujun/Downloads/MOMA/MOMA/web/img/" + brochure.getBrochureId() + "/photo");
+            File file = new File("/Users/bianshujun/Downloads/MOMA/MOMA/web/Data/Brochure/" + brochure.getBrochureId() + "/photo");
             if (!file.exists()) {
                 file.mkdirs();
             }
-            File targetFolder = new File("/Users/bianshujun/Downloads/MOMA/MOMA/web/img/" + brochure.getBrochureId() + "/photo");
+            File targetFolder = new File("/Users/bianshujun/Downloads/MOMA/MOMA/web/Data/Brochure/" + brochure.getBrochureId() + "/photo");
             //注意：有关上传照片的小问题。。这里new File（）里的路径必须写本地的实际路径，运行时注意更改
             InputStream inputStream = event.getFile().getInputstream();
             OutputStream out = new FileOutputStream(new File(targetFolder,
@@ -102,7 +102,7 @@ public class ViewPhotoBean implements Serializable {
             newPhoto.setUser(user);
             newPhoto.setPhotoStartTime(new Date());
             System.out.println(event.getFile().getFileName());
-            newPhoto.setPhotoUrl("./img/" + brochure.getBrochureId() + "/photo/" + event.getFile().getFileName());
+            newPhoto.setPhotoUrl("./Data/Brochure/" + brochure.getBrochureId() + "/photo/" + event.getFile().getFileName());
             PhotoDao.add_photo(newPhoto);
             changeBrochureLatestChange(brochure, newPhoto);
             images = (ArrayList<Photo>) PhotoDao.findby_brochureId(brochure.getBrochureId());
@@ -111,12 +111,12 @@ public class ViewPhotoBean implements Serializable {
             e.printStackTrace();
         }
         
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("viewPhoto.xhtml");
-            System.out.println("IN redirect");
-        } catch (IOException ex) {
-            Logger.getLogger(ViewPhotoBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            FacesContext.getCurrentInstance().getExternalContext().redirect("viewPhoto.xhtml");
+//            System.out.println("IN redirect");
+//        } catch (IOException ex) {
+//            Logger.getLogger(ViewPhotoBean.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     private void changeBrochureLatestChange(Brochure brochure, Photo photo) {

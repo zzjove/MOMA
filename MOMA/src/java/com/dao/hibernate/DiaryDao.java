@@ -28,8 +28,8 @@ public class DiaryDao {
         String sql = "select * from Diary where diary_id=";
         List diaryList = session.createSQLQuery(sql + diaryId + ";")
                 .addEntity(Diary.class).list();
-
-        session.close();
+        transaction.commit();
+//        session.close();
 
         Iterator it = diaryList.iterator();
         if (it.hasNext()) {
@@ -48,7 +48,8 @@ public class DiaryDao {
         Query query = session.createQuery(hql);
         query.setString("diaryurl", diaryurl);
         List diaryList = (List<Diary>) query.list();
-        session.close();
+        transaction.commit();
+//        session.close();
 
         Iterator it = diaryList.iterator();
         if (it.hasNext()) {
@@ -66,7 +67,8 @@ public class DiaryDao {
         String sql = "select * from Diary where diary_user_fk=";
         List diaryList = session.createSQLQuery(sql + userId + ";")
                 .addEntity(Diary.class).list();
-
+        
+        transaction.commit();
         Iterator it = diaryList.iterator();
         if (it.hasNext()) {
             Diary diary = (Diary) it.next();
@@ -76,21 +78,15 @@ public class DiaryDao {
         }
     }
 
-    public static Diary findby_brochureId(int brochureId) {
+    public static List<Diary> findby_brochureId(int brochureId) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         String sql = "select * from Diary where diary_brochure_fk=";
         List diaryList = session.createSQLQuery(sql + brochureId + ";")
                 .addEntity(Diary.class).list();
-
-        Iterator it = diaryList.iterator();
-        if (it.hasNext()) {
-            Diary diary = (Diary) it.next();
-            return diary;
-        } else {
-            return null;
-        }
+        transaction.commit();
+        return diaryList;
     }
 
     public static void add_diary(Diary diary) {
@@ -138,6 +134,7 @@ public class DiaryDao {
         Transaction transaction = session.beginTransaction();
         int maxUserId = (Integer) session.createQuery(
                 "select max(diary.diaryId) from Diary diary").uniqueResult();
+        transaction.commit();
         return maxUserId;
     }
     

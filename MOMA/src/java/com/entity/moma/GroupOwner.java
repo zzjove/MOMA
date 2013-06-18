@@ -1,5 +1,5 @@
 package com.entity.moma;
-// Generated 2013-6-16 12:29:23 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-17 3:25:11 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class GroupOwner  implements java.io.Serializable {
 
 
-     private int groupId;
+     private Integer groupId;
      private int ownerId;
      private String groupName;
      private Set<User> users = new HashSet<User>(0);
@@ -20,22 +20,20 @@ public class GroupOwner  implements java.io.Serializable {
     }
 
 	
-    public GroupOwner(int groupId, int ownerId) {
-        this.groupId = groupId;
+    public GroupOwner(int ownerId) {
         this.ownerId = ownerId;
     }
-    public GroupOwner(int groupId, int ownerId, String groupName, Set<User> users) {
-       this.groupId = groupId;
+    public GroupOwner(int ownerId, String groupName, Set<User> users) {
        this.ownerId = ownerId;
        this.groupName = groupName;
        this.users = users;
     }
    
-    public int getGroupId() {
+    public Integer getGroupId() {
         return this.groupId;
     }
     
-    public void setGroupId(int groupId) {
+    public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
     public int getOwnerId() {
@@ -59,8 +57,11 @@ public class GroupOwner  implements java.io.Serializable {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-
-
+    
+    @Override
+    public String toString() {
+        return this.getGroupName();
+    }
 
 
 }

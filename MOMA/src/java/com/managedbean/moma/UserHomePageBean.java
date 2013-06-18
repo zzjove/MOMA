@@ -68,6 +68,8 @@ public class UserHomePageBean {
      * Creates a new instance of UserHomePageBean
      */
     public UserHomePageBean() {
+        
+        System.out.println("In userHomePageBean construction");
         String userName = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("friendName");
         if (userName == null) {
             userName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
@@ -81,11 +83,11 @@ public class UserHomePageBean {
 
     private void getlatestUpdate() {
         ArrayList<Brochure> latestChangeBrochureList = new ArrayList();
-        ArrayList<Brochure> allBrochureList = new ArrayList(user.getBrochures());
+        ArrayList<Brochure> allBrochureList = new ArrayList(BrochureDao.findby_userId(user.getUserId()));
+        System.out.println("all BrochureList size is " + allBrochureList.size());
         if (!allBrochureList.isEmpty()) {
-            Brochure brochureTest = allBrochureList.get(0);
-            System.out.println("date is " + brochureTest.getBrochureModifyTime());
-            while (latestChangeBrochureList.size() < 6) {
+//            System.out.println("date is " + brochureTest.getBrochureModifyTime());
+            while (latestChangeBrochureList.size() < 6  && !allBrochureList.isEmpty()) {
                 Brochure temp_brochure = allBrochureList.get(0);
                 for (Brochure brochure : allBrochureList) {
                     if (brochure.getBrochureModifyTime().after(temp_brochure.getBrochureModifyTime())) {
@@ -96,9 +98,14 @@ public class UserHomePageBean {
                 allBrochureList.remove(temp_brochure);
                 userUpdate.add(new UserUpdate(temp_brochure));
             }
-            for (Brochure brochure : latestChangeBrochureList) {
-                System.out.println("IN Latest update" + brochure.getBrochureId());
-            }
+//            for (Brochure brochure : latestChangeBrochureList) {
+//                System.out.println("IN Latest update" + brochure.getBrochureId());
+//            }
+            
+//            System.out.println("userUpdate size is " + userUpdate.size());
+//            for (UserUpdate brochure: userUpdate) {
+//                System.out.println("In userUpadte" + brochure.getBrochure().getBrochureName());
+//            }
         }
     }
 
@@ -108,30 +115,32 @@ public class UserHomePageBean {
         User currentUser = UserDao.findby_userName(currentUserName);
         int counter = 0;
         while (true) {
-            System.out.println(counter);
             counter++;
-            int randomUserNumber = (int) (Math.random() * currentUser.getUsersForSecondUserId().size());
-            ArrayList recommandFriendList = new ArrayList(currentUser.getUsersForSecondUserId());
-            User friend = (User) recommandFriendList.get(randomUserNumber);
-            if (!friend.getBrochures().isEmpty()) {
-                System.out.println("IN recommand " + friend.getUserName());
-                int randomBrochureNumber = (int) (Math.random() * friend.getBrochures().size());
-                ArrayList recommandBrochureList = new ArrayList(friend.getBrochures());
-                Brochure brochure = (Brochure) recommandBrochureList.get(randomBrochureNumber);
-                if (recommendedBros.contains(brochure)) {
-                    continue;
+            if (!currentUser.getUsersForSecondUserId().isEmpty()) {
+                int randomUserNumber = (int) (Math.random() * currentUser.getUsersForSecondUserId().size());
+                ArrayList recommandFriendList = new ArrayList(currentUser.getUsersForSecondUserId());
+                User friend = (User) recommandFriendList.get(randomUserNumber);
+                if (!friend.getBrochures().isEmpty()) {
+//                    System.out.println("IN recommand " + friend.getUserName());
+                    int randomBrochureNumber = (int) (Math.random() * friend.getBrochures().size());
+                    ArrayList recommandBrochureList = new ArrayList(friend.getBrochures());
+                    Brochure brochure = (Brochure) recommandBrochureList.get(randomBrochureNumber);
+                    if (recommendedBros.contains(brochure)) {
+                        continue;
+                    }
+                    recommendedBros.add(brochure);
+                    break;
                 }
-                recommendedBros.add(brochure);
-                break;
             }
             if (counter >= 20) {
                 break;
             }
+
         }
 
-        for (Brochure brochure : recommendedBros) {
-            System.out.println("recommandedbros is " + brochure.getBrochureId());
-        }
+//        for (Brochure brochure : recommendedBros) {
+//            System.out.println("recommandedbros is " + brochure.getBrochureId());
+//        }
 
     }
 
@@ -150,13 +159,13 @@ public class UserHomePageBean {
         String brochureName = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("brochureId");
         System.out.println("in to brochure " + brochureName);
     }
-    
+
     public boolean isHost() {
         String userName = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("friendName");
         if (userName == null) {
             return true;
-        }
-        else 
+        } else {
             return false;
+        }
     }
 }

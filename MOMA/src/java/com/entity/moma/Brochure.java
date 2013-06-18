@@ -1,7 +1,8 @@
 package com.entity.moma;
-// Generated 2013-6-16 12:29:23 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-17 3:25:11 by Hibernate Tools 3.2.1.GA
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -178,9 +179,6 @@ public class Brochure  implements java.io.Serializable {
     public void setUsers_1(Set<User> users_1) {
         this.users_1 = users_1;
     }
-
-
-
 
 }
 

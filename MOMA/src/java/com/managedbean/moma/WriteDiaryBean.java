@@ -20,6 +20,7 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @RequestScoped
 public class WriteDiaryBean {
+
     private Diary diary;
     private String title;
     private String content;
@@ -32,7 +33,7 @@ public class WriteDiaryBean {
     public void setTitle(String title) {
         this.title = title;
     }
-    
+
     public String getContent() {
         return content;
     }
@@ -48,19 +49,18 @@ public class WriteDiaryBean {
     public void setDiary(Diary diary) {
         this.diary = diary;
     }
-    
 
     /**
      * Creates a new instance of WriteDiaryBean
      */
     public WriteDiaryBean() {
         diary = new Diary();
+            FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            brochureId = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("brochureToeditId").toString());
     }
-    
+
     public void doCompletion() {
         System.out.println("In diary doCompletion");
-        FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        brochureId = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentBrochureId").toString());
         System.out.println("currentBrochureId is " + brochureId);
         diary.setDiaryUrl("./" + brochureId + "/diary/");
         diary.setDiaryStartTime(new Date());
@@ -75,20 +75,19 @@ public class WriteDiaryBean {
 //            System.out.println("Remove Successfully");
 //        }
     }
-    
+
     public void doModified() {
         diary.setDiaryModifiedTime(new Date());
         DiaryDao.modify_diary(diary);
     }
-    
+
     private void changeBrochureLatestChange(int brochureId) {
         System.out.println("In changeBrochureLatestChange");
         Brochure currentBrochure = BrochureDao.findby_brochureId(brochureId);
         String userNameChangeDiary;
         if (diary.getUser() != null) {
             userNameChangeDiary = diary.getUser().getUserName();
-        }
-        else {
+        } else {
             userNameChangeDiary = "Someone";
         }
         currentBrochure.setBrochureModifyTime(new Date());

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2013-6-16 12:29:24 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 2013-6-17 3:25:12 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.entity.moma.User" table="user" catalog="moma_db">
         <id name="userId" type="java.lang.Integer">
@@ -53,14 +53,6 @@
             </key>
             <many-to-many entity-name="com.entity.moma.User">
                 <column name="first_user_id" not-null="true" />
-            </many-to-many>
-        </set>
-        <set name="groupOwners" inverse="false" table="group_member" lazy="false">
-            <key>
-                <column name="group_member" />
-            </key>
-            <many-to-many entity-name="com.entity.moma.GroupOwner">
-                <column name="group_id" not-null="true" unique="true" />
             </many-to-many>
         </set>
         <set name="usersForSecondUserId" inverse="false" table="friends" lazy="false">
@@ -116,6 +108,14 @@
                 <column name="blessing_user_fk" not-null="true" />
             </key>
             <one-to-many class="com.entity.moma.Blessing" />
+        </set>
+        <set name="groupOwners" inverse="true" table="group_member" lazy="false">
+            <key>
+                <column name="group_member" />
+            </key>
+            <many-to-many entity-name="com.entity.moma.GroupOwner">
+                <column name="group_id" not-null="true" unique="true" />
+            </many-to-many>
         </set>
     </class>
 </hibernate-mapping>

@@ -11,11 +11,11 @@
         
         <h:form>
         <h:outputLabel value="分组: " />
-                <h:selectOneMenu value="#{userGroupTestBean.chosedGroupName}" converter="groupOwnerConverter"> 
-                    <f:selectItems value="#{userGroupTestBean.groupNameList}"/>             
+                <h:selectOneMenu value="#{friendsBean.chosedGroupName}" converter="groupOwnerConverter"> 
+                    <f:selectItems value="#{friendsBean.groupNameList}"/>             
                 </h:selectOneMenu>
         
-        <h:commandLink value="确认加入" action="#{userGroupTestBean.doAdd}" >
+        <h:commandLink value="确认加入" action="#{friendsBean.doAdd}" >
             <f:param name="friendUserName" value="#{friendUserName}" />
         </h:commandLink>
         </h:form>
