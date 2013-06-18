@@ -4,16 +4,21 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
+<<<<<<< HEAD
         <title>MOMA- #{viewDiary.broName}- #{diaryName}</title>
         
          <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
+=======
+        <title>MOMA-Friends List-#{friendListBean.brochure}</title>
+        <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
+>>>>>>> origin/elena
         <style type="text/css">
 
             .loginPage {
                 background-color:#ffffff;
                 background-image:url(img/bg.jpg);
             }
-             .accordion-toggle{
+            .accordion-toggle{
                 background-color: #F3F3F3;
                 opacity: 0.6;
             }
@@ -32,13 +37,19 @@
                     <h:outputLink styleClass="brand" value="#">
                         <h:outputText value="MOMA" />
                     </h:outputLink>
-                    <ul class="nav">
-                        <li><h:outputLink value="#">
+                     <ul class="nav">
+                        <li>
+                            <h:outputLink value="welcome.xhtml">
                                 <h:outputText value="首页" />
                             </h:outputLink>
                         </li>
-                        <li class="active">
-                            <h:outputLink value="#">
+                             <li>
+                            <h:outputLink value="userHomePage.xhtml">
+                                <h:outputText value="个人主页" />
+                            </h:outputLink>
+                        </li>
+                        <li>
+                            <h:outputLink value="PersonalSpace.xhtml">
                                 <h:outputText value="我的纪念册" />
                             </h:outputLink>
                         </li>
@@ -48,6 +59,7 @@
                             </h:outputLink>
                         </li>
 
+<<<<<<< HEAD
                     </ul>
 
                     <h:form styleClass="navbar-search pull-right" >
@@ -63,14 +75,18 @@
                             </h:outputLink>
                         </li>
                     </ul>
+=======
+                     </ul>
+                   
+>>>>>>> origin/elena
 
                 </div>
             </div>
         </div>
         <h:form>
-            <h:form >
+
             <p:messages/>
-            
+
             <div class="jiathis_share_slide jiathis_share_32x32" id="jiathis_share_slide">
                 <div class="jiathis_share_slide_top" id="jiathis_share_title"></div>
                 <div class="jiathis_share_slide_inner">
@@ -101,26 +117,26 @@
                 <p:menuitem value="Video" icon="/img/brochureIcon/video.png" url="videoList.xhtml"/>  
                 <p:menuitem value="Photo" icon="/img/brochureIcon/photo.png" url="viewPhoto.xhtml"/>    
             </p:dock>
-            <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; height: 600px; 
+            <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; min-height: 300px; 
                      position:relative;left: 20%; top: 70px;" header="#{viewDiaryBean.diaryTitle}" footer="">
-                <h:outputText value="MOMA-#{friendListBean.brochure}-搜索好友列表" style="font-size: 16pt;  "/>
-                <p:commandLink id="backToMainPage" action="userHomePage.xhtml" style="margin-right:20px; position: relative;left: 55%;"  ajax="false">  
-                    <h:outputText value="返回个人主页" style="font-family: Matura MT Script Capitals" />  
-                </p:commandLink>
-
-                <br/><br/>
-                <h:outputText value="         共搜索到 #{friendListBean.Count}个结果 " style="font-size: 9px;"/>
+                <h:outputText value="#{viewDiaryBean.editor}于#{viewDiaryBean.editTime}发表" style="position:relative;left: 60%;font-size: 10px"/>
                 <p:separator/>
-                <p:accordionPanel value="#{friendListBean.friends}" var="friend">  
-                    <p:tab>  
-                        <h:panelGrid columns="2" cellpadding="10">  
-                            <p:graphicImage value="#{friend.avatarUrl}" alt="Avatar" title="#{friend.name}"/>
-                            <h:outputText value="#{friend.name}"/>
-                        </h:panelGrid>  
-                        <p:separator/>
-                    </p:tab>  
-                </p:accordionPanel>
+                <h:outputText value="#{viewDiaryBean.diary}"/>
             </p:panel>
+
+            <h:outputText value="查看评论" style="position:relative;left: 20%" />
+            <br/>
+            <p:dataList value="#{viewDiaryBean.comments}" var="comment">  
+                <p:panelGrid columns="2">
+                    <p:graphicImage value="comment.UserAvatarUrl" alt="alt" title="#{image}"/>
+                    <p:panelGrid columns="1">
+                        <h:outputText value="#{comment.userName}: #{comment.content}"/>
+                        <h:outputText value="评论时间：#{comment.releaseTime}" style="position:relative;left: 60%;font-size: 10px"/>
+                    </p:panelGrid>
+                </p:panelGrid>
+                <p:separator/>
+            </p:dataList>  
+        
         </h:form>
         </h:form>
         <!-- UJian Button BEGIN -->

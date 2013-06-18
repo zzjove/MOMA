@@ -52,24 +52,29 @@
                         <h:outputLink styleClass="brand" value="#">
                             <h:outputText value="MOMA" />
                         </h:outputLink>
-                        <ul class="nav">
-                            <li><h:outputLink value="userHomePage.xhtml">
-                                    <!--上面的这个链接要处理一下，改成登陆者的个人主页-->
-                                    <h:outputText value="个人主页" />
-                                </h:outputLink>
-                            </li>
-                            <li class="active">
-                                <h:outputLink value="#">
-                                    <h:outputText value="我的纪念册" />
-                                </h:outputLink>
-                            </li>
-                            <li>
-                                <h:outputLink value="Friends.xhtml">
-                                    <h:outputText value="我的好友" />
-                                </h:outputLink>
-                            </li>
+                         <ul class="nav">
+                        <li>
+                            <h:outputLink value="welcome.xhtml">
+                                <h:outputText value="首页" />
+                            </h:outputLink>
+                        </li>
+                             <li>
+                            <h:outputLink value="userHomePage.xhtml">
+                                <h:outputText value="个人主页" />
+                            </h:outputLink>
+                        </li>
+                        <li>
+                            <h:outputLink value="PersonalSpace.xhtml">
+                                <h:outputText value="我的纪念册" />
+                            </h:outputLink>
+                        </li>
+                        <li>
+                            <h:outputLink value="Friends.xhtml">
+                                <h:outputText value="我的好友" />
+                            </h:outputLink>
+                        </li>
 
-                        </ul>
+                         </ul>
 
                         <h:form styleClass="navbar-search pull-right" >
 
@@ -107,9 +112,13 @@
                                 <h:outputText  value="#{brochure.brochureDescription}" style="width: 250px;display: inline-block;background-color: #C1F7ED;opacity: 0.4;margin-left: 20px;position: absolute;left: 350px;"/>
                                 <c:if test="#{personalSpaceBean.host}"> 
                                     <button class="btn btn-info" style="position:relative;top:85px;margin-left: 10px;">浏览</button>
+<<<<<<< HEAD
                                     <h:outputLink class="btn btn-success" style="position:relative;top:85px;margin-left: 10px;" value="diaryList.xhtml" >编辑
                                         <f:param name="brochureToeditId" value="#{brochure.brochureId}"></f:param>
                                     </h:outputLink>
+=======
+                                    <p:button outcome="diaryList" value="编辑"  class="btn btn-success" style="position:relative;top:85px;margin-left: 10px;"></p:button>
+>>>>>>> origin/elena
                                     <button class="btn btn-danger" style="position:relative;top:85px;margin-left: 10px;">删除</button>
                                 </c:if>
                                 <c:if test="#{!personalSpaceBean.host}">

@@ -10,7 +10,14 @@
 
     <h:head>
         <title>User Info Completion Page</title>
+        <style>
+            .loginPage {
+                background-color:#ffffff;
+                background-image:url(img/bg.jpg);
+            }
+        </style>
     </h:head>
+<<<<<<< HEAD
     <h:body>
         <ui:composition template="./layoutTemplate/template.xhtml">
             <ui:define name="header">
@@ -30,25 +37,33 @@
                         <h:panelGrid columns="2">
                             <h:outputText value="Real Name"/>
                             <p:inputText id="realName" value="#{userInfoCompletionBean.user.userRealName}"/>
+=======
+    <h:body styleClass="loginPage">
+>>>>>>> origin/elena
 
-                            <h:outputText value="E-mail"/>
-                            <p:autoComplete id ="email" value="#{userInfoCompletionBean.user.userEmail}"
-                                            completeMethod="#{autoCompleteBean.complete}" required="true"/>
+        <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; height: 600px; position:relative;left: 20%; top: 70px;">
+            <h2>User Infomation Data Entry</h2>
+            <h:form>
+                <p:messages/>
+                <p:panel style="display:inline-block;width:100%"  header="Please Complete the Following Infomation">
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Real Name"/>
+                        <p:inputText id="realName" value="#{userInfoCompletionBean.userRealName}"/>
 
-                            <h:outputText value="Phone Number"/>
-                            <p:inputMask id ="phoneNumber" value="#{userInfoCompletionBean.user.phoneNumber}" mask="(999) 999-9999-9999"/>
+                        <h:outputText value="E-mail"/>
+                        <p:autoComplete id ="email" value="#{userInfoCompletionBean.user.userEmail}"
+                                        completeMethod="#{autoCompleteBean.complete}" required="true"/>
 
-                            <h:outputText value="QQ Number"/>
-                            <p:inputText id="qqNumber" value="#{userInfoCompletionBean.user.qqNumber}" />
+                        <h:outputText value="Phone Number"/>
+                        <p:inputMask id ="phoneNumber" value="#{userInfoCompletionBean.user.phoneNumber}" mask="(999) 999-9999-9999"/>
 
-                            <h:outputText value="Address Line1"/>
-                            <p:inputText id="addressLine1" value="#{userInfoCompletionBean.user.adressFirstLine}"/>
+                        <h:outputText value="QQ Number"/>
+                        <p:inputText id="qqNumber" value="#{userInfoCompletionBean.user.qqNumber}" />
 
-                            <h:outputText value="Address Line2"/>
-                            <p:inputText id="addressLine2" value="#{userInfoCompletionBean.adressSecondLine}"/>
-                        </h:panelGrid>
-                    </p:panel>
+                        <h:outputText value="Address Line1"/>
+                        <p:inputText id="addressLine1" value="#{userInfoCompletionBean.user.adressFirstLine}"/>
 
+<<<<<<< HEAD
                     <p:commandButton value="Submit" id="submit" action="#{userInfoCompletionBean.doCompletion}" 
                                      update="display" oncomplete="dialog.show()" ></p:commandButton>  
                     <p:dialog header="User Information" widgetVar="dialog" showEffect="fold" hideEffect="fold" width="200">
@@ -70,8 +85,32 @@
                 </h:form>  
             </ui:define>
         </ui:composition>
+=======
+                        <h:outputText value="Address Line2"/>
+                        <p:inputText id="addressLine2" value="#{userInfoCompletionBean.adressSecondLine}"/>
+                    </h:panelGrid>
+                </p:panel>
+>>>>>>> origin/elena
 
+                <p:commandButton value="Submit" id="submit" update="display" oncomplete="dialog.show()" actionListener="#{userInfoCompletionBean.doCompletion}" />  
+                <p:dialog header="User Information" widgetVar="dialog" showEffect="fold" hideEffect="fold" width="200">
+                    <h:panelGrid id="display" columns="2" cellpadding="5">
+                        <h:outputText value="Real Name:"/>
+                        <h:outputText value="#{userInfoCompletionBean.user.userRealName}"/>
+                        <h:outputText value="E-mail:"/>
+                        <h:outputText value="#{userInfoCompletionBean.user.userEmail}"/>
+                        <h:outputText value="Phone Number:"/>
+                        <h:outputText value="#{userInfoCompletionBean.user.phoneNumber}"/>
+                        <h:outputText value="QQ Number:"/>
+                        <h:outputText value="#{userInfoCompletionBean.user.qqNumber}"/>
+                        <h:outputText value="Address:"/>
+                        <h:outputText value="#{userInfoCompletionBean.user.adressCountry} #{userInfoCompletionBean.user.adressProvince} 
+                                      #{userInfoCompletionBean.user.adressSecondLine} #{userInfoCompletionBean.user.adressFirstLine}"/>    
+                    </h:panelGrid>
+                </p:dialog>  
 
+            </h:form>  
+      </p:panel>
     </h:body>
 </html>
 
