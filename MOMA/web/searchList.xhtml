@@ -94,7 +94,8 @@
                     <p:tab title="#{friend.userName}">  
                         <h:panelGrid columns="3" cellpadding="10">  
                             <p:graphicImage value="#{friend.userPortraitUrl}" alt="Avatar" title="#{friend.userName}"/>
-                            <h:outputLink value="UserHomePage.xhtml">
+                            <h:outputLink value="userHomePage.xhtml">
+                                <f:param name="friendName" value="#{friend.userRealName}"></f:param>
                                 <h:outputText value="#{friend.userRealName}"/>
                             </h:outputLink>
                             <h:commandButton value="加为好友" actionListener="#{searchListBean.addFriend}">

@@ -76,12 +76,15 @@ public class WriteDiaryBean {
         System.out.println("currentBrochureId is " + brochureId);
         diary.setDiaryStartTime(new Date());
         diary.setDiaryModifiedTime(new Date());
-        diary.setDiaryUrl("./Data/Brochure/" + brochureId + "/diary/" + diary.getDiaryId() + ".txt");
+        diary.setDiaryUrl("temp_url");
         diary.setBrochure(BrochureDao.findby_brochureId(brochureId));
         DiaryDao.add_diary(diary);
+        diary.setDiaryUrl("/Users/bianshujun/Downloads/MOMA/MOMA/web/Data/Brochure/" + brochureId + "/diary/" + diary.getDiaryId() + ".txt");
+        DiaryDao.modify_diary(diary);
+        
         changeBrochureLatestChange(brochureId);
-       
-        File filename = new File(fileDir + diary.getDiaryId() + ".txt");
+        
+        File filename = new File(fileDir + "/" + diary.getDiaryId() + ".txt");
         RandomAccessFile tempFile = null;
         try {
             tempFile = new RandomAccessFile(filename,"rw");
@@ -95,8 +98,8 @@ public class WriteDiaryBean {
     //        if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentBrochureId") == null) {
     //        }
     //        }
-            //            BufferedReader buf = new BufferedReader( new InputStreamReader(new FileInputStream(f)));
-            //String tempStr = buf.readLine();
+//                        BufferedReader buf = new BufferedReader( new InputStreamReader(new FileInputStream(f)));
+//            String tempStr = buf.readLine();
         } catch (IOException ex) {
             Logger.getLogger(WriteDiaryBean.class.getName()).log(Level.SEVERE, null, ex);
         }

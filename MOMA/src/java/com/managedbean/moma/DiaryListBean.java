@@ -66,7 +66,7 @@ public class DiaryListBean {
         System.out.println(brochure.getBrochureName());
         this.diaryList = new ArrayList(DiaryDao.findby_brochureId(brochureId));
         for(Diary tempdiary :diaryList){
-        System.out.println("DiaryList has " + tempdiary.getDiaryTitle());
+            System.out.println("DiaryList has " + tempdiary.getDiaryTitle());
         }
         this.diaryCount = this.diaryList.size();
     }

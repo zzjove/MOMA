@@ -51,7 +51,7 @@
                                 <h:outputText value="首页" />
                             </h:outputLink>
                         </li>
-                             <li>
+                        <li>
                             <h:outputLink value="userHomePage.xhtml">
                                 <h:outputText value="个人主页" />
                             </h:outputLink>
@@ -68,11 +68,11 @@
                         </li>
 
                     </ul>
-                        <h:form styleClass="navbar-search pull-right" >
-                            <p:inputText id="search" styleClass="search-query" value="#{userHomePageBean.searchName}" />
-                            <p:watermark for="search" value="搜索好友/纪念册" />
-                            <h:commandButton styleClass="pp" id="searchSubmit" action="#{userHomePageBean.doSearch}" />
-                        </h:form>
+                    <h:form styleClass="navbar-search pull-right" >
+                        <p:inputText id="search" styleClass="search-query" value="#{userHomePageBean.searchName}" />
+                        <p:watermark for="search" value="搜索好友/纪念册" />
+                        <h:commandButton styleClass="pp" id="searchSubmit" action="#{userHomePageBean.doSearch}" />
+                    </h:form>
                 </div>
             </div>
         </div>
@@ -145,41 +145,42 @@
 
         <c:if test="#{userHomePageBean.host}">
             <h:form>
-                <p:carousel id="recommendedBros" value="#{userHomePageBean.recommendedBros}" var="brochure" 
-                            itemStyleClass="carItem" style="width: 25%; min-height: 300px; position:relative;left: 20%; ">  
-                    <f:facet name="header">  
-                        推荐 
-                    </f:facet>  
-                    <h:panelGrid columns="1" style="width:100%" cellpadding="5">  
+                <p:panel header="推荐纪念册"  style="width: 25%; min-height: 300px; position:relative;left: 20%; ">  
+                    <ui:repeat value="#{userHomePageBean.recommendedBros}" var="brochure">
+
                         <p:graphicImage value="#{brochure.brochureImageUrl}" width="100"/>   
                         <!--                                 这里我突然有一个想法，纪念册图片上传以后，以纪念册名字命名，找的时候路径就是固定的了，变名字就好了-->
                         <p:commandLink id="recommandedBro1" style="margin-right:20px;" ajax="false">  
                             <h:outputText value="#{brochure.brochureName}" />  
                         </p:commandLink>
-                        <h:outputText value="#{brochure.brochureDescription}" />  
-                    </h:panelGrid>  
-                </p:carousel>  
+                        <h:outputText value="#{brochure.brochureDescription}" /> 
+                        <p:separator/>
+                    </ui:repeat>
+                </p:panel>   
+
+
             </h:form>
             <p:tabView id="upDate"  style="display:inline-block; min-height: 900px; position:absolute;left: 47%;right: 20%;top:60px;"  >  
 
                 <p:tab id="tab1" title="#{userHomePageBean.user.userName}的纪念册更新" >
+                    
                     <p:accordionPanel multiple="true" value="#{userHomePageBean.userUpdate}" var="myBroUpdate">  
                         <p:tab title="#{myBroUpdate.brochure.brochureName}">  
                             <h:panelGrid columns="2" cellpadding="10">  
-                                <p:graphicImage value="#{myBroUpdate.brochure}" width="100"/>
+                                <p:graphicImage value="#{myBroUpdate.brochure.brochureImageUrl}" width="100"/>
                                 <!--上面图片的路径你就自己改吧~-->
                                 <!--以下就是根据更新内容的不同做不同的显示处理-->
-                                <c:if test="#{myBroUpdate.brochure.latestChangeType} == 'text'">
+                                <c:if test="#{myBroUpdate.brochure.latestChangeType == 'text'}">
                                     <p:inputTextarea rows="6" cols="60" value="#{myBroUpdate.brochure.latestChange}" />
                                 </c:if>
-                                <c:if test="#{myBroUpdate.brochure.latestChangeType} == 'photo'">
+                                <c:if test="#{myBroUpdate.brochure.latestChangeType == 'photo'}">
                                     <p:imageSwitch effect="shuffle">  
                                         <ui:repeat value="#{myBroUpdate.brochure.latestChange}" var="image">  
                                             <p:graphicImage value="#{myBroUpdate.brochure.latestChange}" />  
                                         </ui:repeat>  
                                     </p:imageSwitch>  
                                 </c:if>
-                                <c:if test="#{myBroUpdate.brochure.latestChangeType} == 'video'">
+                                <c:if test="#{myBroUpdate.brochure.latestChangeType == 'video'}">
                                     <p:media value="#{myBroUpdate}" width="420" height="315" player="flash"/>
                                     <!--put the link directly in the "value" parameter, e.g. http://www.youtube.com/v/KZnUr8lcqjo-->
                                 </c:if>

@@ -77,15 +77,18 @@ public class UserHomePageBean {
      * Creates a new instance of UserHomePageBean
      */
     public UserHomePageBean() {
-        
+        boolean isHost = false;
         System.out.println("In userHomePageBean construction");
         String userName = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("friendName");
         if (userName == null) {
+            isHost = true;
             userName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
         }
         user = UserDao.findby_userName(userName);
         getlatestUpdate();
-        getRecommandBrochure();
+        if (isHost) {
+            getRecommandBrochure();
+        }
         getFollowBrochureLatestChange();
 
     }
