@@ -39,11 +39,12 @@ public class NewPasswordBean {
 
     }
 
-    public void doModifyPwd() {
+    public String doModifyPwd() {
         System.out.println("IN modify");
         FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         String forgetUserName =  (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("forgetUserName");
         System.out.println(forgetUserName + " in forget user name in modifypwd");
         UserDao.modify_user(user);
+        return "modifySuccess";
     }
 }

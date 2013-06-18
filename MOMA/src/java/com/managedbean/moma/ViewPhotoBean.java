@@ -1,8 +1,4 @@
-
 package com.managedbean.moma;
-
-
-
 
 import com.dao.hibernate.BrochureDao;
 import com.dao.hibernate.PhotoDao;
@@ -40,10 +36,17 @@ public class ViewPhotoBean implements Serializable {
     private Brochure brochure;
     private ArrayList<Photo> images;
     private String photo_comment;
+    private int brochureId;
 
     public ViewPhotoBean() {
-        brochure = BrochureDao.findby_brochureId(1);
-        images = (ArrayList<Photo>) PhotoDao.findby_brochureId(brochure.getBrochureId());
+        if (FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("brochureToeditId") != null) {
+            brochureId = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("brochureToeditId"));
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("brochureToeditId", brochureId);
+        } else {
+            brochureId = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("brochureToeditId").toString());
+        }
+        brochure = BrochureDao.findby_brochureId(brochureId);
+        images = new ArrayList(PhotoDao.findby_brochureId(brochure.getBrochureId()));
         System.out.println(images.size() + "init_called");
     }
 
@@ -69,6 +72,14 @@ public class ViewPhotoBean implements Serializable {
 
     public void setBrochure(Brochure brochure) {
         this.brochure = brochure;
+    }
+
+    public int getBrochureId() {
+        return brochureId;
+    }
+
+    public void setBrochureId(int brochureId) {
+        this.brochureId = brochureId;
     }
 
     public void handleFileUpload(FileUploadEvent event) {
@@ -110,7 +121,7 @@ public class ViewPhotoBean implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
 //        try {
 //            FacesContext.getCurrentInstance().getExternalContext().redirect("viewPhoto.xhtml");
 //            System.out.println("IN redirect");

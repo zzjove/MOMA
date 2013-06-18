@@ -37,10 +37,10 @@
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
-                <root id="src.dir"/>
+                <root id="src.dir" name="源包"/>
             </source-roots>
             <test-roots>
-                <root id="test.src.dir"/>
+                <root id="test.src.dir" name="测试包"/>
             </test-roots>
         </data>
     </configuration>

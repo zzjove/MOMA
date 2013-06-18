@@ -45,8 +45,8 @@ public class GroupDao {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
-        session.merge(groupOwner);
-//        session.update(user);
+//        session.merge(groupOwner);
+        session.update(groupOwner);
         session.flush();
 
         transaction.commit();

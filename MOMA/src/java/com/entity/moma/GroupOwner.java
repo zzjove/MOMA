@@ -1,5 +1,5 @@
 package com.entity.moma;
-// Generated 2013-6-17 3:25:11 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-18 22:31:38 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -57,11 +57,8 @@ public class GroupOwner  implements java.io.Serializable {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-    
-    @Override
-    public String toString() {
-        return this.getGroupName();
-    }
+
+
 
 
 }

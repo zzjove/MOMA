@@ -1,8 +1,7 @@
 package com.entity.moma;
-// Generated 2013-6-17 3:25:11 by Hibernate Tools 3.2.1.GA
+// Generated 2013-6-18 22:31:38 by Hibernate Tools 3.2.1.GA
 
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +23,7 @@ public class Brochure  implements java.io.Serializable {
      private String latestChange;
      private String latestChangeType;
      private Integer brochureVisit;
+     private String latestChangeUserName;
      private Set<Diary> diaries = new HashSet<Diary>(0);
      private Set<Blessing> blessings = new HashSet<Blessing>(0);
      private Set<Video> videos = new HashSet<Video>(0);
@@ -41,7 +41,7 @@ public class Brochure  implements java.io.Serializable {
         this.brochureType = brochureType;
         this.brochureRoot = brochureRoot;
     }
-    public Brochure(String brochureName, Date brochureStartTime, Date brochureModifyTime, int brochureType, int brochureRoot, String brochureDescription, String brochureImageUrl, String latestChange, String latestChangeType, Integer brochureVisit, Set<Diary> diaries, Set<Blessing> blessings, Set<Video> videos, Set<User> users, Set<Photo> photos, Set<User> users_1) {
+    public Brochure(String brochureName, Date brochureStartTime, Date brochureModifyTime, int brochureType, int brochureRoot, String brochureDescription, String brochureImageUrl, String latestChange, String latestChangeType, Integer brochureVisit, String latestChangeUserName, Set<Diary> diaries, Set<Blessing> blessings, Set<Video> videos, Set<User> users, Set<Photo> photos, Set<User> users_1) {
        this.brochureName = brochureName;
        this.brochureStartTime = brochureStartTime;
        this.brochureModifyTime = brochureModifyTime;
@@ -52,6 +52,7 @@ public class Brochure  implements java.io.Serializable {
        this.latestChange = latestChange;
        this.latestChangeType = latestChangeType;
        this.brochureVisit = brochureVisit;
+       this.latestChangeUserName = latestChangeUserName;
        this.diaries = diaries;
        this.blessings = blessings;
        this.videos = videos;
@@ -137,6 +138,13 @@ public class Brochure  implements java.io.Serializable {
     public void setBrochureVisit(Integer brochureVisit) {
         this.brochureVisit = brochureVisit;
     }
+    public String getLatestChangeUserName() {
+        return this.latestChangeUserName;
+    }
+    
+    public void setLatestChangeUserName(String latestChangeUserName) {
+        this.latestChangeUserName = latestChangeUserName;
+    }
     public Set<Diary> getDiaries() {
         return this.diaries;
     }
@@ -179,6 +187,9 @@ public class Brochure  implements java.io.Serializable {
     public void setUsers_1(Set<User> users_1) {
         this.users_1 = users_1;
     }
+
+
+
 
 }
 

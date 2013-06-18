@@ -23,10 +23,10 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class WelcomeBean {
 
-    String loginUserName;
-    String loginUserPassword;
-    String searchName;
-    User user;
+    private String loginUserName;
+    private String loginUserPassword;
+    private String searchName;
+    private User user;
 
     public String getLoginUserName() {
         return loginUserName;

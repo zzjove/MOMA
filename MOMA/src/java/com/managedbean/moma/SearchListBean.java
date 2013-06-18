@@ -8,10 +8,14 @@ import com.dao.hibernate.BrochureDao;
 import com.dao.hibernate.UserDao;
 import com.entity.moma.Brochure;
 import com.entity.moma.User;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 /**
  *
@@ -21,8 +25,8 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class SearchListBean {
 
-    private ArrayList<User>searchUserList = new ArrayList();
-    private ArrayList<Brochure>searchBrochureList = new ArrayList();
+    private ArrayList<User> searchUserList = new ArrayList();
+    private ArrayList<Brochure> searchBrochureList = new ArrayList();
     private int searchUserCount;
     private int searchBrochureCount;
     private String searchName;
@@ -66,8 +70,6 @@ public class SearchListBean {
     public void setSearchName(String searchName) {
         this.searchName = searchName;
     }
-    
-    
 
     /**
      * Creates a new instance of SearchBean
@@ -75,15 +77,25 @@ public class SearchListBean {
     public SearchListBean() {
         System.out.println("In searchList bean");
         FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        searchName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("searchName").toString();    
+        searchName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("searchName").toString();
         System.out.println("searchName is " + searchName);
-        searchUserList = (ArrayList<User>) UserDao.findby_userRealName(searchName);
-        searchBrochureList = (ArrayList<Brochure>) BrochureDao.findby_brochureName(searchName);
+        searchUserList = new ArrayList(UserDao.findby_userRealName(searchName));
+        searchBrochureList = new ArrayList(BrochureDao.findby_brochureName(searchName));
         searchUserCount = searchUserList.size();
         searchBrochureCount = searchBrochureList.size();
     }
 
-    public void addFriend(String friendName) {
+    public String backUserHomePage() {
+        if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName") != null) {
+            return "userHomePage";
+        } else {
+            return "welcome";
+        }
+    }
+
+    public void addFriend(ActionEvent e) {
+        String friendName = (String) e.getComponent().getAttributes().get("friendName");
+        System.out.println("friendName is " + friendName);
         String userName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
         User user = UserDao.findby_userName(userName);
         UserDao.add_user_friend(userName, friendName);
@@ -91,10 +103,19 @@ public class SearchListBean {
             System.out.println(temp_user.getUserName());
         }
     }
-    
+
     public void followBrochure(int BrochureId) {
         String userName = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userName").toString();
         UserDao.add_user_follow_brochure(userName, BrochureId);
     }
-    
+
+    public void doSearch() {
+        FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("searchName", searchName);
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("searchList.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(WelcomeBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

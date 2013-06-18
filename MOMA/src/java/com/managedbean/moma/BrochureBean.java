@@ -116,25 +116,25 @@ public class BrochureBean {
         brochure.setBrochureDescription(this.brochureDescription);
         brochure.setBrochureStartTime(brochureDate);
         brochure.setBrochureModifyTime(brochureDate);
-        brochure.setBrochureImageUrl(brochureName);
+        brochure.setBrochureImageUrl("./img/brochure.jpg");
         BrochureDao.add_brochure(brochure);
         System.out.println(brochure.getBrochureId());
-        UserDao.add_user_brochure(userName, brochure.getBrochureId());
-
         String brochureDir = "/Users/bianshujun/Downloads/MOMA/MOMA/web/Data/Brochure/" + brochure.getBrochureId();
         File file = new File(brochureDir);
         if (!file.exists()) {
             file.mkdirs();
         }
+        UserDao.add_user_brochure(userName, brochure.getBrochureId());
+
 
         FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("currentBrochureId", brochure.getBrochureId());
-        
-//        try {
-//                FacesContext.getCurrentInstance().getExternalContext().redirect("userHomePage.xhtml");
-//            } catch (IOException ex) {
-//                Logger.getLogger(WelcomeBean.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+
+        try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("userHomePage.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(WelcomeBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     public String addDiary() {

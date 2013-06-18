@@ -8,7 +8,7 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>#{userHomePage.userName}'s Home</title>
+        <title>#{userHomePageBean.user.userName}'s Home</title>
         <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
         <style type="text/css">
 
@@ -68,21 +68,11 @@
                         </li>
 
                     </ul>
-
-                    <h:form styleClass="navbar-search pull-right" >
-
-                        <p:inputText id="search" label="search" styleClass="search-query" value="searchListBean.searchName" />
-                        <p:watermark for="search" value="找朋友、找同事、找家人" />
-
-                    </h:form>
-                    <ul class="nav pull-right ">
-                        <li>
-                            <h:outputLink value="#">
-                                <h:outputText value="搜索好友/纪念册" />
-                            </h:outputLink>
-                        </li>
-                    </ul>
-
+                        <h:form styleClass="navbar-search pull-right" >
+                            <p:inputText id="search" styleClass="search-query" value="#{userHomePageBean.searchName}" />
+                            <p:watermark for="search" value="搜索好友/纪念册" />
+                            <h:commandButton styleClass="pp" id="searchSubmit" action="#{userHomePageBean.doSearch}" />
+                        </h:form>
                 </div>
             </div>
         </div>

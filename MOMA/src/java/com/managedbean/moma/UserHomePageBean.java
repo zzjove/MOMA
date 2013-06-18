@@ -31,7 +31,8 @@ public class UserHomePageBean {
     private ArrayList<UserUpdate> userUpdate = new ArrayList();
     private ArrayList<BrochureUpdate> brochureUpdates = new ArrayList();
     private ArrayList<Brochure> recommendedBros = new ArrayList();
-
+    private String searchName;
+        
     public ArrayList<UserUpdate> getUserUpdate() {
         return userUpdate;
     }
@@ -62,6 +63,14 @@ public class UserHomePageBean {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getSearchName() {
+        return searchName;
+    }
+
+    public void setSearchName(String searchName) {
+        this.searchName = searchName;
     }
 
     /**
@@ -166,6 +175,16 @@ public class UserHomePageBean {
             return true;
         } else {
             return false;
+        }
+    }
+    
+    public void doSearch() {
+        FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("searchName", searchName);
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("searchList.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(WelcomeBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

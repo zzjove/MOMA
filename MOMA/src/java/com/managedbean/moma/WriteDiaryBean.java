@@ -8,7 +8,13 @@ import com.dao.hibernate.BrochureDao;
 import com.dao.hibernate.DiaryDao;
 import com.entity.moma.Brochure;
 import com.entity.moma.Diary;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -60,20 +66,40 @@ public class WriteDiaryBean {
     }
 
     public void doCompletion() {
+        String fileDir = "/Users/bianshujun/Downloads/MOMA/MOMA/web/Data/Brochure/" + brochureId + "/diary";
+        File file = new File(fileDir);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        
         System.out.println("In diary doCompletion");
         System.out.println("currentBrochureId is " + brochureId);
-        diary.setDiaryUrl("./" + brochureId + "/diary/");
         diary.setDiaryStartTime(new Date());
         diary.setDiaryModifiedTime(new Date());
-        diary.setDiaryUrl(diary.getDiaryUrl() + diary.getDiaryTitle());
+        diary.setDiaryUrl("./Data/Brochure/" + brochureId + "/diary/" + diary.getDiaryId() + ".txt");
         diary.setBrochure(BrochureDao.findby_brochureId(brochureId));
         DiaryDao.add_diary(diary);
         changeBrochureLatestChange(brochureId);
-//        DiaryDao.add_diary_brochure(diary.getDiaryId(), brochureId);
-//        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("currentBrochureId");
-//        if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentBrochureId") == null) {
-//            System.out.println("Remove Successfully");
-//        }
+       
+        File filename = new File(fileDir + diary.getDiaryId() + ".txt");
+        RandomAccessFile tempFile = null;
+        try {
+            tempFile = new RandomAccessFile(filename,"rw");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WriteDiaryBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            tempFile.writeBytes(content);
+    //        DiaryDao.add_diary_brochure(diary.getDiaryId(), brochureId);
+    //        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("currentBrochureId");
+    //        if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentBrochureId") == null) {
+    //        }
+    //        }
+            //            BufferedReader buf = new BufferedReader( new InputStreamReader(new FileInputStream(f)));
+            //String tempStr = buf.readLine();
+        } catch (IOException ex) {
+            Logger.getLogger(WriteDiaryBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void doModified() {

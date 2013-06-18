@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>MOMA-Search List-#{searchListBean.searchName}</title>
         <link rel="stylesheet" type="text/css" href="./css/generalStyle.css" media="all" />
@@ -32,13 +33,13 @@
                     <h:outputLink styleClass="brand" value="#">
                         <h:outputText value="MOMA" />
                     </h:outputLink>
-                     <ul class="nav">
+                    <ul class="nav">
                         <li>
                             <h:outputLink value="welcome.xhtml">
                                 <h:outputText value="首页" />
                             </h:outputLink>
                         </li>
-                             <li>
+                        <li>
                             <h:outputLink value="userHomePage.xhtml">
                                 <h:outputText value="个人主页" />
                             </h:outputLink>
@@ -54,14 +55,14 @@
                             </h:outputLink>
                         </li>
 
-                     </ul>
+                    </ul>
 
                     <h:form styleClass="navbar-search pull-right" >
-
-                        <p:inputText id="search" label="search" styleClass="search-query" value="#{searchBean.searchName}" />
-                        <p:watermark for="search" value="找朋友、找同事、找家人" />
-
+                        <p:inputText id="search" styleClass="search-query" value="#{searchListBean.searchName}" />
+                        <p:watermark for="search" value="搜索好友/纪念册" />
+                        <h:commandButton styleClass="pp" id="searchSubmit" action="#{searchListBean.doSearch}" />
                     </h:form>
+
                     <ul class="nav pull-right ">
                         <li>
                             <h:outputLink value="#">
@@ -82,7 +83,7 @@
         <h:form>
             <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; height: 600px; position:relative;left: 20%; top: 70px;">
                 <h:outputText value="MOMA-搜索#{searchListBean.searchName}的结果" style="font-size: 16pt;  "/>
-                <p:commandLink id="backToMainPage" action="userHomePage.xhtml" style="margin-right:20px; position: relative;left: 55%;"  ajax="false">  
+                <p:commandLink id="backToMainPage" action="#{searchListBean.backUserHomePage}" style="margin-right:20px; position: relative;left: 55%;"  ajax="false">  
                     <h:outputText value="返回个人主页" style="font-family: Matura MT Script Capitals" />  
                 </p:commandLink>
 
@@ -90,15 +91,16 @@
                 <h:outputText value="         共搜索到 #{searchListBean.searchUserCount}个好友 " style="font-size: 12px;"/>
                 <p:separator/>
                 <p:accordionPanel value="#{searchListBean.searchUserList}" var="friend">  
-                    <p:tab>  
-<!--                        <h:panelGrid columns="3" cellpadding="10">  
-                            <p:graphicImage value="{friend.userPortraitUrl}" alt="Avatar" title="{friend.userName}"/>
+                    <p:tab title="#{friend.userName}">  
+                        <h:panelGrid columns="3" cellpadding="10">  
+                            <p:graphicImage value="#{friend.userPortraitUrl}" alt="Avatar" title="#{friend.userName}"/>
                             <h:outputLink value="UserHomePage.xhtml">
-                                <h:outputText value="{friend.userName}"/>
-                            </h:outputLink>-->
-                            <h:commandButton value="加为好友" />
-                            <!--这个commandButton的actionListener就你根据后台加啦-->
-                        <!--</h:panelGrid>-->  
+                                <h:outputText value="#{friend.userRealName}"/>
+                            </h:outputLink>
+                            <h:commandButton value="加为好友" actionListener="#{searchListBean.addFriend}">
+                                <f:attribute name="friendName" value="#{friend.userName}"></f:attribute>
+                            </h:commandButton>
+                        </h:panelGrid>  
                         <p:separator/>
                     </p:tab>  
                 </p:accordionPanel>
@@ -106,19 +108,20 @@
                 <h:outputText value="         共搜索到 #{searchListBean.searchBrochureCount}个纪念册 " style="font-size: 12px;"/>
                 <p:separator/>
                 <p:accordionPanel value="#{searchListBean.searchBrochureList}" var="brochure">  
-                    <p:tab>  
+                    <p:tab title="#{brochure.brochureName}">  
                         <h:panelGrid columns="3" cellpadding="10">  
-                            <p:graphicImage value="#{brochure.brochureImageUrl}" alt="Image" title="#{brochure.brochureName}"/>
-                            <p:commandLink action="#brochure.viewBrochureUrl">
-                                <!--目前这个viewBrochure的页面还没做，暂且空着-->
+                            <p:graphicImage value="#{brochure.brochureImageUrl}" alt="Avatar" title="#{brochure.brochureName}" width="100"/>
+                            <p:commandLink action="#brochure.viewBrochureUrl"></p:commandLink>
+                            <h:outputLink value="UserHomePage.xhtml">
                                 <h:outputText value="#{brochure.brochureName}"/>
-                            </p:commandLink>
-                            
-                            <h:commandButton value="加关注" />
+                            </h:outputLink>
+                            <h:commandButton value="关注" />
+                            <!--这个commandButton的actionListener就你根据后台加啦-->
                         </h:panelGrid>  
                         <p:separator/>
                     </p:tab>  
                 </p:accordionPanel>
+
             </p:panel>
         </h:form>
         <!-- UJian Button BEGIN -->

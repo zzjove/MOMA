@@ -8,9 +8,12 @@ import com.dao.hibernate.GroupDao;
 import com.dao.hibernate.UserDao;
 import com.entity.moma.GroupOwner;
 import com.entity.moma.User;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -24,6 +27,7 @@ import javax.faces.model.SelectItem;
 @RequestScoped
 public class FriendsBean {
     private User user ;
+    private String searchName;
     private List<GroupOwner> groupList;
     private String chosedGroupName;
     private List<User> userFriendList;
@@ -51,6 +55,22 @@ public class FriendsBean {
     public void setChosedGroupName(String chosedGroupName) {
         System.out.println("In set method " + chosedGroupName);
         this.chosedGroupName = chosedGroupName;
+    }
+
+    public String getSearchName() {
+        return searchName;
+    }
+
+    public void setSearchName(String searchName) {
+        this.searchName = searchName;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
     
     
@@ -98,7 +118,7 @@ public class FriendsBean {
         return items;
     }
 
-    public String doAdd() {
+    public void doAdd() {
         String selectedName = chosedGroupName;
         System.out.println("seleectedName is " + selectedName + " in doAdd");
 
@@ -106,7 +126,6 @@ public class FriendsBean {
         System.out.println("userName is " + userName + " in doAdd");
 
         User userTemp = UserDao.findby_userName(userName);
-        userTemp.setUserPortraitUrl("img/portrait.png");
         for (GroupOwner ownerTemp : groupList) {
             if (ownerTemp.getGroupName().equals(selectedName)) {
                 
@@ -118,9 +137,11 @@ public class FriendsBean {
                 userFriendList = tempList;
             }
         }
-        
-        
-        return "Friends";
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("Friends.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(WelcomeBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public GroupOwner findByGroupName(String groupName) {
@@ -130,6 +151,16 @@ public class FriendsBean {
             }
         }
         return null;
+    }
+    
+    public void doSearch() {
+        FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("searchName", searchName);
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("searchList.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(WelcomeBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
