@@ -17,8 +17,7 @@
             }
         </style>
     </h:head>
-<<<<<<< HEAD
-    <h:body>
+    <h:body styleClass="loginPage">
         <ui:composition template="./layoutTemplate/template.xhtml">
             <ui:define name="header">
                  <ui:include src="./layoutTemplate/header.xhtml" />
@@ -37,9 +36,7 @@
                         <h:panelGrid columns="2">
                             <h:outputText value="Real Name"/>
                             <p:inputText id="realName" value="#{userInfoCompletionBean.user.userRealName}"/>
-=======
-    <h:body styleClass="loginPage">
->>>>>>> origin/elena
+
 
         <p:panel style="display:inline-block; alignment-baseline: central; width: 60%; height: 600px; position:relative;left: 20%; top: 70px;">
             <h2>User Infomation Data Entry</h2>
@@ -63,7 +60,6 @@
                         <h:outputText value="Address Line1"/>
                         <p:inputText id="addressLine1" value="#{userInfoCompletionBean.user.adressFirstLine}"/>
 
-<<<<<<< HEAD
                     <p:commandButton value="Submit" id="submit" action="#{userInfoCompletionBean.doCompletion}" 
                                      update="display" oncomplete="dialog.show()" ></p:commandButton>  
                     <p:dialog header="User Information" widgetVar="dialog" showEffect="fold" hideEffect="fold" width="200">
@@ -85,12 +81,6 @@
                 </h:form>  
             </ui:define>
         </ui:composition>
-=======
-                        <h:outputText value="Address Line2"/>
-                        <p:inputText id="addressLine2" value="#{userInfoCompletionBean.adressSecondLine}"/>
-                    </h:panelGrid>
-                </p:panel>
->>>>>>> origin/elena
 
                 <p:commandButton value="Submit" id="submit" update="display" oncomplete="dialog.show()" actionListener="#{userInfoCompletionBean.doCompletion}" />  
                 <p:dialog header="User Information" widgetVar="dialog" showEffect="fold" hideEffect="fold" width="200">

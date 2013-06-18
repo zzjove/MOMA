@@ -112,13 +112,9 @@
                                 <h:outputText  value="#{brochure.brochureDescription}" style="width: 250px;display: inline-block;background-color: #C1F7ED;opacity: 0.4;margin-left: 20px;position: absolute;left: 350px;"/>
                                 <c:if test="#{personalSpaceBean.host}"> 
                                     <button class="btn btn-info" style="position:relative;top:85px;margin-left: 10px;">浏览</button>
-<<<<<<< HEAD
                                     <h:outputLink class="btn btn-success" style="position:relative;top:85px;margin-left: 10px;" value="diaryList.xhtml" >编辑
                                         <f:param name="brochureToeditId" value="#{brochure.brochureId}"></f:param>
                                     </h:outputLink>
-=======
-                                    <p:button outcome="diaryList" value="编辑"  class="btn btn-success" style="position:relative;top:85px;margin-left: 10px;"></p:button>
->>>>>>> origin/elena
                                     <button class="btn btn-danger" style="position:relative;top:85px;margin-left: 10px;">删除</button>
                                 </c:if>
                                 <c:if test="#{!personalSpaceBean.host}">
